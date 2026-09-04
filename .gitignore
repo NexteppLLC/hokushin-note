@@ -1,0 +1,8 @@
+out/
+__pycache__/
+*.pyc
+deliver/*.zip
+test/page-1.png
+test/test.pdf
+.DS_Store
+deliver/

@@ -1,0 +1,16 @@
+{
+  "name": "北辰 学習ノート",
+  "short_name": "北辰ノート",
+  "description": "北辰テスト・高校入試対策の学習アプリ（計画・教材・演習・手書き・付箋・進捗）",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f3f5f8",
+  "theme_color": "#1f3b64",
+  "lang": "ja",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

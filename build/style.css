@@ -1,0 +1,157 @@
+@page { size: A4; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.85;
+  color: #111;
+  margin: 0;
+  padding: 0;
+}
+body.ruby { line-height: 2.05; }
+ruby { ruby-position: over; ruby-align: center; }
+rt { font-size: 0.48em; line-height: 1; letter-spacing: 0; font-weight: normal; color: #333; }
+.serif, .passage, .dialog { font-family: "Noto Serif CJK JP", serif; }
+
+h1 { font-size: 18pt; color: #fff; background: #1f3b64; padding: 6px 12px; margin: 0 0 12px 0; page-break-before: always; page-break-after: avoid; line-height: 1.5; border-radius: 3px; }
+h1.first, h1:first-child { page-break-before: auto; }
+h1 .sub { font-size: 11pt; font-weight: normal; margin-left: 12px; opacity: 0.9; }
+h2 { font-size: 14pt; color: #1f3b64; border-left: 6px solid #1f3b64; border-bottom: 1px solid #1f3b64; padding: 2px 8px; margin: 16px 0 8px 0; page-break-after: avoid; line-height: 1.5; }
+h3 { font-size: 12pt; color: #222; margin: 12px 0 6px 0; padding: 0 0 0 6px; border-left: 4px solid #8aa2c4; page-break-after: avoid; line-height: 1.5; }
+h4 { font-size: 11pt; margin: 8px 0 4px 0; color: #1f3b64; page-break-after: avoid; }
+p { margin: 3px 0 6px 0; }
+ul, ol { margin: 2px 0 6px 0; padding-left: 1.6em; }
+li { margin: 1px 0; }
+li > p { margin: 0; }
+table { border-collapse: collapse; margin: 6px 0 8px 0; font-size: 9.5pt; line-height: 1.6; page-break-inside: auto; width: 100%; }
+table.genko, table.auto, .cover table { width: auto; }
+body.ruby table { line-height: 1.9; }
+th, td { border: 1px solid #666; padding: 3px 6px; vertical-align: top; }
+th { background: #e8eef7; font-weight: bold; text-align: center; }
+tr { page-break-inside: avoid; }
+mark { background: #fff3a0; padding: 0 2px; }
+u { text-decoration: underline; text-underline-offset: 3px; }
+strong { color: #000; }
+hr { border: 0; border-top: 1px dashed #999; margin: 10px 0; }
+
+.blk { border: 1px solid #999; border-radius: 4px; padding: 6px 10px; margin: 8px 0 10px 0; page-break-inside: avoid; }
+.blk .bt { font-weight: bold; margin: -6px -10px 6px -10px; padding: 3px 10px; border-radius: 3px 3px 0 0; }
+.blk.box { border-color: #1f3b64; background: #f5f8fc; }
+.blk.box .bt { background: #1f3b64; color: #fff; }
+.blk.point { border-color: #b5651d; background: #fff8f0; }
+.blk.point .bt { background: #b5651d; color: #fff; }
+.blk.q { border-color: #333; background: #fff; border-left: 6px solid #333; }
+.blk.q .bt { background: #eee; color: #000; }
+.blk.a { border-color: #2e7d32; background: #f3faf3; border-style: dashed; }
+.blk.a .bt { background: #2e7d32; color: #fff; }
+.blk.note, .blk.memo, .blk.tip { border-color: #777; background: #fafafa; font-size: 9.5pt; }
+.blk.note .bt, .blk.memo .bt, .blk.tip .bt { background: #777; color: #fff; }
+.blk.warn { border-color: #c62828; background: #fff5f5; }
+.blk.warn .bt { background: #c62828; color: #fff; }
+.blk.ex { border-color: #6a1b9a; background: #faf5fd; }
+.blk.ex .bt { background: #6a1b9a; color: #fff; }
+.blk.plan, .blk.goal, .blk.summary { border-color: #00695c; background: #f0faf8; }
+.blk.plan .bt, .blk.goal .bt, .blk.summary .bt { background: #00695c; color: #fff; }
+.blk.step, .blk.rule { border-color: #455a64; background: #f7f9fa; }
+.blk.step .bt, .blk.rule .bt { background: #455a64; color: #fff; }
+.blk.script, .blk.passage, .blk.dialog { border-color: #555; background: #fff; }
+.blk.script .bt, .blk.passage .bt, .blk.dialog .bt { background: #555; color: #fff; }
+.blk.check { border-color: #1f3b64; background: #fff; }
+.blk.check .bt { background: #1f3b64; color: #fff; }
+.blk.data { border-color: #888; background: #fff; }
+.blk.data .bt { background: #888; color: #fff; }
+.blk.sub { border: 0; border-top: 1px dotted #999; border-radius: 0; padding: 4px 0 0 0; margin: 6px 0; }
+.blk.sub .bt { background: none; color: #1f3b64; margin: 0; padding: 0 0 2px 0; }
+.blk p:last-child { margin-bottom: 0; }
+.blk.q .blk.q { border-left-width: 3px; }
+.blk table { background: #fff; }
+
+.cols { column-count: 2; column-gap: 18px; column-rule: 1px solid #ccc; }
+.cols3 { column-count: 3; column-gap: 14px; }
+.cols .blk, .cols table, .cols p, .cols li { break-inside: avoid; }
+.pb { page-break-after: always; height: 0; }
+
+.blank { display: inline-block; border-bottom: 1.5px solid #333; height: 1.3em; vertical-align: bottom; min-width: 4em; margin: 0 2px; }
+.ansline { display: inline-block; margin: 2px 0; }
+.lines { margin: 4px 0; }
+.lines .ln { border-bottom: 1px solid #555; height: 1.9em; }
+.ibox { display: inline-block; border: 1px solid #333; padding: 0 6px; margin: 0 2px; line-height: 1.5; }
+.chk { font-size: 1.1em; margin-right: 2px; }
+.score { float: right; font-size: 9pt; color: #555; }
+table.genko { border-collapse: collapse; margin: 6px 0; }
+table.genko td { width: 1.5em; height: 1.5em; border: 1px solid #999; padding: 0; }
+.fig { text-align: center; margin: 6px 0; page-break-inside: avoid; }
+.fig svg, .fig img { max-width: 100%; height: auto; }
+.figr { float: right; margin: 0 0 6px 12px; }
+.figr svg { max-width: 260px; height: auto; }
+.small { font-size: 9pt; }
+.center { text-align: center; }
+.right { text-align: right; }
+.indent { padding-left: 1.5em; }
+.nowrap { white-space: nowrap; }
+.kw { font-weight: bold; color: #1f3b64; }
+.red { color: #c62828; }
+.gray { color: #666; }
+.big { font-size: 1.2em; }
+.en { font-family: "Noto Sans", "Noto Sans CJK JP", sans-serif; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px 12px; }
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px 10px; }
+
+/* math */
+.math { white-space: nowrap; font-family: "Noto Serif CJK JP", "Noto Sans CJK JP", serif; }
+.math i { font-family: "Noto Serif", "Noto Serif CJK JP", serif; font-style: italic; }
+.math.dm { display: block; text-align: center; margin: 4px 0; white-space: normal; }
+.frac { display: inline-block; vertical-align: middle; text-align: center; line-height: 1.15; margin: 0 2px; }
+.frac .n { display: block; border-bottom: 1px solid #000; padding: 0 3px; }
+.frac .d { display: block; padding: 0 3px; }
+.sqrt { display: inline-block; white-space: nowrap; }
+.sqrt .rs { display: inline-block; font-size: 1.15em; vertical-align: -0.05em; }
+.sqrt .rad { display: inline-block; border-top: 1.2px solid #000; padding: 0 1px; margin-left: -1px; line-height: 1.2; }
+.ovl { text-decoration: overline; }
+.boxed { border: 1px solid #000; padding: 0 5px; }
+.up { font-style: normal; }
+sup { font-size: 0.7em; vertical-align: super; line-height: 0; }
+sub { font-size: 0.7em; vertical-align: sub; line-height: 0; }
+
+/* cover */
+.cover { text-align: center; padding-top: 60px; page-break-after: always; }
+.cover .t1 { font-size: 14pt; color: #1f3b64; letter-spacing: 2px; }
+.cover .t2 { font-size: 30pt; font-weight: bold; color: #1f3b64; margin: 10px 0; line-height: 1.4; }
+.cover .t3 { font-size: 13pt; margin: 8px 0 30px 0; }
+.cover table { margin: 20px auto; font-size: 10.5pt; }
+.cover .meta { margin-top: 40px; color: #555; font-size: 10pt; }
+.toc { page-break-after: always; }
+.toc ul { list-style: none; padding-left: 0; }
+.toc li { display: flex; border-bottom: 1px dotted #aaa; padding: 2px 0; }
+.toc li .t { flex: 1; }
+.toc li .pn { width: 3em; text-align: right; }
+.toc li.l2 { padding-left: 1.5em; font-size: 9.5pt; }
+.toc li.l1 { font-weight: bold; margin-top: 4px; }
+
+/* day header for schedule */
+.dayhead { background: #e8eef7; border-left: 6px solid #1f3b64; padding: 2px 8px; font-weight: bold; margin: 10px 0 4px 0; page-break-after: avoid; }
+
+/* vocabulary / kanji lists */
+table.vocab td:nth-child(1) { width: 2.2em; text-align: right; color: #666; }
+table.kanji td { padding: 2px 5px; }
+table.compact th, table.compact td { padding: 1px 4px; font-size: 9pt; line-height: 1.5; }
+body.ruby table.compact th, body.ruby table.compact td { line-height: 1.8; }
+.noruby { }
+.qnum { font-weight: bold; }
+.choices { display: flex; flex-wrap: wrap; gap: 2px 18px; margin: 2px 0 2px 1em; }
+.choices span { white-space: nowrap; }
+.timer { float: right; border: 1px solid #333; padding: 0 8px; font-size: 9.5pt; }
+.selfcheck { border: 1px dashed #666; padding: 4px 8px; margin: 6px 0; font-size: 9.5pt; }
+.selfcheck .chk { margin-right: 4px; }
+.pb + h1 { page-break-before: auto; }
+h1 rt { color: #fff; }
+.blk .bt rt { color: inherit; }
+
+td.nw, th.nw { white-space: nowrap; }
+.blk.q, .blk.a, .blk.dialog, .blk.passage, .blk.script, .blk.memo, .blk.data, .blk.plan { page-break-inside: auto; }
+.blk .bt { page-break-after: avoid; }
+/* chemistry formulas */
+.math .ce { font-style: normal; font-family: "Noto Serif", "Noto Serif CJK JP", serif; }
+.math .ce sub { font-size: 0.7em; }

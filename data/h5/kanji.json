@@ -1,0 +1,2466 @@
+{
+ "yomi": [
+  {
+   "phrase": "作業が__滞る__",
+   "target": "滞る",
+   "reading": "とどこおる"
+  },
+  {
+   "phrase": "先生を__慕う__",
+   "target": "慕う",
+   "reading": "したう"
+  },
+  {
+   "phrase": "雨で大地が__潤う__",
+   "target": "潤う",
+   "reading": "うるおう"
+  },
+  {
+   "phrase": "視界を__遮る__",
+   "target": "遮る",
+   "reading": "さえぎる"
+  },
+  {
+   "phrase": "音楽会を__催す__",
+   "target": "催す",
+   "reading": "もよおす"
+  },
+  {
+   "phrase": "研究に__携わる__",
+   "target": "携わる",
+   "reading": "たずさわる"
+  },
+  {
+   "phrase": "自分を__戒める__",
+   "target": "戒める",
+   "reading": "いましめる"
+  },
+  {
+   "phrase": "破れた服を__繕う__",
+   "target": "繕う",
+   "reading": "つくろう"
+  },
+  {
+   "phrase": "参加者を__募る__",
+   "target": "募る",
+   "reading": "つのる"
+  },
+  {
+   "phrase": "過去を__顧みる__",
+   "target": "顧みる",
+   "reading": "かえりみる"
+  },
+  {
+   "phrase": "体力を__培う__",
+   "target": "培う",
+   "reading": "つちかう"
+  },
+  {
+   "phrase": "危険に__陥る__",
+   "target": "陥る",
+   "reading": "おちいる"
+  },
+  {
+   "phrase": "旗が__翻る__",
+   "target": "翻る",
+   "reading": "ひるがえる"
+  },
+  {
+   "phrase": "声の__抑揚__",
+   "target": "抑揚",
+   "reading": "よくよう"
+  },
+  {
+   "phrase": "__均衡__を保つ",
+   "target": "均衡",
+   "reading": "きんこう"
+  },
+  {
+   "phrase": "一点を__凝視__する",
+   "target": "凝視",
+   "reading": "ぎょうし"
+  },
+  {
+   "phrase": "__暫定__的な順位",
+   "target": "暫定",
+   "reading": "ざんてい"
+  },
+  {
+   "phrase": "__頻繁__に訪れる",
+   "target": "頻繁",
+   "reading": "ひんぱん"
+  },
+  {
+   "phrase": "商品を__陳列__する",
+   "target": "陳列",
+   "reading": "ちんれつ"
+  },
+  {
+   "phrase": "申し出を__拒む__",
+   "target": "拒む",
+   "reading": "こばむ"
+  },
+  {
+   "phrase": "__潔い__態度",
+   "target": "潔い",
+   "reading": "いさぎよい"
+  },
+  {
+   "phrase": "__拙い__文章",
+   "target": "拙い",
+   "reading": "つたない"
+  },
+  {
+   "phrase": "__和やか__な雰囲気",
+   "target": "和やか",
+   "reading": "なごやか"
+  },
+  {
+   "phrase": "__速やか__に行動する",
+   "target": "速やか",
+   "reading": "すみやか"
+  },
+  {
+   "phrase": "__健やか__に育つ",
+   "target": "健やか",
+   "reading": "すこやか"
+  },
+  {
+   "phrase": "__朗らか__な性格",
+   "target": "朗らか",
+   "reading": "ほがらか"
+  },
+  {
+   "phrase": "__滑らか__な動き",
+   "target": "滑らか",
+   "reading": "なめらか"
+  },
+  {
+   "phrase": "__著しい__進歩",
+   "target": "著しい",
+   "reading": "いちじるしい"
+  },
+  {
+   "phrase": "__甚だしい__誤解",
+   "target": "甚だしい",
+   "reading": "はなはだしい"
+  },
+  {
+   "phrase": "__煩わしい__手続き",
+   "target": "煩わしい",
+   "reading": "わずらわしい"
+  },
+  {
+   "phrase": "費用を__賄う__",
+   "target": "賄う",
+   "reading": "まかなう"
+  },
+  {
+   "phrase": "人形を__操る__",
+   "target": "操る",
+   "reading": "あやつる"
+  },
+  {
+   "phrase": "曲を__奏でる__",
+   "target": "奏でる",
+   "reading": "かなでる"
+  },
+  {
+   "phrase": "練習を__怠る__",
+   "target": "怠る",
+   "reading": "おこたる"
+  },
+  {
+   "phrase": "生徒を__諭す__",
+   "target": "諭す",
+   "reading": "さとす"
+  },
+  {
+   "phrase": "食料を__蓄える__",
+   "target": "蓄える",
+   "reading": "たくわえる"
+  },
+  {
+   "phrase": "目的を__遂げる__",
+   "target": "遂げる",
+   "reading": "とげる"
+  },
+  {
+   "phrase": "不幸を__嘆く__",
+   "target": "嘆く",
+   "reading": "なげく"
+  },
+  {
+   "phrase": "__殊に__優れている",
+   "target": "殊に",
+   "reading": "ことに"
+  },
+  {
+   "phrase": "__専ら__読書をする",
+   "target": "専ら",
+   "reading": "もっぱら"
+  },
+  {
+   "phrase": "__概ね__良好だ",
+   "target": "概ね",
+   "reading": "おおむね"
+  },
+  {
+   "phrase": "__頑な__に断る",
+   "target": "頑な",
+   "reading": "かたくな"
+  },
+  {
+   "phrase": "__厳か__な式典",
+   "target": "厳か",
+   "reading": "おごそか"
+  },
+  {
+   "phrase": "__穏やか__な海",
+   "target": "穏やか",
+   "reading": "おだやか"
+  },
+  {
+   "phrase": "__鮮やか__な色",
+   "target": "鮮やか",
+   "reading": "あざやか"
+  },
+  {
+   "phrase": "__緩やか__な坂",
+   "target": "緩やか",
+   "reading": "ゆるやか"
+  },
+  {
+   "phrase": "壁で__隔てる__",
+   "target": "隔てる",
+   "reading": "へだてる"
+  },
+  {
+   "phrase": "損害を__被る__",
+   "target": "被る",
+   "reading": "こうむる"
+  },
+  {
+   "phrase": "目標を__掲げる__",
+   "target": "掲げる",
+   "reading": "かかげる"
+  },
+  {
+   "phrase": "成長を__妨げる__",
+   "target": "妨げる",
+   "reading": "さまたげる"
+  },
+  {
+   "phrase": "耳を__傾ける__",
+   "target": "傾ける",
+   "reading": "かたむける"
+  },
+  {
+   "phrase": "香りが__漂う__",
+   "target": "漂う",
+   "reading": "ただよう"
+  },
+  {
+   "phrase": "会話が__弾む__",
+   "target": "弾む",
+   "reading": "はずむ"
+  },
+  {
+   "phrase": "危険が__潜む__",
+   "target": "潜む",
+   "reading": "ひそむ"
+  },
+  {
+   "phrase": "糸が__絡む__",
+   "target": "絡む",
+   "reading": "からむ"
+  },
+  {
+   "phrase": "各地を__巡る__",
+   "target": "巡る",
+   "reading": "めぐる"
+  },
+  {
+   "phrase": "時を__刻む__",
+   "target": "刻む",
+   "reading": "きざむ"
+  },
+  {
+   "phrase": "布が__透ける__",
+   "target": "透ける",
+   "reading": "すける"
+  },
+  {
+   "phrase": "音楽に__秀でる__",
+   "target": "秀でる",
+   "reading": "ひいでる"
+  },
+  {
+   "phrase": "健康を__損なう__",
+   "target": "損なう",
+   "reading": "そこなう"
+  },
+  {
+   "phrase": "危険を__伴う__",
+   "target": "伴う",
+   "reading": "ともなう"
+  },
+  {
+   "phrase": "罪を__償う__",
+   "target": "償う",
+   "reading": "つぐなう"
+  },
+  {
+   "phrase": "許しを__請う__",
+   "target": "請う",
+   "reading": "こう"
+  },
+  {
+   "phrase": "真理を__悟る__",
+   "target": "悟る",
+   "reading": "さとる"
+  },
+  {
+   "phrase": "努力を__褒める__",
+   "target": "褒める",
+   "reading": "ほめる"
+  },
+  {
+   "phrase": "不正を__訴える__",
+   "target": "訴える",
+   "reading": "うったえる"
+  },
+  {
+   "phrase": "記録に__挑む__",
+   "target": "挑む",
+   "reading": "いどむ"
+  },
+  {
+   "phrase": "__憩い__の場",
+   "target": "憩い",
+   "reading": "いこい"
+  },
+  {
+   "phrase": "__名残__を惜しむ",
+   "target": "名残",
+   "reading": "なごり"
+  },
+  {
+   "phrase": "神社の__境内__",
+   "target": "境内",
+   "reading": "けいだい"
+  },
+  {
+   "phrase": "__風情__のある庭",
+   "target": "風情",
+   "reading": "ふぜい"
+  },
+  {
+   "phrase": "__体裁__を整える",
+   "target": "体裁",
+   "reading": "ていさい"
+  },
+  {
+   "phrase": "軽く__会釈__する",
+   "target": "会釈",
+   "reading": "えしゃく"
+  },
+  {
+   "phrase": "地図の__凡例__",
+   "target": "凡例",
+   "reading": "はんれい"
+  },
+  {
+   "phrase": "寺を__建立__する",
+   "target": "建立",
+   "reading": "こんりゅう"
+  },
+  {
+   "phrase": "委員会が__発足__する",
+   "target": "発足",
+   "reading": "ほっそく"
+  },
+  {
+   "phrase": "__精進__を重ねる",
+   "target": "精進",
+   "reading": "しょうじん"
+  },
+  {
+   "phrase": "__柔和__な表情",
+   "target": "柔和",
+   "reading": "にゅうわ"
+  },
+  {
+   "phrase": "勝利に__執着__する",
+   "target": "執着",
+   "reading": "しゅうちゃく"
+  },
+  {
+   "phrase": "正月に__帰省__する",
+   "target": "帰省",
+   "reading": "きせい"
+  },
+  {
+   "phrase": "作文を__添削__する",
+   "target": "添削",
+   "reading": "てんさく"
+  },
+  {
+   "phrase": "__謙虚__な姿勢",
+   "target": "謙虚",
+   "reading": "けんきょ"
+  },
+  {
+   "phrase": "社会に__貢献__する",
+   "target": "貢献",
+   "reading": "こうけん"
+  },
+  {
+   "phrase": "参加を__促す__",
+   "target": "促す",
+   "reading": "うながす"
+  },
+  {
+   "phrase": "__迅速__な対応",
+   "target": "迅速",
+   "reading": "じんそく"
+  },
+  {
+   "phrase": "体を__鍛える__",
+   "target": "鍛える",
+   "reading": "きたえる"
+  },
+  {
+   "phrase": "全力を__尽くす__",
+   "target": "尽くす",
+   "reading": "つくす"
+  },
+  {
+   "phrase": "友人を__慰める__",
+   "target": "慰める",
+   "reading": "なぐさめる"
+  },
+  {
+   "phrase": "材料を__吟味__する",
+   "target": "吟味",
+   "reading": "ぎんみ"
+  },
+  {
+   "phrase": "解決策を__示唆__する",
+   "target": "示唆",
+   "reading": "しさ"
+  },
+  {
+   "phrase": "内容を__把握__する",
+   "target": "把握",
+   "reading": "はあく"
+  },
+  {
+   "phrase": "__妥協__を許さない",
+   "target": "妥協",
+   "reading": "だきょう"
+  },
+  {
+   "phrase": "__余韻__にひたる",
+   "target": "余韻",
+   "reading": "よいん"
+  },
+  {
+   "phrase": "作品を__披露__する",
+   "target": "披露",
+   "reading": "ひろう"
+  },
+  {
+   "phrase": "判断を__委ねる__",
+   "target": "委ねる",
+   "reading": "ゆだねる"
+  },
+  {
+   "phrase": "__軽率__な行動",
+   "target": "軽率",
+   "reading": "けいそつ"
+  },
+  {
+   "phrase": "将来を__懸念__する",
+   "target": "懸念",
+   "reading": "けねん"
+  },
+  {
+   "phrase": "絶滅が__危惧__される",
+   "target": "危惧",
+   "reading": "きぐ"
+  },
+  {
+   "phrase": "__一斉__に立ち上がる",
+   "target": "一斉",
+   "reading": "いっせい"
+  },
+  {
+   "phrase": "自然の__恩恵__",
+   "target": "恩恵",
+   "reading": "おんけい"
+  },
+  {
+   "phrase": "資料を__網羅__する",
+   "target": "網羅",
+   "reading": "もうら"
+  },
+  {
+   "phrase": "入部を__勧誘__する",
+   "target": "勧誘",
+   "reading": "かんゆう"
+  },
+  {
+   "phrase": "条件に__該当__する",
+   "target": "該当",
+   "reading": "がいとう"
+  },
+  {
+   "phrase": "__便宜__を図る",
+   "target": "便宜",
+   "reading": "べんぎ"
+  },
+  {
+   "phrase": "選手を__鼓舞__する",
+   "target": "鼓舞",
+   "reading": "こぶ"
+  },
+  {
+   "phrase": "別れを__惜しむ__",
+   "target": "惜しむ",
+   "reading": "おしむ"
+  },
+  {
+   "phrase": "道を__尋ねる__",
+   "target": "尋ねる",
+   "reading": "たずねる"
+  },
+  {
+   "phrase": "__頼もしい__仲間",
+   "target": "頼もしい",
+   "reading": "たのもしい"
+  },
+  {
+   "phrase": "__幼い__子ども",
+   "target": "幼い",
+   "reading": "おさない"
+  },
+  {
+   "phrase": "__快い__返事",
+   "target": "快い",
+   "reading": "こころよい"
+  },
+  {
+   "phrase": "店を__営む__",
+   "target": "営む",
+   "reading": "いとなむ"
+  },
+  {
+   "phrase": "__珍しい__鳥",
+   "target": "珍しい",
+   "reading": "めずらしい"
+  },
+  {
+   "phrase": "家族を__養う__",
+   "target": "養う",
+   "reading": "やしなう"
+  },
+  {
+   "phrase": "不足を__補う__",
+   "target": "補う",
+   "reading": "おぎなう"
+  },
+  {
+   "phrase": "礼服を__装う__",
+   "target": "装う",
+   "reading": "よそおう"
+  },
+  {
+   "phrase": "結論に__至る__",
+   "target": "至る",
+   "reading": "いたる"
+  },
+  {
+   "phrase": "正しい方向に__導く__",
+   "target": "導く",
+   "reading": "みちびく"
+  },
+  {
+   "phrase": "信頼を__築く__",
+   "target": "築く",
+   "reading": "きずく"
+  },
+  {
+   "phrase": "チームを__率いる__",
+   "target": "率いる",
+   "reading": "ひきいる"
+  },
+  {
+   "phrase": "本を__著す__",
+   "target": "著す",
+   "reading": "あらわす"
+  },
+  {
+   "phrase": "新説を__唱える__",
+   "target": "唱える",
+   "reading": "となえる"
+  },
+  {
+   "phrase": "医学を__志す__",
+   "target": "志す",
+   "reading": "こころざす"
+  },
+  {
+   "phrase": "スターに__憧れる__",
+   "target": "憧れる",
+   "reading": "あこがれる"
+  },
+  {
+   "phrase": "最後まで__粘る__",
+   "target": "粘る",
+   "reading": "ねばる"
+  },
+  {
+   "phrase": "土台を__据える__",
+   "target": "据える",
+   "reading": "すえる"
+  },
+  {
+   "phrase": "敵を__欺く__",
+   "target": "欺く",
+   "reading": "あざむく"
+  },
+  {
+   "phrase": "相手を__侮る__",
+   "target": "侮る",
+   "reading": "あなどる"
+  },
+  {
+   "phrase": "記事を__掲載__する",
+   "target": "掲載",
+   "reading": "けいさい"
+  },
+  {
+   "phrase": "__素朴__な疑問",
+   "target": "素朴",
+   "reading": "そぼく"
+  },
+  {
+   "phrase": "__愉快__な仲間",
+   "target": "愉快",
+   "reading": "ゆかい"
+  },
+  {
+   "phrase": "__巧妙__な仕掛け",
+   "target": "巧妙",
+   "reading": "こうみょう"
+  },
+  {
+   "phrase": "__率直__な意見",
+   "target": "率直",
+   "reading": "そっちょく"
+  },
+  {
+   "phrase": "__恒例__の行事",
+   "target": "恒例",
+   "reading": "こうれい"
+  },
+  {
+   "phrase": "他人を__模倣__する",
+   "target": "模倣",
+   "reading": "もほう"
+  },
+  {
+   "phrase": "米を__収穫__する",
+   "target": "収穫",
+   "reading": "しゅうかく"
+  },
+  {
+   "phrase": "豊かな__土壌__",
+   "target": "土壌",
+   "reading": "どじょう"
+  },
+  {
+   "phrase": "生活の__基盤__",
+   "target": "基盤",
+   "reading": "きばん"
+  },
+  {
+   "phrase": "水が__循環__する",
+   "target": "循環",
+   "reading": "じゅんかん"
+  },
+  {
+   "phrase": "文章を__解釈__する",
+   "target": "解釈",
+   "reading": "かいしゃく"
+  },
+  {
+   "phrase": "伝統を__継承__する",
+   "target": "継承",
+   "reading": "けいしょう"
+  },
+  {
+   "phrase": "__慎重__に選ぶ",
+   "target": "慎重",
+   "reading": "しんちょう"
+  },
+  {
+   "phrase": "__濃厚__な味",
+   "target": "濃厚",
+   "reading": "のうこう"
+  },
+  {
+   "phrase": "__詳細__を報告する",
+   "target": "詳細",
+   "reading": "しょうさい"
+  },
+  {
+   "phrase": "__郊外__に住む",
+   "target": "郊外",
+   "reading": "こうがい"
+  },
+  {
+   "phrase": "__渓谷__を歩く",
+   "target": "渓谷",
+   "reading": "けいこく"
+  },
+  {
+   "phrase": "__海峡__を渡る",
+   "target": "海峡",
+   "reading": "かいきょう"
+  },
+  {
+   "phrase": "__彫刻__を作る",
+   "target": "彫刻",
+   "reading": "ちょうこく"
+  },
+  {
+   "phrase": "__肖像__画",
+   "target": "肖像",
+   "reading": "しょうぞう"
+  },
+  {
+   "phrase": "古代の__遺跡__",
+   "target": "遺跡",
+   "reading": "いせき"
+  },
+  {
+   "phrase": "社会に__奉仕__する",
+   "target": "奉仕",
+   "reading": "ほうし"
+  },
+  {
+   "phrase": "読書を__奨励__する",
+   "target": "奨励",
+   "reading": "しょうれい"
+  },
+  {
+   "phrase": "考えが__浸透__する",
+   "target": "浸透",
+   "reading": "しんとう"
+  },
+  {
+   "phrase": "絵画を__鑑賞__する",
+   "target": "鑑賞",
+   "reading": "かんしょう"
+  },
+  {
+   "phrase": "町を__彩る__",
+   "target": "彩る",
+   "reading": "いろどる"
+  },
+  {
+   "phrase": "実力を__誇る__",
+   "target": "誇る",
+   "reading": "ほこる"
+  },
+  {
+   "phrase": "海に__潜る__",
+   "target": "潜る",
+   "reading": "もぐる"
+  },
+  {
+   "phrase": "任務を__遂行__する",
+   "target": "遂行",
+   "reading": "すいこう"
+  },
+  {
+   "phrase": "__即座__に答える",
+   "target": "即座",
+   "reading": "そくざ"
+  },
+  {
+   "phrase": "__顕著__な差",
+   "target": "顕著",
+   "reading": "けんちょ"
+  },
+  {
+   "phrase": "__繊細__な感覚",
+   "target": "繊細",
+   "reading": "せんさい"
+  },
+  {
+   "phrase": "__冗談__を言う",
+   "target": "冗談",
+   "reading": "じょうだん"
+  },
+  {
+   "phrase": "__偶然__の出会い",
+   "target": "偶然",
+   "reading": "ぐうぜん"
+  },
+  {
+   "phrase": "__矛盾__した説明",
+   "target": "矛盾",
+   "reading": "むじゅん"
+  },
+  {
+   "phrase": "__克服__する",
+   "target": "克服",
+   "reading": "こくふく"
+  },
+  {
+   "phrase": "__錯覚__を起こす",
+   "target": "錯覚",
+   "reading": "さっかく"
+  },
+  {
+   "phrase": "__哀愁__がただよう",
+   "target": "哀愁",
+   "reading": "あいしゅう"
+  },
+  {
+   "phrase": "__余裕__がある",
+   "target": "余裕",
+   "reading": "よゆう"
+  },
+  {
+   "phrase": "__漠然__とした不安",
+   "target": "漠然",
+   "reading": "ばくぜん"
+  },
+  {
+   "phrase": "__丁寧__な言葉",
+   "target": "丁寧",
+   "reading": "ていねい"
+  },
+  {
+   "phrase": "__拍車__をかける",
+   "target": "拍車",
+   "reading": "はくしゃ"
+  },
+  {
+   "phrase": "__脅威__を感じる",
+   "target": "脅威",
+   "reading": "きょうい"
+  },
+  {
+   "phrase": "__瞬時__に判断する",
+   "target": "瞬時",
+   "reading": "しゅんじ"
+  },
+  {
+   "phrase": "__遭遇__する",
+   "target": "遭遇",
+   "reading": "そうぐう"
+  },
+  {
+   "phrase": "__措置__をとる",
+   "target": "措置",
+   "reading": "そち"
+  },
+  {
+   "phrase": "__頻度__が高い",
+   "target": "頻度",
+   "reading": "ひんど"
+  },
+  {
+   "phrase": "__慈しむ__",
+   "target": "慈しむ",
+   "reading": "いつくしむ"
+  },
+  {
+   "phrase": "__育む__",
+   "target": "育む",
+   "reading": "はぐくむ"
+  },
+  {
+   "phrase": "__滴__が落ちる",
+   "target": "滴",
+   "reading": "しずく"
+  },
+  {
+   "phrase": "__綻び__を直す",
+   "target": "綻び",
+   "reading": "ほころび"
+  },
+  {
+   "phrase": "__漏れる__",
+   "target": "漏れる",
+   "reading": "もれる"
+  },
+  {
+   "phrase": "__朽ちる__",
+   "target": "朽ちる",
+   "reading": "くちる"
+  },
+  {
+   "phrase": "__砕く__",
+   "target": "砕く",
+   "reading": "くだく"
+  },
+  {
+   "phrase": "__摘む__",
+   "target": "摘む",
+   "reading": "つむ"
+  },
+  {
+   "phrase": "__剝がす__",
+   "target": "剝がす",
+   "reading": "はがす"
+  },
+  {
+   "phrase": "__拭く__",
+   "target": "拭く",
+   "reading": "ふく"
+  },
+  {
+   "phrase": "__羨む__",
+   "target": "羨む",
+   "reading": "うらやむ"
+  },
+  {
+   "phrase": "__蔑む__",
+   "target": "蔑む",
+   "reading": "さげすむ"
+  },
+  {
+   "phrase": "__嫌う__",
+   "target": "嫌う",
+   "reading": "きらう"
+  },
+  {
+   "phrase": "__脅す__",
+   "target": "脅す",
+   "reading": "おどす"
+  },
+  {
+   "phrase": "__奪う__",
+   "target": "奪う",
+   "reading": "うばう"
+  },
+  {
+   "phrase": "__逃れる__",
+   "target": "逃れる",
+   "reading": "のがれる"
+  },
+  {
+   "phrase": "__避ける__",
+   "target": "避ける",
+   "reading": "さける"
+  },
+  {
+   "phrase": "__鎮める__",
+   "target": "鎮める",
+   "reading": "しずめる"
+  },
+  {
+   "phrase": "__干渉__する",
+   "target": "干渉",
+   "reading": "かんしょう"
+  },
+  {
+   "phrase": "__緩和__する",
+   "target": "緩和",
+   "reading": "かんわ"
+  },
+  {
+   "phrase": "__沈黙__する",
+   "target": "沈黙",
+   "reading": "ちんもく"
+  },
+  {
+   "phrase": "__明瞭__な発音",
+   "target": "明瞭",
+   "reading": "めいりょう"
+  },
+  {
+   "phrase": "__均一__な品質",
+   "target": "均一",
+   "reading": "きんいつ"
+  },
+  {
+   "phrase": "__功績__をたたえる",
+   "target": "功績",
+   "reading": "こうせき"
+  },
+  {
+   "phrase": "__栽培__する",
+   "target": "栽培",
+   "reading": "さいばい"
+  },
+  {
+   "phrase": "__搭乗__する",
+   "target": "搭乗",
+   "reading": "とうじょう"
+  },
+  {
+   "phrase": "__沸騰__する",
+   "target": "沸騰",
+   "reading": "ふっとう"
+  },
+  {
+   "phrase": "__瞬く__",
+   "target": "瞬く",
+   "reading": "またたく"
+  },
+  {
+   "phrase": "__覆う__",
+   "target": "覆う",
+   "reading": "おおう"
+  },
+  {
+   "phrase": "__偏る__",
+   "target": "偏る",
+   "reading": "かたよる"
+  },
+  {
+   "phrase": "__趣__のある",
+   "target": "趣",
+   "reading": "おもむき"
+  },
+  {
+   "phrase": "__輪郭__",
+   "target": "輪郭",
+   "reading": "りんかく"
+  },
+  {
+   "phrase": "__執筆__する",
+   "target": "執筆",
+   "reading": "しっぴつ"
+  },
+  {
+   "phrase": "__枠__の中",
+   "target": "枠",
+   "reading": "わく"
+  },
+  {
+   "phrase": "__促進__する",
+   "target": "促進",
+   "reading": "そくしん"
+  },
+  {
+   "phrase": "__暖房__",
+   "target": "暖房",
+   "reading": "だんぼう"
+  },
+  {
+   "phrase": "__冒険__",
+   "target": "冒険",
+   "reading": "ぼうけん"
+  },
+  {
+   "phrase": "__駐車__する",
+   "target": "駐車",
+   "reading": "ちゅうしゃ"
+  },
+  {
+   "phrase": "__堅実__な経営",
+   "target": "堅実",
+   "reading": "けんじつ"
+  },
+  {
+   "phrase": "__譲歩__する",
+   "target": "譲歩",
+   "reading": "じょうほ"
+  },
+  {
+   "phrase": "__削減__する",
+   "target": "削減",
+   "reading": "さくげん"
+  },
+  {
+   "phrase": "__抽象__的",
+   "target": "抽象",
+   "reading": "ちゅうしょう"
+  },
+  {
+   "phrase": "__象徴__する",
+   "target": "象徴",
+   "reading": "しょうちょう"
+  },
+  {
+   "phrase": "__概念__",
+   "target": "概念",
+   "reading": "がいねん"
+  },
+  {
+   "phrase": "__普遍__的",
+   "target": "普遍",
+   "reading": "ふへん"
+  },
+  {
+   "phrase": "__本質__",
+   "target": "本質",
+   "reading": "ほんしつ"
+  },
+  {
+   "phrase": "__客観__的",
+   "target": "客観",
+   "reading": "きゃっかん"
+  },
+  {
+   "phrase": "__主観__的",
+   "target": "主観",
+   "reading": "しゅかん"
+  },
+  {
+   "phrase": "__相対__的",
+   "target": "相対",
+   "reading": "そうたい"
+  },
+  {
+   "phrase": "__絶対__的",
+   "target": "絶対",
+   "reading": "ぜったい"
+  },
+  {
+   "phrase": "__必然__",
+   "target": "必然",
+   "reading": "ひつぜん"
+  },
+  {
+   "phrase": "__比喩__",
+   "target": "比喩",
+   "reading": "ひゆ"
+  },
+  {
+   "phrase": "__暗示__する",
+   "target": "暗示",
+   "reading": "あんじ"
+  },
+  {
+   "phrase": "__意図__",
+   "target": "意図",
+   "reading": "いと"
+  },
+  {
+   "phrase": "__双方__",
+   "target": "双方",
+   "reading": "そうほう"
+  },
+  {
+   "phrase": "__依然__として",
+   "target": "依然",
+   "reading": "いぜん"
+  },
+  {
+   "phrase": "__慌てる__",
+   "target": "慌てる",
+   "reading": "あわてる"
+  },
+  {
+   "phrase": "__勧める__",
+   "target": "勧める",
+   "reading": "すすめる"
+  },
+  {
+   "phrase": "__縮む__",
+   "target": "縮む",
+   "reading": "ちぢむ"
+  },
+  {
+   "phrase": "__襲う__",
+   "target": "襲う",
+   "reading": "おそう"
+  },
+  {
+   "phrase": "__師走__の街",
+   "target": "師走",
+   "reading": "しわす"
+  },
+  {
+   "phrase": "__梅雨__が明ける",
+   "target": "梅雨",
+   "reading": "つゆ"
+  },
+  {
+   "phrase": "__五月雨__",
+   "target": "五月雨",
+   "reading": "さみだれ"
+  },
+  {
+   "phrase": "__時雨__が降る",
+   "target": "時雨",
+   "reading": "しぐれ"
+  },
+  {
+   "phrase": "__行方__不明",
+   "target": "行方",
+   "reading": "ゆくえ"
+  },
+  {
+   "phrase": "__土産__を買う",
+   "target": "土産",
+   "reading": "みやげ"
+  },
+  {
+   "phrase": "__眼鏡__をかける",
+   "target": "眼鏡",
+   "reading": "めがね"
+  },
+  {
+   "phrase": "__為替__相場",
+   "target": "為替",
+   "reading": "かわせ"
+  },
+  {
+   "phrase": "__雪崩__が起きる",
+   "target": "雪崩",
+   "reading": "なだれ"
+  },
+  {
+   "phrase": "__最寄り__の駅",
+   "target": "最寄り",
+   "reading": "もより"
+  },
+  {
+   "phrase": "__硫黄__のにおい",
+   "target": "硫黄",
+   "reading": "いおう"
+  },
+  {
+   "phrase": "__笑顔__で話す",
+   "target": "笑顔",
+   "reading": "えがお"
+  },
+  {
+   "phrase": "__迷子__になる",
+   "target": "迷子",
+   "reading": "まいご"
+  },
+  {
+   "phrase": "__七夕__の飾り",
+   "target": "七夕",
+   "reading": "たなばた"
+  },
+  {
+   "phrase": "__息吹__を感じる",
+   "target": "息吹",
+   "reading": "いぶき"
+  },
+  {
+   "phrase": "__汎用__性が高い",
+   "target": "汎用",
+   "reading": "はんよう"
+  },
+  {
+   "phrase": "__曖昧__な返事",
+   "target": "曖昧",
+   "reading": "あいまい"
+  },
+  {
+   "phrase": "__語彙__を増やす",
+   "target": "語彙",
+   "reading": "ごい"
+  },
+  {
+   "phrase": "自由を__享受__する",
+   "target": "享受",
+   "reading": "きょうじゅ"
+  },
+  {
+   "phrase": "経験が__皆無__だ",
+   "target": "皆無",
+   "reading": "かいむ"
+  },
+  {
+   "phrase": "川が__氾濫__する",
+   "target": "氾濫",
+   "reading": "はんらん"
+  },
+  {
+   "phrase": "__駆逐__する",
+   "target": "駆逐",
+   "reading": "くちく"
+  },
+  {
+   "phrase": "__把持__する",
+   "target": "把持",
+   "reading": "はじ"
+  },
+  {
+   "phrase": "__脚光__を浴びる",
+   "target": "脚光",
+   "reading": "きゃっこう"
+  },
+  {
+   "phrase": "__痕跡__を残す",
+   "target": "痕跡",
+   "reading": "こんせき"
+  },
+  {
+   "phrase": "__緻密__な計画",
+   "target": "緻密",
+   "reading": "ちみつ"
+  },
+  {
+   "phrase": "__卓越__した技術",
+   "target": "卓越",
+   "reading": "たくえつ"
+  },
+  {
+   "phrase": "__逸話__を語る",
+   "target": "逸話",
+   "reading": "いつわ"
+  },
+  {
+   "phrase": "__惰性__で続ける",
+   "target": "惰性",
+   "reading": "だせい"
+  },
+  {
+   "phrase": "__頒布__する",
+   "target": "頒布",
+   "reading": "はんぷ"
+  },
+  {
+   "phrase": "__享楽__にふける",
+   "target": "享楽",
+   "reading": "きょうらく"
+  },
+  {
+   "phrase": "__廉価__な商品",
+   "target": "廉価",
+   "reading": "れんか"
+  },
+  {
+   "phrase": "__斬新__なデザイン",
+   "target": "斬新",
+   "reading": "ざんしん"
+  },
+  {
+   "phrase": "__折衷__案",
+   "target": "折衷",
+   "reading": "せっちゅう"
+  },
+  {
+   "phrase": "__窮地__に立つ",
+   "target": "窮地",
+   "reading": "きゅうち"
+  },
+  {
+   "phrase": "__促成__栽培",
+   "target": "促成",
+   "reading": "そくせい"
+  },
+  {
+   "phrase": "__含蓄__のある言葉",
+   "target": "含蓄",
+   "reading": "がんちく"
+  },
+  {
+   "phrase": "__会得__する",
+   "target": "会得",
+   "reading": "えとく"
+  },
+  {
+   "phrase": "__功徳__",
+   "target": "功徳",
+   "reading": "くどく"
+  },
+  {
+   "phrase": "__納涼__祭",
+   "target": "納涼",
+   "reading": "のうりょう"
+  },
+  {
+   "phrase": "__暴露__する",
+   "target": "暴露",
+   "reading": "ばくろ"
+  },
+  {
+   "phrase": "__仮病__を使う",
+   "target": "仮病",
+   "reading": "けびょう"
+  },
+  {
+   "phrase": "__相殺__する",
+   "target": "相殺",
+   "reading": "そうさい"
+  },
+  {
+   "phrase": "__出納__帳",
+   "target": "出納",
+   "reading": "すいとう"
+  },
+  {
+   "phrase": "__流布__する",
+   "target": "流布",
+   "reading": "るふ"
+  },
+  {
+   "phrase": "__一矢__を報いる",
+   "target": "一矢",
+   "reading": "いっし"
+  },
+  {
+   "phrase": "__遵守__する",
+   "target": "遵守",
+   "reading": "じゅんしゅ"
+  },
+  {
+   "phrase": "__脆弱__な体制",
+   "target": "脆弱",
+   "reading": "ぜいじゃく"
+  },
+  {
+   "phrase": "__凄惨__な光景",
+   "target": "凄惨",
+   "reading": "せいさん"
+  },
+  {
+   "phrase": "__辛辣__な批評",
+   "target": "辛辣",
+   "reading": "しんらつ"
+  },
+  {
+   "phrase": "__漸次__進める",
+   "target": "漸次",
+   "reading": "ぜんじ"
+  },
+  {
+   "phrase": "__寡黙__な人",
+   "target": "寡黙",
+   "reading": "かもく"
+  },
+  {
+   "phrase": "__払拭__する",
+   "target": "払拭",
+   "reading": "ふっしょく"
+  },
+  {
+   "phrase": "__萎縮__する",
+   "target": "萎縮",
+   "reading": "いしゅく"
+  },
+  {
+   "phrase": "__逐次__報告する",
+   "target": "逐次",
+   "reading": "ちくじ"
+  },
+  {
+   "phrase": "__恣意__的",
+   "target": "恣意",
+   "reading": "しい"
+  },
+  {
+   "phrase": "__拘束__する",
+   "target": "拘束",
+   "reading": "こうそく"
+  },
+  {
+   "phrase": "__放棄__する",
+   "target": "放棄",
+   "reading": "ほうき"
+  },
+  {
+   "phrase": "__脱却__する",
+   "target": "脱却",
+   "reading": "だっきゃく"
+  },
+  {
+   "phrase": "__弾劾__する",
+   "target": "弾劾",
+   "reading": "だんがい"
+  },
+  {
+   "phrase": "__咀嚼__する",
+   "target": "咀嚼",
+   "reading": "そしゃく"
+  },
+  {
+   "phrase": "__訃報__が届く",
+   "target": "訃報",
+   "reading": "ふほう"
+  },
+  {
+   "phrase": "__偶像__",
+   "target": "偶像",
+   "reading": "ぐうぞう"
+  },
+  {
+   "phrase": "__逆説__",
+   "target": "逆説",
+   "reading": "ぎゃくせつ"
+  },
+  {
+   "phrase": "__媒体__",
+   "target": "媒体",
+   "reading": "ばいたい"
+  }
+ ],
+ "kaki": [
+  {
+   "sentence": "__セイジツ__な人がら",
+   "answer": "誠実"
+  },
+  {
+   "sentence": "__ジュンビ__をする",
+   "answer": "準備"
+  },
+  {
+   "sentence": "災害に__ソナ__える",
+   "answer": "備える"
+  },
+  {
+   "sentence": "__ヒョウバン__のよい店",
+   "answer": "評判"
+  },
+  {
+   "sentence": "__コウフン__して眠れない",
+   "answer": "興奮"
+  },
+  {
+   "sentence": "__セイケツ__な服",
+   "answer": "清潔"
+  },
+  {
+   "sentence": "__ケンサ__を受ける",
+   "answer": "検査"
+  },
+  {
+   "sentence": "会社を__ケイエイ__する",
+   "answer": "経営"
+  },
+  {
+   "sentence": "__ハイケイ__をえがく",
+   "answer": "背景"
+  },
+  {
+   "sentence": "__ジョウキョウ__を説明する",
+   "answer": "状況"
+  },
+  {
+   "sentence": "__シキュウ__連絡する",
+   "answer": "至急"
+  },
+  {
+   "sentence": "__ケンポウ__を学ぶ",
+   "answer": "憲法"
+  },
+  {
+   "sentence": "__センモン__の知識",
+   "answer": "専門"
+  },
+  {
+   "sentence": "__ミッセツ__な関係",
+   "answer": "密接"
+  },
+  {
+   "sentence": "税金を__オサ__める",
+   "answer": "納める"
+  },
+  {
+   "sentence": "成功を__オサ__める",
+   "answer": "収める"
+  },
+  {
+   "sentence": "国を__オサ__める",
+   "answer": "治める"
+  },
+  {
+   "sentence": "学問を__オサ__める",
+   "answer": "修める"
+  },
+  {
+   "sentence": "会社に__ツト__める",
+   "answer": "勤める"
+  },
+  {
+   "sentence": "議長を__ツト__める",
+   "answer": "務める"
+  },
+  {
+   "sentence": "解決に__ツト__める",
+   "answer": "努める"
+  },
+  {
+   "sentence": "時計が__クル__う",
+   "answer": "狂う"
+  },
+  {
+   "sentence": "__カンタン__な問題",
+   "answer": "簡単"
+  },
+  {
+   "sentence": "__フクザツ__な仕組み",
+   "answer": "複雑"
+  },
+  {
+   "sentence": "__キチョウ__な体験",
+   "answer": "貴重"
+  },
+  {
+   "sentence": "__シゲン__を大切にする",
+   "answer": "資源"
+  },
+  {
+   "sentence": "__ジュウヨウ__な役目",
+   "answer": "重要"
+  },
+  {
+   "sentence": "__キョウリョク__して働く",
+   "answer": "協力"
+  },
+  {
+   "sentence": "__ホウフ__な知識",
+   "answer": "豊富"
+  },
+  {
+   "sentence": "__ジョウケン__を満たす",
+   "answer": "条件"
+  },
+  {
+   "sentence": "__キボ__が大きい",
+   "answer": "規模"
+  },
+  {
+   "sentence": "__ソシキ__をつくる",
+   "answer": "組織"
+  },
+  {
+   "sentence": "__ヒョウカ__が高い",
+   "answer": "評価"
+  },
+  {
+   "sentence": "__コウカ__がある",
+   "answer": "効果"
+  },
+  {
+   "sentence": "__カクジツ__な方法",
+   "answer": "確実"
+  },
+  {
+   "sentence": "__ユウシュウ__な成績",
+   "answer": "優秀"
+  },
+  {
+   "sentence": "__ケイコウ__が強い",
+   "answer": "傾向"
+  },
+  {
+   "sentence": "__タイサク__を立てる",
+   "answer": "対策"
+  },
+  {
+   "sentence": "__カイゼン__する",
+   "answer": "改善"
+  },
+  {
+   "sentence": "__シンライ__される",
+   "answer": "信頼"
+  },
+  {
+   "sentence": "__ドクトク__の文化",
+   "answer": "独特"
+  },
+  {
+   "sentence": "__キケン__をさける",
+   "answer": "危険"
+  },
+  {
+   "sentence": "__ケッカ__を出す",
+   "answer": "結果"
+  },
+  {
+   "sentence": "__ゲンイン__を調べる",
+   "answer": "原因"
+  },
+  {
+   "sentence": "__エイキョウ__を受ける",
+   "answer": "影響"
+  },
+  {
+   "sentence": "__ヒツヨウ__な物",
+   "answer": "必要"
+  },
+  {
+   "sentence": "__ヒョウジョウ__が明るい",
+   "answer": "表情"
+  },
+  {
+   "sentence": "__カンシャ__の気持ち",
+   "answer": "感謝"
+  },
+  {
+   "sentence": "__キボウ__を持つ",
+   "answer": "希望"
+  },
+  {
+   "sentence": "__ヨウイ__に解ける",
+   "answer": "容易"
+  },
+  {
+   "sentence": "__キリツ__を守る",
+   "answer": "規律"
+  },
+  {
+   "sentence": "__チョウサ__をする",
+   "answer": "調査"
+  },
+  {
+   "sentence": "__トウロン__する",
+   "answer": "討論"
+  },
+  {
+   "sentence": "__ハンダン__する",
+   "answer": "判断"
+  },
+  {
+   "sentence": "__ソンケイ__する",
+   "answer": "尊敬"
+  },
+  {
+   "sentence": "__キョウミ__がある",
+   "answer": "興味"
+  },
+  {
+   "sentence": "__カンケイ__を築く",
+   "answer": "関係"
+  },
+  {
+   "sentence": "__ホウホウ__を考える",
+   "answer": "方法"
+  },
+  {
+   "sentence": "__イチョウ__が悪い",
+   "answer": "胃腸"
+  },
+  {
+   "sentence": "__ゾウキ__の働き",
+   "answer": "臓器"
+  },
+  {
+   "sentence": "__コキュウ__が乱れる",
+   "answer": "呼吸"
+  },
+  {
+   "sentence": "__ケツエキ__の流れ",
+   "answer": "血液"
+  },
+  {
+   "sentence": "__ホネ__を折る",
+   "answer": "骨"
+  },
+  {
+   "sentence": "__キンニク__をきたえる",
+   "answer": "筋肉"
+  },
+  {
+   "sentence": "__ノウ__の働き",
+   "answer": "脳"
+  },
+  {
+   "sentence": "__シンゾウ__の音",
+   "answer": "心臓"
+  },
+  {
+   "sentence": "__セスジ__をのばす",
+   "answer": "背筋"
+  },
+  {
+   "sentence": "__カタ__を組む",
+   "answer": "肩"
+  },
+  {
+   "sentence": "__ハラ__が立つ",
+   "answer": "腹"
+  },
+  {
+   "sentence": "__ムネ__を張る",
+   "answer": "胸"
+  },
+  {
+   "sentence": "__イキ__を吸う",
+   "answer": "息"
+  },
+  {
+   "sentence": "__シンパイ__する",
+   "answer": "心配"
+  },
+  {
+   "sentence": "__ヨクボウ__をおさえる",
+   "answer": "欲望"
+  },
+  {
+   "sentence": "__シュウカン__をつける",
+   "answer": "習慣"
+  },
+  {
+   "sentence": "__チュウイ__する",
+   "answer": "注意"
+  },
+  {
+   "sentence": "__キオク__に残る",
+   "answer": "記憶"
+  },
+  {
+   "sentence": "__ソウゾウ__する",
+   "answer": "想像"
+  },
+  {
+   "sentence": "__ソウゾウ__する（つくる）",
+   "answer": "創造"
+  },
+  {
+   "sentence": "__カテイ__を見直す",
+   "answer": "過程"
+  },
+  {
+   "sentence": "__カテイ__を立てる",
+   "answer": "仮定"
+  },
+  {
+   "sentence": "__タイショウ__を絞る",
+   "answer": "対象"
+  },
+  {
+   "sentence": "__タイショウ__をなす",
+   "answer": "対照"
+  },
+  {
+   "sentence": "__イガイ__な結果",
+   "answer": "意外"
+  },
+  {
+   "sentence": "__イガイ__は認めない",
+   "answer": "以外"
+  },
+  {
+   "sentence": "__カイホウ__する（解き放つ）",
+   "answer": "解放"
+  },
+  {
+   "sentence": "__カイホウ__する（開け放つ）",
+   "answer": "開放"
+  },
+  {
+   "sentence": "__キカイ__を操作する",
+   "answer": "機械"
+  },
+  {
+   "sentence": "__キカイ__をのがす",
+   "answer": "機会"
+  },
+  {
+   "sentence": "__コウエン__を聞く",
+   "answer": "講演"
+  },
+  {
+   "sentence": "__コウエン__を見る",
+   "answer": "公演"
+  },
+  {
+   "sentence": "__シジ__を出す",
+   "answer": "指示"
+  },
+  {
+   "sentence": "__シジ__を得る",
+   "answer": "支持"
+  },
+  {
+   "sentence": "__セイサク__を作る",
+   "answer": "製作"
+  },
+  {
+   "sentence": "__セイサク__を決める",
+   "answer": "政策"
+  },
+  {
+   "sentence": "__ヘイコウ__に走る",
+   "answer": "平行"
+  },
+  {
+   "sentence": "__ヘイコウ__を保つ",
+   "answer": "平衡"
+  },
+  {
+   "sentence": "__ホショウ__する（品質）",
+   "answer": "保証"
+  },
+  {
+   "sentence": "__ホショウ__する（安全）",
+   "answer": "保障"
+  },
+  {
+   "sentence": "__カンシン__を持つ",
+   "answer": "関心"
+  },
+  {
+   "sentence": "__カンシン__する",
+   "answer": "感心"
+  },
+  {
+   "sentence": "__シンチョウ__に行う",
+   "answer": "慎重"
+  },
+  {
+   "sentence": "__シンチョウ__をはかる",
+   "answer": "身長"
+  },
+  {
+   "sentence": "__ヨウリョウ__がよい",
+   "answer": "要領"
+  },
+  {
+   "sentence": "__ヨウリョウ__を守る",
+   "answer": "容量"
+  },
+  {
+   "sentence": "__キョウドウ__で作業する",
+   "answer": "共同"
+  },
+  {
+   "sentence": "__キョウドウ__組合",
+   "answer": "協同"
+  },
+  {
+   "sentence": "__フシン__な人物",
+   "answer": "不審"
+  },
+  {
+   "sentence": "__フシン__に思う",
+   "answer": "不信"
+  },
+  {
+   "sentence": "__ヨウケン__を伝える",
+   "answer": "用件"
+  },
+  {
+   "sentence": "__ヨウケン__を満たす",
+   "answer": "要件"
+  },
+  {
+   "sentence": "__ゲンショウ__が起こる",
+   "answer": "現象"
+  },
+  {
+   "sentence": "__ゲンショウ__する",
+   "answer": "減少"
+  },
+  {
+   "sentence": "__ジュウライ__の方法",
+   "answer": "従来"
+  },
+  {
+   "sentence": "__ソッチョク__な感想",
+   "answer": "率直"
+  },
+  {
+   "sentence": "__ヨウス__",
+   "answer": "様子"
+  },
+  {
+   "sentence": "__ジタイ__が悪化する",
+   "answer": "事態"
+  },
+  {
+   "sentence": "__キシャ__が走る",
+   "answer": "汽車"
+  },
+  {
+   "sentence": "__キシャ__が取材する",
+   "answer": "記者"
+  },
+  {
+   "sentence": "__イシ__を固める",
+   "answer": "意志"
+  },
+  {
+   "sentence": "__イシ__を伝える",
+   "answer": "意思"
+  },
+  {
+   "sentence": "__キセイ__の品",
+   "answer": "既製"
+  },
+  {
+   "sentence": "__キセイ__を緩める",
+   "answer": "規制"
+  },
+  {
+   "sentence": "__シンコウ__が厚い",
+   "answer": "信仰"
+  },
+  {
+   "sentence": "__シンコウ__する",
+   "answer": "進行"
+  },
+  {
+   "sentence": "__ドリョク__する",
+   "answer": "努力"
+  },
+  {
+   "sentence": "__セイコウ__する",
+   "answer": "成功"
+  },
+  {
+   "sentence": "__シッパイ__する",
+   "answer": "失敗"
+  },
+  {
+   "sentence": "__ハンセイ__する",
+   "answer": "反省"
+  },
+  {
+   "sentence": "__ケイケン__を積む",
+   "answer": "経験"
+  },
+  {
+   "sentence": "__ギジュツ__を学ぶ",
+   "answer": "技術"
+  },
+  {
+   "sentence": "__ゲイジュツ__作品",
+   "answer": "芸術"
+  },
+  {
+   "sentence": "__ブンカ__を守る",
+   "answer": "文化"
+  },
+  {
+   "sentence": "__レキシ__を学ぶ",
+   "answer": "歴史"
+  },
+  {
+   "sentence": "__ケンチク__の仕事",
+   "answer": "建築"
+  },
+  {
+   "sentence": "__ジンジャ__に参る",
+   "answer": "神社"
+  },
+  {
+   "sentence": "__ブッキョウ__の教え",
+   "answer": "仏教"
+  },
+  {
+   "sentence": "__ギョウジ__に参加する",
+   "answer": "行事"
+  },
+  {
+   "sentence": "__ジュンバン__を待つ",
+   "answer": "順番"
+  },
+  {
+   "sentence": "__ソウゴ__に理解する",
+   "answer": "相互"
+  },
+  {
+   "sentence": "__ゼッタイ__に守る",
+   "answer": "絶対"
+  },
+  {
+   "sentence": "__エンソウ__会",
+   "answer": "演奏"
+  },
+  {
+   "sentence": "__ガクフ__を読む",
+   "answer": "楽譜"
+  },
+  {
+   "sentence": "__シキ__をする",
+   "answer": "指揮"
+  },
+  {
+   "sentence": "__エイゾウ__を見る",
+   "answer": "映像"
+  },
+  {
+   "sentence": "__ドクショ__の時間",
+   "answer": "読書"
+  },
+  {
+   "sentence": "__ザッシ__を読む",
+   "answer": "雑誌"
+  },
+  {
+   "sentence": "__ザイリョウ__をそろえる",
+   "answer": "材料"
+  },
+  {
+   "sentence": "__ネダン__を調べる",
+   "answer": "値段"
+  },
+  {
+   "sentence": "__ボウエキ__が盛ん",
+   "answer": "貿易"
+  },
+  {
+   "sentence": "__ユシュツ__する",
+   "answer": "輸出"
+  },
+  {
+   "sentence": "__ユニュウ__する",
+   "answer": "輸入"
+  },
+  {
+   "sentence": "__コウギョウ__が発達する",
+   "answer": "工業"
+  },
+  {
+   "sentence": "__ノウギョウ__を営む",
+   "answer": "農業"
+  },
+  {
+   "sentence": "__ギョギョウ__の町",
+   "answer": "漁業"
+  },
+  {
+   "sentence": "__コクサイ__交流",
+   "answer": "国際"
+  },
+  {
+   "sentence": "__セイジ__に関心を持つ",
+   "answer": "政治"
+  },
+  {
+   "sentence": "__センキョ__に行く",
+   "answer": "選挙"
+  },
+  {
+   "sentence": "__ギイン__になる",
+   "answer": "議員"
+  },
+  {
+   "sentence": "__ケンリ__を主張する",
+   "answer": "権利"
+  },
+  {
+   "sentence": "__ギム__を果たす",
+   "answer": "義務"
+  },
+  {
+   "sentence": "__ヘイワ__を願う",
+   "answer": "平和"
+  },
+  {
+   "sentence": "__ビョウドウ__に分ける",
+   "answer": "平等"
+  },
+  {
+   "sentence": "__ジユウ__を求める",
+   "answer": "自由"
+  },
+  {
+   "sentence": "__ホウリツ__を守る",
+   "answer": "法律"
+  },
+  {
+   "sentence": "__サイバン__を受ける",
+   "answer": "裁判"
+  },
+  {
+   "sentence": "__ザイセイ__を立て直す",
+   "answer": "財政"
+  },
+  {
+   "sentence": "__ヨサン__を組む",
+   "answer": "予算"
+  },
+  {
+   "sentence": "__キンユウ__機関",
+   "answer": "金融"
+  },
+  {
+   "sentence": "__ネンレイ__を聞く",
+   "answer": "年齢"
+  },
+  {
+   "sentence": "__コウレイ__化",
+   "answer": "高齢"
+  },
+  {
+   "sentence": "__シュウショク__する",
+   "answer": "就職"
+  },
+  {
+   "sentence": "__キュウリョウ__をもらう",
+   "answer": "給料"
+  },
+  {
+   "sentence": "__ザイタク__で働く",
+   "answer": "在宅"
+  },
+  {
+   "sentence": "__ジュウタク__を建てる",
+   "answer": "住宅"
+  },
+  {
+   "sentence": "__トカイ__に住む",
+   "answer": "都会"
+  },
+  {
+   "sentence": "__チイキ__の人々",
+   "answer": "地域"
+  },
+  {
+   "sentence": "__カンキョウ__を守る",
+   "answer": "環境"
+  },
+  {
+   "sentence": "__オセン__を防ぐ",
+   "answer": "汚染"
+  },
+  {
+   "sentence": "__シンリン__を守る",
+   "answer": "森林"
+  },
+  {
+   "sentence": "__キコウ__の変化",
+   "answer": "気候"
+  },
+  {
+   "sentence": "__オンダン__化",
+   "answer": "温暖"
+  },
+  {
+   "sentence": "__サイガイ__に備える",
+   "answer": "災害"
+  },
+  {
+   "sentence": "__ヒナン__する",
+   "answer": "避難"
+  },
+  {
+   "sentence": "__キュウジョ__する",
+   "answer": "救助"
+  },
+  {
+   "sentence": "__ヨボウ__接種",
+   "answer": "予防"
+  },
+  {
+   "sentence": "__エイセイ__に気をつける",
+   "answer": "衛生"
+  },
+  {
+   "sentence": "__エイヨウ__をとる",
+   "answer": "栄養"
+  },
+  {
+   "sentence": "__ケンコウ__に気を配る",
+   "answer": "健康"
+  },
+  {
+   "sentence": "__イリョウ__の進歩",
+   "answer": "医療"
+  },
+  {
+   "sentence": "__ヤクヒン__を使う",
+   "answer": "薬品"
+  },
+  {
+   "sentence": "__ショウジョウ__を伝える",
+   "answer": "症状"
+  },
+  {
+   "sentence": "__チリョウ__を受ける",
+   "answer": "治療"
+  },
+  {
+   "sentence": "__ハッケン__する",
+   "answer": "発見"
+  },
+  {
+   "sentence": "__ハツメイ__する",
+   "answer": "発明"
+  },
+  {
+   "sentence": "__ジッケン__をする",
+   "answer": "実験"
+  },
+  {
+   "sentence": "__カンサツ__する",
+   "answer": "観察"
+  },
+  {
+   "sentence": "__ケンキュウ__する",
+   "answer": "研究"
+  },
+  {
+   "sentence": "__リロン__を学ぶ",
+   "answer": "理論"
+  },
+  {
+   "sentence": "__シュチョウ__する",
+   "answer": "主張"
+  },
+  {
+   "sentence": "__コンキョ__を示す",
+   "answer": "根拠"
+  },
+  {
+   "sentence": "__ロンリ__的に考える",
+   "answer": "論理"
+  },
+  {
+   "sentence": "__ケツロン__を出す",
+   "answer": "結論"
+  },
+  {
+   "sentence": "__シュダン__を選ぶ",
+   "answer": "手段"
+  },
+  {
+   "sentence": "__モクテキ__を持つ",
+   "answer": "目的"
+  },
+  {
+   "sentence": "__ヨウテン__をまとめる",
+   "answer": "要点"
+  },
+  {
+   "sentence": "__ダンラク__を分ける",
+   "answer": "段落"
+  },
+  {
+   "sentence": "__ヒョウゲン__を工夫する",
+   "answer": "表現"
+  },
+  {
+   "sentence": "__コウセイ__を考える",
+   "answer": "構成"
+  },
+  {
+   "sentence": "__ヨウヤク__する",
+   "answer": "要約"
+  },
+  {
+   "sentence": "__キジュツ__する",
+   "answer": "記述"
+  },
+  {
+   "sentence": "__インヨウ__する",
+   "answer": "引用"
+  },
+  {
+   "sentence": "__ヒカク__する",
+   "answer": "比較"
+  },
+  {
+   "sentence": "__ブンルイ__する",
+   "answer": "分類"
+  },
+  {
+   "sentence": "__トクチョウ__をとらえる",
+   "answer": "特徴"
+  },
+  {
+   "sentence": "__キョウツウ__点",
+   "answer": "共通"
+  },
+  {
+   "sentence": "__サイ__を見つける",
+   "answer": "差異"
+  },
+  {
+   "sentence": "__カクシン__を持つ",
+   "answer": "確信"
+  },
+  {
+   "sentence": "__スイソク__する",
+   "answer": "推測"
+  },
+  {
+   "sentence": "__ケントウ__する",
+   "answer": "検討"
+  },
+  {
+   "sentence": "__ゴカイ__を招く",
+   "answer": "誤解"
+  },
+  {
+   "sentence": "__ナットク__する",
+   "answer": "納得"
+  },
+  {
+   "sentence": "__ハンロン__する",
+   "answer": "反論"
+  },
+  {
+   "sentence": "__サンセイ__する",
+   "answer": "賛成"
+  },
+  {
+   "sentence": "__ハンタイ__する",
+   "answer": "反対"
+  },
+  {
+   "sentence": "__ダキョウ__する",
+   "answer": "妥協"
+  },
+  {
+   "sentence": "__チョウセイ__する",
+   "answer": "調整"
+  },
+  {
+   "sentence": "__ギリ__を果たす",
+   "answer": "義理"
+  },
+  {
+   "sentence": "__セキニン__を負う",
+   "answer": "責任"
+  },
+  {
+   "sentence": "__チュウコク__を聞く",
+   "answer": "忠告"
+  },
+  {
+   "sentence": "__ジョゲン__をする",
+   "answer": "助言"
+  },
+  {
+   "sentence": "__ハゲ__ましの言葉",
+   "answer": "励まし"
+  },
+  {
+   "sentence": "__シンボウ__強い",
+   "answer": "辛抱"
+  },
+  {
+   "sentence": "__ヒナン__する（責める）",
+   "answer": "非難"
+  },
+  {
+   "sentence": "__ヒハン__する",
+   "answer": "批判"
+  },
+  {
+   "sentence": "__ヒヒョウ__する",
+   "answer": "批評"
+  },
+  {
+   "sentence": "__ケイコク__する",
+   "answer": "警告"
+  },
+  {
+   "sentence": "__ケイカイ__する",
+   "answer": "警戒"
+  },
+  {
+   "sentence": "__ヨウキュウ__する",
+   "answer": "要求"
+  },
+  {
+   "sentence": "__ヨウセイ__する",
+   "answer": "要請"
+  },
+  {
+   "sentence": "__イライ__する",
+   "answer": "依頼"
+  }
+ ]
+}
