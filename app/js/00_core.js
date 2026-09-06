@@ -38,14 +38,23 @@ EDITIONS.forEach(E => {
       u.content.forEach((c, ci) => {
         c.ci = ci;
         if (c.t === 'ex') {
-          if (c.items) c.items.forEach(it => u.items.push({ key: u.ukey + '#' + ci + ':' + it.n, ci, n: it.n, q: it.q, a: it.a, label: c.title }));
-          else if (c.kanji) c.kanji.forEach(part => part.items.forEach(it => u.items.push({ key: u.ukey + '#' + ci + ':' + part.kind + ':' + it.n, ci, n: it.n, q: it.q, a: it.a, label: c.title + '・' + part.kind, kanji: part.kind })));
-          else u.items.push({ key: u.ukey + '#' + ci + ':all', ci, n: 0, q: c.q, a: c.a, label: c.title, whole: true });
+          if (c.items) c.items.forEach(it => u.items.push({ key: u.ukey + '#' + ci + ':' + it.n, ci, n: it.n, q: it.q, a: it.a, label: c.title, numberLabel: it.l || String(it.n), context: (c.externalContext || '') + (c.context || ''), contextTitle: c.contextTitle || '' }));
+          else if (c.kanji) c.kanji.forEach(part => part.items.forEach(it => u.items.push({ key: u.ukey + '#' + ci + ':' + part.kind + ':' + it.n, ci, n: it.n, q: it.q, a: it.a, label: c.title + '・' + part.kind, numberLabel: String(it.n), context: c.externalContext || '', contextTitle: c.contextTitle || '', kanji: part.kind })));
+          else u.items.push({ key: u.ukey + '#' + ci + ':all', ci, n: 0, q: c.q, a: c.a, label: c.title, context: c.externalContext || '', contextTitle: c.contextTitle || '', whole: true });
         } else if (c.vocab) {
           c.vocab.forEach(v => u.items.push({ key: u.ukey + '#v' + ci + ':' + v.n, ci, n: v.n, q: '<b>' + esc(v.word) + '</b> <span class="muted sm">' + esc(v.pos) + '</span>', a: esc(v.meaning), label: '単語', vocab: v }));
         }
       });
     });
+    // Separated answer-only units remain in their original slots. Match their exact
+    // rendered answer text to existing questions so viewing them is never a first attempt.
+    const answerIndex = new Map();
+    s.units.forEach(u => u.content.forEach(c => { if (c.t === 'ex' && c.a) {
+      const key = (c.atitle || '') + '\n' + c.a;
+      const list = answerIndex.get(key) || [];
+      list.push(...u.items.filter(it => it.ci === c.ci).map(it => it.key)); answerIndex.set(key, list);
+    } }));
+    s.units.forEach(u => u.content.forEach(c => { if (c.t === 'a') c.answerKeys = answerIndex.get((c.title || '') + '\n' + c.html) || []; }));
   });
 });
 /* current edition — these globals are re-pointed by setEdition() */
@@ -74,6 +83,18 @@ function unitByKey(ukey) {
 function subjOf(u) { return EDITIONS_BY_ID[u.ed].SUBJ[u.subject]; }
 function unitLabel(u) { return (u.code ? u.code + '　' : '') + u.title; }
 function edLabel(u) { const E = EDITIONS_BY_ID[u.ed]; return E ? (E.short || E.name) : u.ed; }
+
+// Question context is kept separate from the question/answer, so reverse cards and
+// repeated displays never duplicate it or accidentally put it on the answer side.
+function questionContextHTML(context, title) {
+  if (!context && !title) return '';
+  return '<section class="exercise-context" aria-label="共通資料">' +
+    (title ? '<div class="ex-title">' + esc(title) + '</div>' : '') + (context || '') + '</section>';
+}
+function studyCard(it, sid) {
+  return { key: it.key, q: it.q, a: it.a, context: it.context || '', contextTitle: it.contextTitle || '',
+    label: it.label + (it.numberLabel ? '　' + it.numberLabel : ''), sid, ruby: SUBJ[sid].ruby };
+}
 
 /* ---- storage (IndexedDB key-value, localStorage fallback, memory fallback) ---- */
 const Store = (() => {
@@ -186,6 +207,7 @@ async function loadState() {
   }
   setEdition(S.settings.edition && EDITIONS_BY_ID[S.settings.edition] ? S.settings.edition : defaultEdition());
   EDITIONS.forEach(E => E.subjects.forEach(s => progOf(s)));
+  Study.migrateAll(S).forEach(k => markDirty('progress/' + k));
   S.loaded = true;
 }
 
@@ -202,16 +224,13 @@ function progOf(x) {
 }
 function progKey(x) { return typeof x === 'string' ? (x.split(':')[0] + ':' + x.slice(x.indexOf(':') + 1).split('/')[0]) : x.ed + ':' + (x.subject || x.id); }
 function gradeOf(subjectId, key) { const it = progOf(key).items[key]; return it ? it.g : undefined; }
-function setGrade(subjectId, key, g) {
-  const items = progOf(key).items;
-  if (g == null) delete items[key]; else items[key] = { g, t: Date.now() };
-  markDirty('progress/' + progKey(key));
-  logActivity();
+function setGrade(subjectId, key, g, opts) {
+  return Study.record(key, g, opts);
 }
 function unitStats(u) {
   const doc = progOf(u); const items = doc.items;
   let total = u.items.length, graded = 0, ok = 0, ng = 0;
-  u.items.forEach(it => { const r = items[it.key]; if (r) { graded++; if (r.g === 2) ok++; else ng++; } });
+  u.items.forEach(it => { const r = items[it.key]; if (r && (r.g === 0 || r.g === 1 || r.g === 2)) { graded++; if (r.g === 2) ok++; else ng++; } });
   const rec = doc.units[u.ukey] || {};
   const done = !!rec.d || (total > 0 && graded === total);
   return { total, graded, ok, ng, done, viewed: !!rec.v, hasItems: total > 0 };

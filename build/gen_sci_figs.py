@@ -72,7 +72,7 @@ def series_circuit(vlabel='12 V', ra='a', rb='b', amp='A₁', title='図1（ち�
     f.line((165, T), (R, T))
     f.line((R, T), (R, B)); f.line((L, T), (L, B))
     # bottom: battery and ammeter
-    f.line((L, B), (95, B)); battery(f, 115, B); f.line((122, B), (150, B))
+    f.line((L, B), (114, B)); battery(f, 115, B); f.line((119, B), (151, B))
     meter(f, 160, B, 'A', amp); f.line((169, B), (R, B))
     txt(f, (115, B - 16), 'でんげん ' + vlabel, 10)
     txt(f, (115, 142), title, 12)
@@ -89,7 +89,7 @@ def parallel_circuit(vlabel='12 V', ra='a', rb='b', amp='A₂', title='図2（�
     f.line((70, M), (100, M)); resistor(f, 100, 135, M, rb); f.line((135, M), (160, M))
     f.dot((70, T), 2.5); f.dot((160, T), 2.5)
     f.line((R, T), (R, B)); f.line((L, T), (L, B))
-    f.line((L, B), (95, B)); battery(f, 115, B); f.line((122, B), (150, B))
+    f.line((L, B), (114, B)); battery(f, 115, B); f.line((119, B), (151, B))
     meter(f, 160, B, 'A', amp); f.line((169, B), (R, B))
     txt(f, (115, B - 16), 'でんげん ' + vlabel, 10)
     txt(f, (115, 162), title, 12)
@@ -210,4 +210,8 @@ def blood():
 
 
 save(blood(), 'blood')
+# Keep the expanded h5 diagrams and repaired circuit layout in sync.
+if (EDITION.get('id') if isinstance(EDITION, dict) else EDITION) == 'h5':
+    import subprocess
+    subprocess.run([sys.executable, os.path.join(ROOT, 'build', 'generate_science_visuals.py'), ROOT], check=True)
 print('ok')

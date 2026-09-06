@@ -30,7 +30,7 @@
     {
      "type": "goal",
      "title": "英語の目標と方針",
-     "md": "- 目標は**偏差値62**。北辰の英語は平均点が50点前後になることが多く、**70点前後を毎回安定して取れれば達成**できます。\n- ばらつきが出る原因は「文法の穴」「長文の読み方が固まっていない」「英作文で白紙・減点」の3つ。この教材はその3つを**型**で固めます。\n- 毎日の順番：**単語セット（10分）→ 文法ユニットまたは大問別演習 → リスニング（演習または音読）**。英語は毎日、最初にやりましょう。"
+     "md": "- この教材の大問番号・配点・目標点は練習用の設計です。2026年度の本番の構成は直近の問題用紙で確認し、偏差値はその回の換算で確認してください。\n- 目標は**偏差値62**。北辰の英語は平均点が50点前後になることが多く、**初見の過去問を時間内に解き、その回の換算で到達を確認**します。\n- ばらつきが出る原因は「文法の穴」「長文の読み方が固まっていない」「英作文で白紙・減点」の3つ。この教材はその3つを**型**で固めます。\n- 毎日の順番：**単語セット（10分）→ 文法ユニットまたは大問別演習 → リスニング（演習または音読）**。英語は毎日、最初にやりましょう。"
     }
    ]
   },
@@ -164,105 +164,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "My sister ( play / plays ) the piano every day.",
        "a": "plays"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "Ken and I ( am / are / is ) good friends.",
        "a": "are（主語は Ken and I ＝ we）"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "( Do / Does ) your father like cooking?",
        "a": "Does"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "She ( don't / doesn't ) eat breakfast.",
        "a": "doesn't"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "There ( is / are ) some books on the desk.",
        "a": "are（books は複数）"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "( Is / Are ) there a hospital near the station?",
        "a": "Is（a hospital は単数）"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "We ( was / were ) very tired last night.",
        "a": "were"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "( Don't / Not ) open the window.\n**B　（　）内の語を適切な形に直しなさい。直す必要がなければそのまま書きなさい。**",
        "a": "Don't"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "Tom ( study ) English at home every day.",
        "a": "studies（y → ies）"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "My mother ( have ) a nice bag.",
        "a": "has"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "Yuki ( go ) to school by bus.",
        "a": "goes"
       },
       {
        "no": 12,
+       "label": "12",
        "q": "I ( be ) in Osaka last week.",
        "a": "was"
       },
       {
        "no": 13,
+       "label": "13",
        "q": "Bob and Mike ( be ) in the same class last year.\n**C　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "were"
       },
       {
        "no": 14,
+       "label": "14",
        "q": "公園には木がたくさんあります。 ( a lot of / there / trees / are ) in the park.",
        "a": "There are a lot of trees in the park."
       },
       {
        "no": 15,
+       "label": "15",
        "q": "静かにしなさい。 ( quiet / be ), please.",
        "a": "Be quiet, please."
       },
       {
        "no": 16,
+       "label": "16",
        "q": "彼はテニスをしません。 He ( play / doesn't / tennis ).",
        "a": "He doesn't play tennis."
       },
       {
        "no": 17,
+       "label": "17",
        "q": "あなたのお姉さんは英語を話しますか。 ( your sister / speak / does / English )?\n**D　英語にしなさい。**",
        "a": "Does your sister speak English?"
       },
       {
        "no": 18,
+       "label": "18",
        "q": "私の父は毎朝コーヒーを飲みます。（drink, coffee, every morning）",
        "a": "My father drinks coffee every morning."
       },
       {
        "no": 19,
+       "label": "19",
        "q": "私たちの町には駅が2つあります。（two stations, in our town）",
        "a": "There are two stations in our town.（Our town has two stations. も可）"
       },
       {
        "no": 20,
+       "label": "20",
        "q": "ここで走ってはいけません。（run, here）",
        "a": "Don't run here.\n**よくあるミス**：9 で studys にしない／13 の Bob and Mike は複数なので were／18 の drinks の s 忘れ。"
       }
-     ]
+     ],
+     "context_md": "**A　（　）内から適切な語を選びなさい。**"
     }
    ]
   },
@@ -297,105 +318,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "I ( see ) a beautiful bird in the park yesterday.",
        "a": "saw"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "She ( write ) a letter to her grandmother last night.",
        "a": "wrote"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "We ( go ) to the museum two days ago.",
        "a": "went"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "He ( study ) math for three hours last Sunday.",
        "a": "studied"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "They ( swim ) in the river now.",
        "a": "are swimming（now → 現在進行形）"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "My brother ( read ) a book when I came home.",
        "a": "was reading（when I came ＝過去のある時点で進行中）"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "Look! The dog ( run ) in the garden.",
        "a": "is running（Look! → 現在進行形）"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "It ( be ) rainy tomorrow, so I will take an umbrella.\n**B　（　）に入る適切な語を選びなさい。**",
        "a": "will be（tomorrow → 未来）"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "( Did / Were / Was ) you watch the game last night?",
        "a": "Did（watch は一般動詞）"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "What ( did / were / was ) you doing at seven yesterday?",
        "a": "were（doing があるので過去進行形）"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "I ( will / am ) going to visit my uncle next week.",
        "a": "am"
       },
       {
        "no": 12,
+       "label": "12",
        "q": "If it ( is / will be ) sunny tomorrow, we will go hiking.",
        "a": "is（if の中は現在形）"
       },
       {
        "no": 13,
+       "label": "13",
        "q": "She ( didn't / wasn't ) come to school yesterday.\n**C　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "didn't（come は一般動詞）"
       },
       {
        "no": 14,
+       "label": "14",
        "q": "私が電話したとき、彼女は夕食を作っていました。 She ( dinner / was / cooking ) when I called her.",
        "a": "She was cooking dinner when I called her."
       },
       {
        "no": 15,
+       "label": "15",
        "q": "今週末は何をするつもりですか。 ( are / what / going / you / to / do ) this weekend?",
        "a": "What are you going to do this weekend?"
       },
       {
        "no": 16,
+       "label": "16",
        "q": "明日は雪が降らないでしょう。 It ( snow / won't ) tomorrow.",
        "a": "It won't snow tomorrow."
       },
       {
        "no": 17,
+       "label": "17",
        "q": "私は昨日その本を買いませんでした。 I ( the book / buy / didn't ) yesterday.\n**D　英語にしなさい。**",
        "a": "I didn't buy the book yesterday."
       },
       {
        "no": 18,
+       "label": "18",
        "q": "私は昨夜10時に寝ました。（go to bed, at ten）",
        "a": "I went to bed at ten last night."
       },
       {
        "no": 19,
+       "label": "19",
        "q": "彼らは今、体育館でバスケットボールをしています。（in the gym）",
        "a": "They are playing basketball in the gym now."
       },
       {
        "no": 20,
+       "label": "20",
        "q": "私は来年、京都を訪れるつもりです。（be going to, visit）",
        "a": "I am going to visit Kyoto next year."
       }
-     ]
+     ],
+     "context_md": "**A　（　）内の語を適切な形に直しなさい。**"
     }
    ]
   },
@@ -430,105 +472,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "You ( must / can ) be quiet in the library.（〜しなければならない）",
        "a": "must"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "I ( can't / mustn't ) swim well. I want to practice more.（できない）",
        "a": "can't"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "( May / Must ) I use your pen? — Sure.",
        "a": "May"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "You ( don't have to / must not ) touch this. It's dangerous.",
        "a": "must not（禁止）"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "It's Sunday. You ( don't have to / must not ) get up early.",
        "a": "don't have to（不要）"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "He ( has to / have to ) finish the report by Friday.",
        "a": "has to（三単現）"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "( Shall / Will ) we go shopping tomorrow? — Yes, let's.",
        "a": "Shall"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "( Would / Shall ) you like some coffee? — Yes, please.\n**B　ほぼ同じ意味になるように（　）に適切な語を入れなさい。**",
        "a": "Would"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "I can play the guitar. ＝ I ( ) ( ) ( ) play the guitar.",
        "a": "am able to"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "You must clean your room. ＝ You ( ) ( ) clean your room.",
        "a": "have to"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "Let's have lunch. ＝ ( ) ( ) have lunch?",
        "a": "Shall we"
       },
       {
        "no": 12,
+       "label": "12",
        "q": "I want to see the movie. ＝ I ( ) ( ) ( ) see the movie.",
        "a": "would like to"
       },
       {
        "no": 13,
+       "label": "13",
        "q": "Don't speak Japanese here. ＝ You ( ) ( ) speak Japanese here.\n**C　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "must not（mustn't も可）"
       },
       {
        "no": 14,
+       "label": "14",
        "q": "窓を開けてくれませんか。 ( you / open / could / the window )?",
        "a": "Could you open the window?"
       },
       {
        "no": 15,
+       "label": "15",
        "q": "私たちは明日早く起きなければなりません。 We ( get up / to / have / early ) tomorrow.",
        "a": "We have to get up early tomorrow."
       },
       {
        "no": 16,
+       "label": "16",
        "q": "私はその日、学校に行く必要はありませんでした。 I ( go / have / to / didn't ) to school that day.",
        "a": "I didn't have to go to school that day."
       },
       {
        "no": 17,
+       "label": "17",
        "q": "あなたは医者に行ったほうがいいです。 You ( a doctor / should / see ).\n**D　英語にしなさい。**",
        "a": "You should see a doctor."
       },
       {
        "no": 18,
+       "label": "18",
        "q": "あなたはここで写真を撮ってはいけません。（take pictures）",
        "a": "You must not take pictures here.（You mustn't … / Don't take pictures here. も可）"
       },
       {
        "no": 19,
+       "label": "19",
        "q": "手伝いましょうか。（Shall, help）",
        "a": "Shall I help you?"
       },
       {
        "no": 20,
+       "label": "20",
        "q": "彼女は来週、その仕事を終えることができるでしょう。（be able to, finish the work）",
        "a": "She will be able to finish the work next week."
       }
-     ]
+     ],
+     "context_md": "**A　（　）に入る適切な語（句）を選びなさい。**"
     }
    ]
   },
@@ -563,105 +626,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "( ) is that girl? — She is my cousin.",
        "a": "Who"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "( ) do you go to school? — By bike.",
        "a": "How"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "( ) is your birthday? — It's May 5.",
        "a": "When"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "( ) ( ) does it take to get to the station? — About ten minutes.",
        "a": "How long"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "( ) ( ) brothers do you have? — I have two.",
        "a": "How many"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "( ) bag is this? — It's Mika's.",
        "a": "Whose"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "( ) do you like better, summer or winter?",
        "a": "Which"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "( ) were you late? — Because I missed the bus.\n**B　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "Why"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "彼がどこの出身か知っていますか。 Do you know ( from / he / is / where )?",
        "a": "Do you know where he is from?"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "私は彼女が何がほしいのかわかりません。 I don't know ( she / what / wants ).",
        "a": "I don't know what she wants."
       },
       {
        "no": 11,
+       "label": "11",
        "q": "この本がだれのものか教えてください。 Please tell me ( this book / is / whose ).",
        "a": "Please tell me whose this book is."
       },
       {
        "no": 12,
+       "label": "12",
        "q": "彼がいつ来るのか知りたいです。 I want to know ( will / when / come / he ).",
        "a": "I want to know when he will come."
       },
       {
        "no": 13,
+       "label": "13",
        "q": "なぜ彼女が泣いていたのかわかりません。 I don't know ( was / she / why / crying ).",
        "a": "I don't know why she was crying."
       },
       {
        "no": 14,
+       "label": "14",
        "q": "彼が来るかどうかわかりません。 I'm not sure ( come / if / will / he ).\n**C　2つの文を1つの文にしなさい。**",
        "a": "I'm not sure if he will come."
       },
       {
        "no": 15,
+       "label": "15",
        "q": "Do you know? ＋ What time does the store open?",
        "a": "Do you know what time the store opens?（does が消えて opens）"
       },
       {
        "no": 16,
+       "label": "16",
        "q": "I don't know. ＋ Where did he buy the watch?",
        "a": "I don't know where he bought the watch.（did が消えて過去形に）"
       },
       {
        "no": 17,
+       "label": "17",
        "q": "Tell me. ＋ Who is that man?\n**D　英語にしなさい。**",
        "a": "Tell me who that man is."
       },
       {
        "no": 18,
+       "label": "18",
        "q": "あなたは何時に起きますか。",
        "a": "What time do you get up?"
       },
       {
        "no": 19,
+       "label": "19",
        "q": "私はあの建物が何か知りません。（that building）",
        "a": "I don't know what that building is."
       },
       {
        "no": 20,
+       "label": "20",
        "q": "駅までどのくらいの距離ですか。（far, to the station）",
        "a": "How far is it to the station?"
       }
-     ]
+     ],
+     "context_md": "**A　（　）に適切な疑問詞（句）を入れなさい。**"
     }
    ]
   },
@@ -696,105 +780,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "I want ( visit ) Australia someday.",
        "a": "to visit"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "She enjoys ( listen ) to music.",
        "a": "listening"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "We finished ( clean ) the classroom.",
        "a": "cleaning"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "He decided ( study ) abroad.",
        "a": "to study"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "Thank you for ( invite ) me to the party.",
        "a": "inviting（前置詞 for のあと）"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "My brother is good at ( play ) the guitar.",
        "a": "playing"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "It stopped ( rain ) an hour ago.",
        "a": "raining（雨がやんだ）"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "I hope ( see ) you again.\n**B　下線部の不定詞の用法を、ア 名詞的用法　イ 副詞的用法　ウ 形容詞的用法 から選びなさい。**",
        "a": "to see"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "I have many things __to do__ today.",
        "a": "ウ"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "She went to the store __to buy__ some milk.",
        "a": "イ"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "__To learn__ a foreign language is not easy.",
        "a": "ア"
       },
       {
        "no": 12,
+       "label": "12",
        "q": "I was surprised __to hear__ the news.",
        "a": "イ"
       },
       {
        "no": 13,
+       "label": "13",
        "q": "Do you want something __to eat__?\n**C　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "ウ"
       },
       {
        "no": 14,
+       "label": "14",
        "q": "私の夢は宇宙飛行士になることです。 My dream ( be / is / to / an astronaut ).",
        "a": "My dream is to be an astronaut."
       },
       {
        "no": 15,
+       "label": "15",
        "q": "私たちは新しい友達を作るために、そのクラブに入りました。 We ( the club / joined / make / to ) new friends.",
        "a": "We joined the club to make new friends."
       },
       {
        "no": 16,
+       "label": "16",
        "q": "何か飲むものをください。 Please ( something / me / to / give / drink ).",
        "a": "Please give me something to drink."
       },
       {
        "no": 17,
+       "label": "17",
        "q": "彼女は英語を話すことが上手です。 She ( speaking / good / is / at ) English.\n**D　英語にしなさい。**",
        "a": "She is good at speaking English."
       },
       {
        "no": 18,
+       "label": "18",
        "q": "私は本を読むことが好きです。（動名詞で）",
        "a": "I like reading books."
       },
       {
        "no": 19,
+       "label": "19",
        "q": "彼は昼食を食べるために家に帰りました。（go home, eat lunch）",
        "a": "He went home to eat lunch."
       },
       {
        "no": 20,
+       "label": "20",
        "q": "私には今日、やるべき宿題がたくさんあります。（a lot of homework）",
        "a": "I have a lot of homework to do today."
       }
-     ]
+     ],
+     "context_md": "**A　（　）内の語を適切な形（to＋原形 または -ing）に直しなさい。**"
     }
    ]
   },
@@ -829,105 +934,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "It is difficult ( for / of / to ) me to get up early.",
        "a": "for"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "I want ( you / your / yours ) to come to the party.",
        "a": "you"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "Do you know how ( use / to use / using ) this machine?",
        "a": "to use"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "He was ( too / so / very ) sleepy to do his homework.",
        "a": "too"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "My mother let me ( go / to go / going ) to the concert.",
        "a": "go（let＋人＋原形）"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "The teacher told us ( be / to be / being ) quiet.",
        "a": "to be（tell＋人＋to）"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "Could you help me ( carry / carried / carrying ) this bag?",
        "a": "carry"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "The movie made me ( cry / to cry / crying ).\n**B　ほぼ同じ意味になるように（　）に適切な語を入れなさい。**",
        "a": "cry（make＋人＋原形）"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "To speak English is fun for me. ＝ ( ) is fun ( ) me ( ) speak English.",
        "a": "It / for / to"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "I was so tired that I couldn't walk. ＝ I was ( ) tired ( ) walk.",
        "a": "too / to"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "She said to me, \"Please close the door.\" ＝ She ( ) me ( ) close the door.",
        "a": "asked / to（told でも可：「言った」）"
       },
       {
        "no": 12,
+       "label": "12",
        "q": "I don't know what I should do. ＝ I don't know ( ) ( ) do.\n**C　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "what to"
       },
       {
        "no": 13,
+       "label": "13",
        "q": "私は彼にピアノを弾いてほしい。 I ( him / play / want / to ) the piano.",
        "a": "I want him to play the piano."
       },
       {
        "no": 14,
+       "label": "14",
        "q": "私たちにとって早寝は大切です。 ( for / is / it / important / us ) to go to bed early.",
        "a": "It is important for us to go to bed early."
       },
       {
        "no": 15,
+       "label": "15",
        "q": "母は私にその皿を洗うように言いました。 My mother ( to / me / wash / told ) the dishes.",
        "a": "My mother told me to wash the dishes."
       },
       {
        "no": 16,
+       "label": "16",
        "q": "彼女はどこに行けばいいかわかりませんでした。 She didn't ( go / know / to / where ).",
        "a": "She didn't know where to go."
       },
       {
        "no": 17,
+       "label": "17",
        "q": "父は私に自分の車を運転させてくれました。 My father ( drive / me / let ) his car.",
        "a": "My father let me drive his car."
       },
       {
        "no": 18,
+       "label": "18",
        "q": "このお茶は熱すぎて飲めません。 This tea ( to / too / drink / is / hot ).\n**D　英語にしなさい。**",
        "a": "This tea is too hot to drink."
       },
       {
        "no": 19,
+       "label": "19",
        "q": "私は彼女にその写真を見せるように頼みました。（ask, show, the picture）",
        "a": "I asked her to show me the picture."
       },
       {
        "no": 20,
+       "label": "20",
        "q": "私の兄は私が宿題をするのを手伝ってくれました。（help, do my homework）",
        "a": "My brother helped me do my homework.（helped me to do も可）"
       }
-     ]
+     ],
+     "context_md": "**A　（　）に入る適切な語を選びなさい。**"
     }
    ]
   },
@@ -962,105 +1088,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "This bridge is ( long ) than that one.",
        "a": "longer"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "Mt. Fuji is the ( high ) mountain in Japan.",
        "a": "highest"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "This question is ( difficult ) than that one.",
        "a": "more difficult"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "He is the ( famous ) singer in Japan.",
        "a": "most famous"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "Today is ( hot ) than yesterday.",
        "a": "hotter"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "This is the ( good ) movie of all.",
        "a": "best"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "I get up ( early ) than my brother.",
        "a": "earlier"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "This is one of the ( beautiful ) pictures in the museum.\n**B　（　）に入る適切な語を入れなさい。**",
        "a": "most beautiful"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "Ken is the tallest ( ) the three.",
        "a": "of"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "She is the best swimmer ( ) her class.",
        "a": "in"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "My bag is ( ) heavy ( ) yours.（同じくらい重い）",
        "a": "as / as"
       },
       {
        "no": 12,
+       "label": "12",
        "q": "I like tea ( ) than coffee.",
        "a": "better"
       },
       {
        "no": 13,
+       "label": "13",
        "q": "( ) is bigger, Tokyo or Osaka?\n**C　ほぼ同じ意味になるように（　）に適切な語を入れなさい。**",
        "a": "Which"
       },
       {
        "no": 14,
+       "label": "14",
        "q": "Tom is older than I. ＝ I am ( ) than Tom.",
        "a": "younger"
       },
       {
        "no": 15,
+       "label": "15",
        "q": "This book is not as interesting as that one. ＝ That book is ( ) ( ) than this one.",
        "a": "more interesting"
       },
       {
        "no": 16,
+       "label": "16",
        "q": "Nothing is more important than health. ＝ Health is ( ) ( ) ( ) thing.\n**D　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "the most important"
       },
       {
        "no": 17,
+       "label": "17",
        "q": "彼はクラスでいちばん速く走ります。 He ( the / runs / fastest / in ) his class.",
        "a": "He runs the fastest in his class."
       },
       {
        "no": 18,
+       "label": "18",
        "q": "私はすべての季節の中で春がいちばん好きです。 I ( best / spring / the / like ) of all the seasons.\n**E　英語にしなさい。**",
        "a": "I like spring the best of all the seasons."
       },
       {
        "no": 19,
+       "label": "19",
        "q": "この花はあの花よりも美しいです。（beautiful）",
        "a": "This flower is more beautiful than that one."
       },
       {
        "no": 20,
+       "label": "20",
        "q": "彼女は私の母と同じくらいの年齢です。（as, old）",
        "a": "She is as old as my mother."
       }
-     ]
+     ],
+     "context_md": "**A　（　）内の語を適切な形に直しなさい。**"
     }
    ]
   },
@@ -1095,105 +1242,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "I was late for school ( because / so / if ) I got up late.",
        "a": "because"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "I got up late, ( because / so / but ) I was late for school.",
        "a": "so"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "( If / Though / When ) I came home, my brother was watching TV.",
        "a": "When"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "( If / Because / Though ) it rains tomorrow, we won't play soccer.",
        "a": "If"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "I know ( that / if / when ) she likes music.",
        "a": "that"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "( Though / Because / If ) he is rich, he is not happy.",
        "a": "Though"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "Please wait here ( when / until / before ) I come back.",
        "a": "until"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "It was ( so / very / too ) hot that we stayed inside.\n**B　（　）内の語を適切な形に直しなさい。**",
        "a": "so"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "If it ( be ) fine tomorrow, let's go to the park.",
        "a": "is（if の中は現在形）"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "I'll tell him about it when he ( come ) back.",
        "a": "comes"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "I hope that she ( will / is going to ) get well soon.（どちらか1つ選ぶ）",
        "a": "will（hope that のあとは未来でよい。時・条件の接続詞ではない）"
       },
       {
        "no": 12,
+       "label": "12",
        "q": "Brush your teeth before you ( go ) to bed.\n**C　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "go"
       },
       {
        "no": 13,
+       "label": "13",
        "q": "私は彼が親切だと思います。 I ( kind / that / think / is / he ).",
        "a": "I think that he is kind."
       },
       {
        "no": 14,
+       "label": "14",
        "q": "私は子どものとき、犬をこわがっていました。 ( a child / was / I / when ), I was afraid of dogs.",
        "a": "When I was a child, I was afraid of dogs."
       },
       {
        "no": 15,
+       "label": "15",
        "q": "もし時間があれば、私を手伝ってください。 ( you / if / time / have ), please help me.",
        "a": "If you have time, please help me."
       },
       {
        "no": 16,
+       "label": "16",
        "q": "疲れていたけれど、彼は勉強を続けました。 ( was / tired / though / he ), he kept studying.",
        "a": "Though he was tired, he kept studying."
       },
       {
        "no": 17,
+       "label": "17",
        "q": "私は家に着いたらすぐにあなたに電話します。 I'll call you ( as / I / soon / as / get ) home.\n**D　英語にしなさい。**",
        "a": "I'll call you as soon as I get home."
       },
       {
        "no": 18,
+       "label": "18",
        "q": "私は雨が降っていたので、家にいました。（because）",
        "a": "I stayed home because it was raining."
       },
       {
        "no": 19,
+       "label": "19",
        "q": "私は彼が正しいと確信しています。（sure）",
        "a": "I'm sure that he is right.（I am sure he is right. も可）"
       },
       {
        "no": 20,
+       "label": "20",
        "q": "彼女はとても速く走ったので、電車に間に合いました。（so … that, catch the train）",
        "a": "She ran so fast that she caught the train.（she could catch も可）"
       }
-     ]
+     ],
+     "context_md": "**A　（　）に入る適切な接続詞を選びなさい。**"
     }
    ]
   },
@@ -1240,105 +1408,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "This song ( love ) by many people.",
        "a": "is loved"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "These pictures ( take ) by my father last year.",
        "a": "were taken"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "English ( speak ) in Australia.",
        "a": "is spoken"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "The window ( break ) by Tom yesterday.",
        "a": "was broken"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "The new library will ( build ) next year.",
        "a": "be built"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "Cheese ( make ) from milk.",
        "a": "is made"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "The book ( write ) by a famous writer.",
        "a": "was written"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "This car ( wash ) every Sunday.\n**B　受け身の文に書きかえなさい。**",
        "a": "is washed"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "Many students use this room.",
        "a": "This room is used by many students."
       },
       {
        "no": 10,
+       "label": "10",
        "q": "My mother made this cake.",
        "a": "This cake was made by my mother."
       },
       {
        "no": 11,
+       "label": "11",
        "q": "Ken didn't clean the room.",
        "a": "The room wasn't cleaned by Ken."
       },
       {
        "no": 12,
+       "label": "12",
        "q": "Do they sell vegetables at that store?\n**C　（　）に適切な語を入れなさい。**",
        "a": "Are vegetables sold at that store?"
       },
       {
        "no": 13,
+       "label": "13",
        "q": "This desk is made ( ) wood.",
        "a": "of"
       },
       {
        "no": 14,
+       "label": "14",
        "q": "The top of the mountain is covered ( ) snow.",
        "a": "with"
       },
       {
        "no": 15,
+       "label": "15",
        "q": "She is known ( ) everyone in this town.",
        "a": "to"
       },
       {
        "no": 16,
+       "label": "16",
        "q": "I was surprised ( ) the news.\n**D　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "at"
       },
       {
        "no": 17,
+       "label": "17",
        "q": "この寺は約400年前に建てられました。 This temple ( built / about / was / 400 years ago ).",
        "a": "This temple was built about 400 years ago."
       },
       {
        "no": 18,
+       "label": "18",
        "q": "この学校では何語が話されていますか。 ( is / language / what / spoken ) at this school?\n**E　英語にしなさい。**",
        "a": "What language is spoken at this school?"
       },
       {
        "no": 19,
+       "label": "19",
        "q": "この本は世界中で読まれています。（all over the world）",
        "a": "This book is read all over the world."
       },
       {
        "no": 20,
+       "label": "20",
        "q": "その映画はいつ作られましたか。（make）",
        "a": "When was the movie made?"
       }
-     ]
+     ],
+     "context_md": "**A　（　）内の語を適切な形に直しなさい。**"
     }
    ]
   },
@@ -1373,105 +1562,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "I have known him ( ) 2015.",
        "a": "since"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "She has been sick ( ) three days.",
        "a": "for"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "We have lived here ( ) we were born.",
        "a": "since（主語＋動詞が続く）"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "It has been raining ( ) a week.\n**B　（　）内の語を適切な形に直しなさい。**",
        "a": "for"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "My father ( work ) for this company for twenty years.",
        "a": "has worked"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "I ( be ) a member of the tennis club since April.",
        "a": "have been"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "They ( study ) English for two hours. (現在完了進行形で)",
        "a": "have been studying"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "He ( live ) in Tokyo since he was ten.",
        "a": "has lived"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "How long ( you / know ) each other?",
        "a": "have you known"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "She ( not / see ) her grandmother since last year.\n**C　（　）内の正しいほうを選びなさい。**",
        "a": "hasn't seen（has not seen）"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "I ( lived / have lived ) in Kyoto three years ago.",
        "a": "lived（ago があるので過去形）"
       },
       {
        "no": 12,
+       "label": "12",
        "q": "I ( lived / have lived ) in Kyoto for three years.",
        "a": "have lived"
       },
       {
        "no": 13,
+       "label": "13",
        "q": "When ( did you start / have you started ) learning English?",
        "a": "did you start（When …? は過去形）"
       },
       {
        "no": 14,
+       "label": "14",
        "q": "It ( is / has been ) cold since yesterday.\n**D　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "has been"
       },
       {
        "no": 15,
+       "label": "15",
        "q": "あなたはどのくらいの間、日本にいますか。 ( long / you / have / how / been ) in Japan?",
        "a": "How long have you been in Japan?"
       },
       {
        "no": 16,
+       "label": "16",
        "q": "彼は今朝からずっとテレビを見続けています。 He ( watching / been / TV / has ) since this morning.",
        "a": "He has been watching TV since this morning."
       },
       {
        "no": 17,
+       "label": "17",
        "q": "私は10年間このいすを使っています。 I ( used / this chair / have ) for ten years.\n**E　英語にしなさい。**",
        "a": "I have used this chair for ten years."
       },
       {
        "no": 18,
+       "label": "18",
        "q": "私は彼女を5年前から知っています。（know, for）",
        "a": "I have known her for five years."
       },
       {
        "no": 19,
+       "label": "19",
        "q": "私の姉は3時間ずっと勉強し続けています。（現在完了進行形）",
        "a": "My sister has been studying for three hours."
       },
       {
        "no": 20,
+       "label": "20",
        "q": "あなたはどのくらいの間、この本を持っていますか。（have）",
        "a": "How long have you had this book?"
       }
-     ]
+     ],
+     "context_md": "**A　（　）に for か since を入れなさい。**"
     }
    ]
   },
@@ -1506,105 +1716,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "Have you ( ever / never / yet ) been to Kyoto?",
        "a": "ever"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "I have ( ever / never / yet ) seen such a big dog.",
        "a": "never"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "She has ( just / yet / ever ) finished her homework.",
        "a": "just"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "I have ( already / yet / never ) read this book, so I know the story.",
        "a": "already"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "Have you cleaned your room ( already / yet / just )?",
        "a": "yet"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "He has ( been / gone ) to Paris, so he isn't here now.",
        "a": "gone"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "I have ( been / gone ) to Paris twice.",
        "a": "been"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "My father has visited China ( two times / twice times / twice ).\n**B　（　）内の語を適切な形に直しなさい。**",
        "a": "twice"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "I have ( eat ) sushi many times.",
        "a": "eaten"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "Have you ever ( write ) a letter in English?",
        "a": "written"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "The train has just ( leave ) the station.",
        "a": "left"
       },
       {
        "no": 12,
+       "label": "12",
        "q": "She has never ( be ) abroad.",
        "a": "been"
       },
       {
        "no": 13,
+       "label": "13",
        "q": "We have already ( see ) the movie.\n**C　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "seen"
       },
       {
        "no": 14,
+       "label": "14",
        "q": "あなたは今までに富士山に登ったことがありますか。 ( ever / you / climbed / have ) Mt. Fuji?",
        "a": "Have you ever climbed Mt. Fuji?"
       },
       {
        "no": 15,
+       "label": "15",
        "q": "私はまだその手紙を読んでいません。 I ( yet / read / haven't / the letter ).",
        "a": "I haven't read the letter yet."
       },
       {
        "no": 16,
+       "label": "16",
        "q": "彼女は何回北海道に行ったことがありますか。 ( has / how / times / she / many / been ) to Hokkaido?",
        "a": "How many times has she been to Hokkaido?"
       },
       {
        "no": 17,
+       "label": "17",
        "q": "兄はちょうど家を出たところです。 My brother ( just / has / home / left ).\n**D　英語にしなさい。**",
        "a": "My brother has just left home."
       },
       {
        "no": 18,
+       "label": "18",
        "q": "私は一度もその歌を聞いたことがありません。（hear, the song）",
        "a": "I have never heard the song."
       },
       {
        "no": 19,
+       "label": "19",
        "q": "あなたはもう昼食を食べましたか。（have lunch）",
        "a": "Have you had lunch yet?（eaten lunch も可）"
       },
       {
        "no": 20,
+       "label": "20",
        "q": "私は東京タワーに3回行ったことがあります。（Tokyo Tower）",
        "a": "I have been to Tokyo Tower three times."
       }
-     ]
+     ],
+     "context_md": "**A　（　）に入る適切な語を選びなさい。**"
     }
    ]
   },
@@ -1639,105 +1870,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "彼は私にその本を見せてくれました。 He ( the book / me / showed ).",
        "a": "He showed me the book."
       },
       {
        "no": 2,
+       "label": "2",
        "q": "私たちはその犬をシロと呼びます。 We ( the dog / call / Shiro ).",
        "a": "We call the dog Shiro."
       },
       {
        "no": 3,
+       "label": "3",
        "q": "その手紙は彼女を悲しませました。 The letter ( sad / made / her ).",
        "a": "The letter made her sad."
       },
       {
        "no": 4,
+       "label": "4",
        "q": "母は私に朝食を作ってくれました。 My mother ( breakfast / me / made ).",
        "a": "My mother made me breakfast."
       },
       {
        "no": 5,
+       "label": "5",
        "q": "先生は私たちに英語を教えます。 The teacher ( English / us / teaches ).",
        "a": "The teacher teaches us English."
       },
       {
        "no": 6,
+       "label": "6",
        "q": "この花を英語で何と呼びますか。 ( do / call / what / you / this flower ) in English?",
        "a": "What do you call this flower in English?"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "私に駅への道を教えてください。 Please ( the way / me / tell ) to the station.",
        "a": "Please tell me the way to the station."
       },
       {
        "no": 8,
+       "label": "8",
        "q": "部屋をきれいにしておきなさい。 ( clean / keep / your room ).\n**B　ほぼ同じ意味になるように（　）に適切な語を入れなさい。**",
        "a": "Keep your room clean."
       },
       {
        "no": 9,
+       "label": "9",
        "q": "My uncle gave me a watch. ＝ My uncle gave a watch ( ) me.",
        "a": "to"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "She bought her son a bike. ＝ She bought a bike ( ) her son.",
        "a": "for"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "I'll show you my pictures. ＝ I'll show my pictures ( ) you.",
        "a": "to"
       },
       {
        "no": 12,
+       "label": "12",
        "q": "We were happy because of the news. ＝ The news ( ) us happy.\n**C　（　）に入る適切な語を選びなさい。**",
        "a": "made"
       },
       {
        "no": 13,
+       "label": "13",
        "q": "My friends call ( I / my / me ) Aki.",
        "a": "me"
       },
       {
        "no": 14,
+       "label": "14",
        "q": "The song made me ( happy / happily / happiness ).",
        "a": "happy"
       },
       {
        "no": 15,
+       "label": "15",
        "q": "Could you lend ( me / to me / for me ) your pen?",
        "a": "me"
       },
       {
        "no": 16,
+       "label": "16",
        "q": "Her smile always makes everyone ( warm / warmly / warmth ).\n**D　英語にしなさい。**",
        "a": "warm"
       },
       {
        "no": 17,
+       "label": "17",
        "q": "父は私に新しいかばんを買ってくれました。（buy）",
        "a": "My father bought me a new bag.（bought a new bag for me も可）"
       },
       {
        "no": 18,
+       "label": "18",
        "q": "私たちはそのねこをタマと名づけました。（name）",
        "a": "We named the cat Tama."
       },
       {
        "no": 19,
+       "label": "19",
        "q": "その映画は私を眠くさせました。（sleepy）",
        "a": "The movie made me sleepy."
       },
       {
        "no": 20,
+       "label": "20",
        "q": "彼女は私に彼女の写真を送ってくれました。（send）",
        "a": "She sent me her picture(s)."
       }
-     ]
+     ],
+     "context_md": "**A　日本語に合うように（　）内の語を並べかえなさい。**"
     }
    ]
   },
@@ -1772,105 +2024,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "Look at the ( sleep ) cat on the sofa.",
        "a": "sleeping（1語なので前）"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "The girl ( play ) the piano is my sister.",
        "a": "playing"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "Do you know the boy ( run ) in the park?",
        "a": "running"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "The man ( stand ) by the door is our teacher.",
        "a": "standing"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "There are many students ( study ) in the library.",
        "a": "studying"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "Who is the woman ( talk ) with Mr. Brown?",
        "a": "talking"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "I have a friend ( live ) in Canada.",
        "a": "living"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "The dog ( sleep ) under the tree is mine.\n**B　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "sleeping"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "向こうで泳いでいる少年はケンです。 The ( over there / swimming / boy ) is Ken.",
        "a": "The boy swimming over there is Ken."
       },
       {
        "no": 10,
+       "label": "10",
        "q": "あなたは、あそこで走っている犬を知っていますか。 Do you know ( running / the dog / there / over )?",
        "a": "Do you know the dog running over there?"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "ギターを弾いている男性は私のおじです。 The ( the guitar / playing / man ) is my uncle.",
        "a": "The man playing the guitar is my uncle."
       },
       {
        "no": 12,
+       "label": "12",
        "q": "私には東京に住んでいる友達がいます。 I ( living / have / a friend ) in Tokyo.",
        "a": "I have a friend living in Tokyo."
       },
       {
        "no": 13,
+       "label": "13",
        "q": "木の下で本を読んでいる女の子はだれですか。 Who is ( reading / the girl / a book ) under the tree?",
        "a": "Who is the girl reading a book under the tree?"
       },
       {
        "no": 14,
+       "label": "14",
        "q": "泣いている赤ちゃんを見てください。 Look at ( baby / the / crying ).\n**C　2つの文を、分詞を使って1つの文にしなさい。**",
        "a": "Look at the crying baby."
       },
       {
        "no": 15,
+       "label": "15",
        "q": "The boy is my cousin. ＋ He is playing tennis.",
        "a": "The boy playing tennis is my cousin."
       },
       {
        "no": 16,
+       "label": "16",
        "q": "Do you know the girl? ＋ She is singing on the stage.",
        "a": "Do you know the girl singing on the stage?"
       },
       {
        "no": 17,
+       "label": "17",
        "q": "The students are from Australia. ＋ They are talking with Mr. Sato.\n**D　英語にしなさい。**",
        "a": "The students talking with Mr. Sato are from Australia.（主語が students なので are）"
       },
       {
        "no": 18,
+       "label": "18",
        "q": "私のとなりに座っている少女はユミです。（sit next to）",
        "a": "The girl sitting next to me is Yumi."
       },
       {
        "no": 19,
+       "label": "19",
        "q": "あなたは、あの走っている少年を知っていますか。（that）",
        "a": "Do you know that running boy?"
       },
       {
        "no": 20,
+       "label": "20",
        "q": "公園で写真を撮っている男性は私の父です。（take pictures）",
        "a": "The man taking pictures in the park is my father."
       }
-     ]
+     ],
+     "context_md": "**A　（　）内の語を適切な形に直しなさい。**"
     }
    ]
   },
@@ -1905,105 +2178,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "This is a picture ( paint ) by my brother.",
        "a": "painted"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "The boy ( paint ) a picture is my brother.",
        "a": "painting"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "I want a car ( make ) in Germany.",
        "a": "made"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "The language ( speak ) in Mexico is Spanish.",
        "a": "spoken"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "The woman ( speak ) to the students is our principal.",
        "a": "speaking"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "Look at the ( break ) window.",
        "a": "broken"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "This is a book ( write ) by Natsume Soseki.",
        "a": "written"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "The girl ( write ) a letter is my classmate.",
        "a": "writing"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "I like the songs ( sing ) by that singer.",
        "a": "sung"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "The cake ( make ) by my mother was delicious.\n**B　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "made"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "これは英語で書かれた本です。 This is ( in / a book / written / English ).",
        "a": "This is a book written in English."
       },
       {
        "no": 12,
+       "label": "12",
        "q": "父によって撮られた写真を見せましょう。 I'll show you ( by / taken / the pictures / my father ).",
        "a": "I'll show you the pictures taken by my father."
       },
       {
        "no": 13,
+       "label": "13",
        "q": "日本で作られた車は人気があります。 ( in / cars / Japan / made ) are popular.",
        "a": "Cars made in Japan are popular."
       },
       {
        "no": 14,
+       "label": "14",
        "q": "これは100年前に建てられた家です。 This is ( built / a house / 100 years ago ).",
        "a": "This is a house built 100 years ago."
       },
       {
        "no": 15,
+       "label": "15",
        "q": "私はエミと呼ばれている女の子を知っています。 I know ( Emi / a girl / called ).",
        "a": "I know a girl called Emi."
       },
       {
        "no": 16,
+       "label": "16",
        "q": "あそこに駐車されている車は私たちのものです。 ( there / parked / the car / over ) is ours.\n**C　2つの文を、分詞を使って1つの文にしなさい。**",
        "a": "The car parked over there is ours."
       },
       {
        "no": 17,
+       "label": "17",
        "q": "This is a letter. ＋ It was written by my grandfather.",
        "a": "This is a letter written by my grandfather."
       },
       {
        "no": 18,
+       "label": "18",
        "q": "The bag is very expensive. ＋ It was made in France.\n**D　英語にしなさい。**",
        "a": "The bag made in France is very expensive."
       },
       {
        "no": 19,
+       "label": "19",
        "q": "これは私の姉によって作られたケーキです。",
        "a": "This is a cake made by my sister."
       },
       {
        "no": 20,
+       "label": "20",
        "q": "世界中で話されている言語は英語です。（all over the world）",
        "a": "The language spoken all over the world is English."
       }
-     ]
+     ],
+     "context_md": "**A　（　）内の語を適切な形（現在分詞 or 過去分詞）に直しなさい。**"
     }
    ]
   },
@@ -2033,105 +2327,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "I don't have ( some / any ) money now.",
        "a": "any"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "Would you like ( some / any ) more juice?",
        "a": "some（勧める）"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "There is ( a few / a little ) water in the bottle.",
        "a": "a little（water は数えられない）"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "( Few / Little ) people know the fact.",
        "a": "Few（people は数えられる）"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "How ( many / much ) books do you have?",
        "a": "many"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "How ( many / much ) is this bag?",
        "a": "much（値段）"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "I bought two ( piece / pieces ) of cake.",
        "a": "pieces"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "She has three ( child / children ).",
        "a": "children"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "Everyone ( know / knows ) his name.",
        "a": "knows（everyone は単数扱い）"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "I lost my umbrella, so I want to buy a new ( one / it ).\n**B　（　）内の語を適切な形に直しなさい。**",
        "a": "one（別の新しいもの）"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "This bike is ( I ).",
        "a": "mine"
       },
       {
        "no": 12,
+       "label": "12",
        "q": "Those ( leaf ) are turning red.",
        "a": "leaves"
       },
       {
        "no": 13,
+       "label": "13",
        "q": "He brushes his ( tooth ) every morning.",
        "a": "teeth"
       },
       {
        "no": 14,
+       "label": "14",
        "q": "They helped ( they ) each other.\n**C　（　）に a, an, the のいずれかを入れなさい。不要なら×を書きなさい。**",
        "a": "them"
       },
       {
        "no": 15,
+       "label": "15",
        "q": "I have ( ) dog. ( ) dog is very cute.",
        "a": "a / The"
       },
       {
        "no": 16,
+       "label": "16",
        "q": "She is ( ) honest girl.",
        "a": "an（honest の h は発音しない）"
       },
       {
        "no": 17,
+       "label": "17",
        "q": "I usually play ( ) tennis after school.",
        "a": "×"
       },
       {
        "no": 18,
+       "label": "18",
        "q": "Can you play ( ) violin?\n**D　英語にしなさい。**",
        "a": "the"
       },
       {
        "no": 19,
+       "label": "19",
        "q": "冷蔵庫にはほとんど牛乳が残っていません。（little, left, in the fridge）",
        "a": "There is little milk left in the fridge."
       },
       {
        "no": 20,
+       "label": "20",
        "q": "私は何か冷たい飲み物がほしいです。（something）",
        "a": "I want something cold to drink."
       }
-     ]
+     ],
+     "context_md": "**A　（　）に入る適切な語を選びなさい。**"
     }
    ]
   },
@@ -2161,105 +2476,126 @@
      "items": [
       {
        "no": 1,
+       "label": "1",
        "q": "A: Would you like some more tea?　B: ( )　ア Yes, I do.　イ No, thank you.　ウ Here you are.",
        "a": "イ"
       },
       {
        "no": 2,
+       "label": "2",
        "q": "A: Can I use your dictionary?　B: ( )　ア Sure, go ahead.　イ Yes, please.　ウ You're welcome.",
        "a": "ア"
       },
       {
        "no": 3,
+       "label": "3",
        "q": "A: Thank you for your help.　B: ( )　ア Never mind.　イ My pleasure.　ウ That's too bad.",
        "a": "イ"
       },
       {
        "no": 4,
+       "label": "4",
        "q": "A: I have a cold today.　B: ( )　ア Sounds good.　イ That's too bad.　ウ Congratulations!",
        "a": "イ"
       },
       {
        "no": 5,
+       "label": "5",
        "q": "A: Hello. This is Yumi. May I speak to Tom?　B: ( )　ア Hold on, please.　イ I'll take it.　ウ Take care.",
        "a": "ア"
       },
       {
        "no": 6,
+       "label": "6",
        "q": "A: How long does it take to the library?　B: ( )　ア It's on your left.　イ About fifteen minutes on foot.　ウ Twice a week.",
        "a": "イ"
       },
       {
        "no": 7,
+       "label": "7",
        "q": "A: Why don't we go to the movies this weekend?　B: ( )　ア Sounds good.　イ You're welcome.　ウ I see.",
        "a": "ア"
       },
       {
        "no": 8,
+       "label": "8",
        "q": "A: Excuse me. Could you tell me the way to the museum?　B: ( )　ア Sure. Go straight and turn right at the bank.　イ No, I don't.　ウ Here's your change.\n**B　（　）に適切な語を入れて熟語を完成させなさい。**",
        "a": "ア"
       },
       {
        "no": 9,
+       "label": "9",
        "q": "I'm looking ( ) to seeing you.",
        "a": "forward"
       },
       {
        "no": 10,
+       "label": "10",
        "q": "She is good ( ) playing tennis.",
        "a": "at"
       },
       {
        "no": 11,
+       "label": "11",
        "q": "Please take ( ) of my dog while I'm away.",
        "a": "care"
       },
       {
        "no": 12,
+       "label": "12",
        "q": "He took ( ) in the speech contest.",
        "a": "part"
       },
       {
        "no": 13,
+       "label": "13",
        "q": "We arrived ( ) the station at nine.",
        "a": "at"
       },
       {
        "no": 14,
+       "label": "14",
        "q": "I got ( ) the bus at the next stop.",
        "a": "off"
       },
       {
        "no": 15,
+       "label": "15",
        "q": "My dream came ( ) at last.",
        "a": "true"
       },
       {
        "no": 16,
+       "label": "16",
        "q": "This town is famous ( ) its old temples.\n**C　日本語に合うように（　）内の語を並べかえなさい。**",
        "a": "for"
       },
       {
        "no": 17,
+       "label": "17",
        "q": "私を手伝ってくれませんか。 ( you / could / me / help )?",
        "a": "Could you help me?"
       },
       {
        "no": 18,
+       "label": "18",
        "q": "私の兄は昨日、パーティーに遅れました。 My brother ( late / was / for / the party ) yesterday.\n**D　英語にしなさい。**",
        "a": "My brother was late for the party yesterday."
       },
       {
        "no": 19,
+       "label": "19",
        "q": "一緒に昼食を食べませんか。（Why don't we）",
        "a": "Why don't we have lunch together?"
       },
       {
        "no": 20,
+       "label": "20",
        "q": "私は初めて京都を訪れました。（for the first time）",
        "a": "I visited Kyoto for the first time."
       }
-     ]
+     ],
+     "context_md": "**A　会話が成り立つように、（　）に入る最も適切なものを選びなさい。**"
     }
    ]
   },
@@ -3334,30 +3670,36 @@
      "items": [
       {
        "no": 1,
+       "label": "問1",
        "q": "①③の（　）内の語を、それぞれ適切な形に直して書きなさい。【各2点】",
        "a": "① gathered（On the day of the event ＝ 過去）　③ moved（His words moved me ＝ 感動させた）"
       },
       {
        "no": 2,
+       "label": "問2",
        "q": "下線部②の日本語を、（　）内の語を並べかえて英語にしなさい。 ( was / clean / very / this river ) forty years ago.【4点】",
        "a": "This river was very clean forty years ago."
       },
       {
        "no": 3,
+       "label": "問3",
        "q": "（④）に入る最も適切な語をア〜エから選びなさい。【3点】　ア buy　イ bought　ウ buying　エ to buy",
        "a": "ウ（instead of ＋ -ing：前置詞のあとは動名詞）"
       },
       {
        "no": 4,
+       "label": "問4",
        "q": "次の質問に英語で答えなさい。 Why was Kenta surprised at the river?【4点】",
        "a": "Because there was so much trash.（（例）Because he found a lot of trash there. も可）"
       },
       {
        "no": 5,
+       "label": "問5",
        "q": "本文の内容と合うものをア〜エから1つ選びなさい。【3点】\nア Kenta was very interested in the event before he joined it.\nイ About fifty people cleaned the river for two hours.\nウ The old man said the river was dirty forty years ago.\nエ Kenta thinks that only big actions can change the town.",
        "a": "イ（ア：最初は興味がなかった／ウ：40年前はきれいだった／エ：小さな行動でも変えられる）"
       }
-     ]
+     ],
+     "context_md": ""
     }
    ]
   },
@@ -3387,30 +3729,36 @@
      "items": [
       {
        "no": 1,
+       "label": "問1",
        "q": "①③の（　）内の語を、それぞれ適切な形に直して書きなさい。【各2点】",
        "a": "① grows（still ＋現在の習慣。主語 She → 三単現）　③ eaten（have never ＋過去分詞）"
       },
       {
        "no": 2,
+       "label": "問2",
        "q": "下線部②の日本語を、（　）内の語を並べかえて英語にしなさい。 We ( curry / with / made / the vegetables ) she grew.【4点】",
        "a": "We made curry with the vegetables she grew."
       },
       {
        "no": 3,
+       "label": "問3",
        "q": "（④）に入る最も適切な語をア〜エから選びなさい。【3点】　ア am growing　イ grew　ウ have grown　エ was growing",
        "a": "ア（Now → 現在進行形「今育てている」）"
       },
       {
        "no": 4,
+       "label": "問4",
        "q": "次の質問に英語で答えなさい。 Why does Saki's grandmother work hard every day?【4点】",
        "a": "Because she wants to give fresh vegetables to her family and neighbors."
       },
       {
        "no": 5,
+       "label": "問5",
        "q": "本文の内容と合うものをア〜エから1つ選びなさい。【3点】\nア Saki's grandmother stopped working in the field because she is old.\nイ Saki helped her grandmother for a week without any trouble.\nウ Saki's grandmother feels happy when people enjoy her vegetables.\nエ Saki wants to buy vegetables for her grandmother next summer.",
        "a": "ウ"
       }
-     ]
+     ],
+     "context_md": ""
     }
    ]
   },
@@ -3440,30 +3788,36 @@
      "items": [
       {
        "no": 1,
+       "label": "問1",
        "q": "①③の（　）内の語を、それぞれ適切な形に直して書きなさい。【各2点】",
        "a": "① chose（Before the trip ＝ 過去）　③ swimming（see ＋目的語＋ -ing「〜が…しているのを見る」）"
       },
       {
        "no": 2,
+       "label": "問2",
        "q": "下線部②の日本語を、（　）内の語を並べかえて英語にしなさい。 It was ( 400 years / built / about / ago ).【4点】",
        "a": "It was built about 400 years ago."
       },
       {
        "no": 3,
+       "label": "問3",
        "q": "（④）に入る最も適切な語をア〜エから選びなさい。【3点】　ア but　イ or　ウ because　エ though",
        "a": "ウ（「人が手入れするから」古いものが美しいまま）"
       },
       {
        "no": 4,
+       "label": "問4",
        "q": "次の質問に英語で答えなさい。 Why did Ryo's group choose Toshogu Shrine?【4点】",
        "a": "Because they wanted to see the famous carvings of the three monkeys."
       },
       {
        "no": 5,
+       "label": "問5",
        "q": "本文の内容と合うものをア〜エから1つ選びなさい。【3点】\nア Ryo's class went to Nikko in April.\nイ Each group visited the same place on the first day.\nウ Taku wants to take pictures as his job in the future.\nエ Ryo thinks old things stay beautiful without any care.",
        "a": "ウ"
       }
-     ]
+     ],
+     "context_md": ""
     }
    ]
   },
@@ -3493,30 +3847,36 @@
      "items": [
       {
        "no": 1,
+       "label": "問1",
        "q": "①③の（　）内の語を、それぞれ適切な形に直して書きなさい。【各2点】",
        "a": "① speaking（be afraid of ＋ -ing）　③ showed"
       },
       {
        "no": 2,
+       "label": "問2",
        "q": "下線部②の日本語を、（　）内の語を並べかえて英語にしなさい。 I ( the way / her / told / to the museum ) from the station.【4点】",
        "a": "I told her the way to the museum from the station."
       },
       {
        "no": 3,
+       "label": "問3",
        "q": "（④）に入る最も適切な語（句）をア〜エから選びなさい。【3点】　ア am studying　イ have studied　ウ study　エ studied",
        "a": "イ（Since that day ＝ その日以来ずっと → 現在完了「勉強してきた」。since があれば現在完了）"
       },
       {
        "no": 4,
+       "label": "問4",
        "q": "次の質問に英語で答えなさい。 Where did the woman want to go?【4点】",
        "a": "She wanted to go to the art museum.（To the art museum. も可）"
       },
       {
        "no": 5,
+       "label": "問5",
        "q": "本文の内容と合うものをア〜エから1つ選びなさい。【3点】\nア Emi helped the woman right away because she was good at English.\nイ The woman was traveling in Japan with her family.\nウ Emi knew the museum because she often goes there with her father.\nエ Emi thinks perfect English is the most important thing.",
        "a": "ウ"
       }
-     ]
+     ],
+     "context_md": ""
     }
    ]
   },
@@ -3607,20 +3967,24 @@
      "items": [
       {
        "no": 7,
+       "label": "問7",
        "q": "（⑥）に入る最も適切な文をア〜エから選びなさい。【3点】\nア Can I show you the poster when I finish it?　イ Did you go to the festival with me?　ウ Shall I make a poster for you?　エ May I go to Australia with you?",
        "a": "ア（Of course. Come and show it to me anytime. につながる）"
       },
       {
        "no": 8,
+       "label": "問8",
        "q": "本文の内容と合うものをア〜エから1つ選びなさい。【3点】\nア Hana has been to a festival in Australia.　イ In Mr. Davis's hometown, people wear yukata at the festival.　ウ Hana's father takes pictures at the festival every year.　エ Mr. Davis chose the festival for Hana's poster.",
        "a": "ウ（【3】He takes a lot of pictures every year.）"
       },
       {
        "no": 9,
+       "label": "問9",
        "q": "あなたが外国の人に紹介したい日本の行事や文化は何ですか。次の書き出しに続けて、**2文以上**の英語で書きなさい。【4点】\nI want to introduce ( ) to people from other countries.\n[[lines:3]]",
        "a": "（例）I want to introduce *origami* to people from other countries. It is a traditional Japanese art of folding paper. We can make many things such as cranes and flowers with only one piece of paper."
       }
-     ]
+     ],
+     "context_md": ""
     }
    ]
   },
@@ -3680,20 +4044,24 @@
      "items": [
       {
        "no": 7,
+       "label": "問7",
        "q": "（⑥）に入る最も適切な文をア〜エから選びなさい。【3点】\nア Books can connect people around the world.　イ I don't like reading books.　ウ The elephant was very big.　エ I will buy the book again tomorrow.",
        "a": "ア（Reading is a bridge between people. につながる）"
       },
       {
        "no": 8,
+       "label": "問8",
        "q": "本文の内容と合うものをア〜エから1つ選びなさい。【3点】\nア Kota's sister started the book project five years ago.　イ The books are sent to other countries by plane.　ウ Lily will bring her English books to the library.　エ Kota has read his favorite book only once.",
        "a": "ウ"
       },
       {
        "no": 9,
+       "label": "問9",
        "q": "あなたは、子どものころに好きだった本や物語について話すことになりました。次の書き出しに続けて、**2文以上**の英語で書きなさい。【4点】\nWhen I was a child, my favorite book was ( ).\n[[lines:3]]",
        "a": "（例）When I was a child, my favorite book was *Momotaro*. I liked the story because Momotaro was brave and kind to his friends. My mother read it to me every night."
       }
-     ]
+     ],
+     "context_md": ""
     }
    ]
   },
@@ -3753,20 +4121,24 @@
      "items": [
       {
        "no": 7,
+       "label": "問7",
        "q": "（⑥）に入る最も適切な文をア〜エから選びなさい。【3点】\nア Can you tell me what to do?　イ Do I have to buy a lunch?　ウ Why don't you go home?　エ Where is the cafeteria?",
        "a": "ア（Sure. First, let's move the desks … と「やること」を教えている）"
       },
       {
        "no": 8,
+       "label": "問8",
        "q": "本文の内容と合うものをア〜エから1つ選びなさい。【3点】\nア In Canada, students usually eat school lunch in the classroom.　イ The cooks at Yui's school make lunch for about six hundred students.　ウ Ben doesn't think Japanese school lunch is good.　エ In Canada, students clean their school every day.",
        "a": "イ"
       },
       {
        "no": 9,
+       "label": "問9",
        "q": "あなたは、学校で「生徒が自分で教室をそうじすること」についてどう思いますか。あなたの考えを、理由を含めて**2文以上**の英語で書きなさい。【4点】\n[[lines:3]]",
        "a": "（例）I think students should clean their classroom. If we clean it by ourselves, we will try to keep it clean. Also, we can learn to work together with our classmates."
       }
-     ]
+     ],
+     "context_md": ""
     }
    ]
   },
@@ -3826,20 +4198,24 @@
      "items": [
       {
        "no": 7,
+       "label": "問7",
        "q": "（⑥）に入る最も適切な文をア〜エから選びなさい。【3点】\nア They will be surprised to see it.　イ They don't want to see it.　ウ I have never used a bag.　エ My family lives in Japan.",
        "a": "ア（家族に見せる → 「見て驚くだろう」→ That's a good idea.）"
       },
       {
        "no": 8,
+       "label": "問8",
        "q": "本文の内容と合うものをア〜エから1つ選びなさい。【3点】\nア Sora always takes plastic bags at stores.　イ Mia thinks paying for plastic bags is a bad idea.　ウ Sora's grandmother has used her furoshiki for a long time.　エ Mia will teach Sora how to use a furoshiki.",
        "a": "ウ"
       },
       {
        "no": 9,
+       "label": "問9",
        "q": "あなたが環境のためにしていること、またはしたいことは何ですか。理由を含めて**2文以上**の英語で書きなさい。【4点】\n[[lines:3]]",
        "a": "（例）I try to use my own bag when I go shopping. Plastic bags are bad for the sea and the animals living there. I also want to turn off the lights when I leave a room to save energy."
       }
-     ]
+     ],
+     "context_md": ""
     }
    ]
   },
@@ -3888,15 +4264,18 @@
      "items": [
       {
        "no": 2,
+       "label": "問2",
        "q": "この庭が「植物のための場所」であるだけでなく、どのような場所であると述べられていますか。日本語で書きなさい。【4点】",
        "a": "人々が集まって話をすることができる場所。"
       },
       {
        "no": 3,
+       "label": "問3",
        "q": "あなたの町を、もっとよい場所にするために、あなたができることは何ですか。理由を含めて**3文以上**の英語で書きなさい。【5点】\n[[lines:4]]",
        "a": "（例）I can clean the park near my house with my friends. If the park is clean, more people will come and enjoy it. I also want to talk with elderly people in my town because they know a lot about its history.\n**英作文の採点ポイント**：①3文以上あるか　②意見と理由がつながっているか　③三単現の s・時制・冠詞のミスがないか。"
       }
-     ]
+     ],
+     "context_md": "ア which　イ where　ウ when　エ what"
     }
    ]
   },
@@ -3926,15 +4305,18 @@
      "items": [
       {
        "no": 2,
+       "label": "問2",
        "q": "Kate が日本で最も楽しかった思い出は何ですか。日本語で書きなさい。【4点】",
        "a": "正月に家族と一緒にもちを作ったこと。"
       },
       {
        "no": 3,
+       "label": "問3",
        "q": "あなたが外国から来た人に体験してもらいたい日本の食べ物や行事は何ですか。理由を含めて**3文以上**の英語で書きなさい。【5点】\n[[lines:4]]",
        "a": "（例）I want people from other countries to try *okonomiyaki*. It is a Japanese food made with flour, eggs, cabbage, and meat. You can cook it at the table with your friends, so it is a lot of fun."
       }
-     ]
+     ],
+     "context_md": "ア They wanted to learn kanji, too.　イ They didn't like my name.　ウ I forgot how to write it.　エ Kanji is easy for me."
     }
    ]
   },
@@ -3964,15 +4346,18 @@
      "items": [
       {
        "no": 2,
+       "label": "問2",
        "q": "筆者の母親が、イベントの前に与えた助言を日本語で2つ書きなさい。【4点】",
        "a": "ゆっくり読むこと。／子どもたちの顔を見ること。（自分自身が物語を楽しむこと、も可）"
       },
       {
        "no": 3,
+       "label": "問3",
        "q": "あなたがやってみたいボランティア活動は何ですか。理由を含めて**3文以上**の英語で書きなさい。【5点】\n[[lines:4]]",
        "a": "（例）I want to help elderly people in my town. Many of them live alone and feel lonely. I can visit them and talk with them, and I think they will be happy."
       }
-     ]
+     ],
+     "context_md": "ア She wanted to read many books herself.　イ Sharing a story makes both the reader and the listeners happy.　ウ The library is very quiet.　エ The children didn't listen to the story."
     }
    ]
   },
@@ -4002,15 +4387,18 @@
      "items": [
       {
        "no": 2,
+       "label": "問2",
        "q": "筆者は、ロボットにできないことは何だと述べていますか。日本語で書きなさい。【4点】",
        "a": "私たちの気持ちを理解すること。"
       },
       {
        "no": 3,
+       "label": "問3",
        "q": "あなたは、レストランでロボットが働くことについてどう思いますか。あなたの考えを、理由を含めて**3文以上**の英語で書きなさい。【5点】\n[[lines:4]]",
        "a": "（例）I think it is a good idea. Robots can carry dishes quickly, so the staff can spend more time talking with customers. But I hope people will keep working at restaurants because their kindness makes us happy."
       }
-     ]
+     ],
+     "context_md": "ア Robots are better than people.　イ The food was not delicious.　ウ A restaurant needs a warm heart, too.　エ I want to buy a robot."
     },
     {
      "type": "box",

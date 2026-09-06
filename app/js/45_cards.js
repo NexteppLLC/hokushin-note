@@ -5,36 +5,51 @@ const Cards = (() => {
     if (!items.length) { toast('カードにする問題がありません'); return; }
     const order = items.slice();
     if (opts.shuffle) order.sort(() => Math.random() - 0.5);
-    let i = 0, revealed = false, res = { 2: 0, 1: 0, 0: 0 }, again = [];
-    let reverse = false;
+    let i = 0, revealed = false, res = { 2: 0, 1: 0, 0: 0 }, again = [], reverse = false;
+    let mode = opts.mode || 'auto', run = Study.session(mode, 'cards'), grade = null;
+    const scratches = {};
     const body = el('<div class="fc"></div>');
     const m = openModal(opts.title || 'カード練習', body, { sticky: true, onClose: () => { if (opts.onEnd) opts.onEnd(); if (typeof Progress !== 'undefined' && App.view === 'progress') Progress.render(); } });
-    function frontBack(it) { return reverse ? [it.a, it.q] : [it.q, it.a]; }
     function draw() {
       if (i >= order.length) {
-        body.innerHTML = '<div class="fc-done"><div class="big">' + (res[2]) + ' / ' + order.length + '</div><div>○ ' + res[2] + '　△ ' + res[1] + '　× ' + res[0] + '</div>' +
-          (again.length ? '<p class="muted">×・△の問題を続けて解き直せます</p>' : '<p>全部○！すばらしい</p>') +
-          '<div class="row" style="justify-content:center;margin-top:12px">' + (again.length ? '<button class="primary" data-a="again">×△だけもう一回（' + again.length + '問）</button>' : '') + '<button data-a="close">閉じる</button></div></div>';
+        body.innerHTML = '<div class="fc-done"><div class="big">' + res[2] + ' / ' + order.length + '</div><div>○ ' + res[2] + '　△ ' + res[1] + '　× ' + res[0] + '</div><p class="muted">今回の自己採点です。後日再テストは24時間以上あけて取り組みます。</p>' +
+          '<div class="row" style="justify-content:center;margin-top:12px">' + (again.length ? '<button class="primary" data-a="again">×△を今すぐ解き直す（' + again.length + '問）</button>' : '') + '<button data-a="close">閉じる</button></div></div>';
         $('[data-a="close"]', body).onclick = () => m.close();
-        const ag = $('[data-a="again"]', body); if (ag) ag.onclick = () => { order.splice(0, order.length, ...again); again = []; i = 0; res = { 2: 0, 1: 0, 0: 0 }; draw(); };
+        const ag = $('[data-a="again"]', body); if (ag) ag.onclick = () => { order.splice(0, order.length, ...again); again = []; i = 0; res = { 2: 0, 1: 0, 0: 0 }; mode = 'review'; run = Study.session(mode, 'cards'); grade = null; revealed = false; draw(); };
         return;
       }
-      const it = order[i]; const [f, b] = frontBack(it);
+      const it = order[i], ruby = it.ruby ? (S.settings.ruby ? 'ruby' : 'noruby') : '';
+      const f = reverse ? it.a : it.q, b = reverse ? it.q : it.a;
+      if (reverse) Study.seen(it.key); // The usual answer is visible even without grading.
+      const attempt = Study.current(it.key, run), completed = Study.completion(it.key, run);
+      const activeMode = attempt ? attempt.mode : completed ? completed.mode : Study.modeFor(it.key, run, Date.now()).mode;
       body.innerHTML = '<div class="fc-prog"><span class="num">' + (i + 1) + ' / ' + order.length + '</span><span class="bar grow"><i style="width:' + pct(i, order.length) + '%"></i></span>' +
-        (opts.reverse ? '<button class="small" data-a="flip">' + (reverse ? '意味→単語' : '単語→意味') + '</button>' : '') + '<button class="small" data-a="shuffle">シャッフル</button></div>' +
-        '<div class="fc-card cbody ' + (it.ruby ? (S.settings.ruby ? 'ruby' : 'noruby') : '') + '"><div class="lab">' + esc(it.label || '') + '</div><div class="ff">' + f + '</div>' +
-        '<div class="fa" ' + (revealed ? '' : 'hidden') + '>' + (b || '<span class="muted">（解答なし）</span>') + '</div>' +
-        (revealed ? '' : '<div class="muted sm" style="margin-top:10px">タップして答えを見る</div>') + '</div>' +
+        '<select data-a="mode" aria-label="練習の種類">' + Study.modeOptions(mode) + '</select>' +
+        (opts.reverse ? '<button class="small" data-a="flip">' + (reverse ? '意味→単語' : '単語→意味') + '</button>' : '') + '<button class="small" data-a="shuffle"' + (grade != null ? ' disabled' : '') + '>シャッフル</button></div>' +
+        '<p class="sm muted">' + Study.help + '</p>' +
+        '<div class="fc-context cbody ' + ruby + '">' + questionContextHTML(it.context, it.contextTitle) + '</div>' +
+        '<div class="fc-card cbody ' + ruby + '"><div class="lab">' + esc(it.label || '') + '</div><div class="ff">' + f + '</div>' +
+        '<div class="fa" ' + (revealed ? '' : 'hidden') + '>' + (b || '<span class="muted">（解答なし）</span>') + '</div></div>' +
+        '<div class="study-record-note">今回：' + esc(Study.MODES[activeMode]) + '（自己申告） ' + Study.noteHTML(it.key) + '</div>' +
         '<div class="fc-scratch inkhost"><div class="sc-tools"><button data-sc="clear">消す</button></div></div>' +
-        '<div class="fc-ctl">' + (revealed ? '<button class="gbtn g2" data-g="2">○</button><button class="gbtn g1" data-g="1">△</button><button class="gbtn g0" data-g="0">×</button>' : '<button class="primary" data-a="show" style="min-width:160px;min-height:52px;font-size:18px">答えを見る</button>') + '</div>';
-      const sc = $('.fc-scratch', body); let scratch = { w: 0, strokes: [] };
-      Ink.attach(sc, () => scratch, d => { scratch = d; }, { always: true });
-      $('[data-sc="clear"]', body).onclick = () => sc._ink.clear();
-      $('.fc-card', body).onclick = () => { if (!revealed) { revealed = true; draw(); } };
-      const sh = $('[data-a="show"]', body); if (sh) sh.onclick = () => { revealed = true; draw(); };
-      $$('[data-g]', body).forEach(bt => bt.onclick = () => { const g = +bt.dataset.g; res[g]++; if (g < 2) again.push(it); if (it.key && it.sid) setGrade(it.sid, it.key, g); i++; revealed = false; draw(); });
-      $('[data-a="shuffle"]', body).onclick = () => { const rest = order.slice(i).sort(() => Math.random() - 0.5); order.splice(i, rest.length, ...rest); revealed = false; draw(); toast('残りをシャッフルしました'); };
-      const fl = $('[data-a="flip"]', body); if (fl) fl.onclick = () => { reverse = !reverse; revealed = false; draw(); };
+        '<div class="fc-ctl">' + (revealed ? '<span class="gr">' + [[2, '○'], [1, '△'], [0, '×']].map(([g, label]) => '<button class="gbtn g' + g + (grade === g ? ' on' : '') + '" data-g="' + g + '">' + label + '</button>').join('') + '</span>' + Study.reasonHTML(it.key, run) + (grade == null ? '' : '<button class="primary" data-a="next">次へ</button>') :
+          '<button class="primary" data-a="finish">解答を終えた・答え合わせ</button><button data-a="study">答えを見て学ぶ</button>') + '<button class="small" data-a="history">記録</button></div>';
+      const scratchKey = run.id + ':' + i + ':' + (it.key || 'free');
+      Ink.attach($('.fc-scratch', body), () => scratches[scratchKey], d => { scratches[scratchKey] = d; }, { always: true });
+      $('[data-sc="clear"]', body).onclick = () => $('.fc-scratch', body)._ink.clear();
+      const reveal = finish => { if (finish) Study.finish(it.key, run); Study.seen(it.key); revealed = true; draw(); };
+      const finish = $('[data-a="finish"]', body); if (finish) finish.onclick = () => reveal(true);
+      const study = $('[data-a="study"]', body); if (study) study.onclick = () => reveal(false);
+      $$('[data-g]', body).forEach(bt => bt.onclick = () => {
+        const result = setGrade(it.sid, it.key, +bt.dataset.g, { session: run });
+        grade = +bt.dataset.g; if (result.message) toast(result.message); draw();
+      });
+      const next = $('[data-a="next"]', body); if (next) next.onclick = () => { res[grade]++; if (grade < 2) again.push(it); i++; revealed = false; grade = null; draw(); };
+      const reason = $('[data-reason]', body); if (reason) reason.onchange = e => Study.setReason(it.key, e.target.value, run);
+      $('[data-a="history"]', body).onclick = () => Study.history(it.key);
+      $('[data-a="mode"]', body).onchange = e => { mode = reverse ? 'review' : e.target.value; run = Study.session(mode, 'cards'); revealed = false; grade = null; draw(); };
+      $('[data-a="shuffle"]', body).onclick = () => { const rest = order.slice(i).sort(() => Math.random() - 0.5); order.splice(i, rest.length, ...rest); revealed = false; grade = null; draw(); };
+      const fl = $('[data-a="flip"]', body); if (fl) fl.onclick = () => { reverse = !reverse; if (reverse) mode = 'review'; revealed = false; grade = null; run = Study.session(mode, 'cards'); draw(); };
     }
     draw();
   }

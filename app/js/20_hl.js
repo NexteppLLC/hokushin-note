@@ -5,7 +5,7 @@ const HL = (() => {
     const out = [];
     const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode(n) {
       let p = n.parentNode;
-      while (p && p !== root) { if (p.nodeName === 'RT' || p.nodeName === 'RP' || p.nodeName === 'svg' || p.classList && (p.classList.contains('ink') || p.classList.contains('hl-ui'))) return NodeFilter.FILTER_REJECT; p = p.parentNode; }
+      while (p && p !== root) { if (p.nodeName === 'RT' || p.nodeName === 'RP' || p.nodeName === 'svg' || p.classList && (p.classList.contains('ink') || p.classList.contains('hl-ui') || p.classList.contains('study-record-note') || p.classList.contains('study-reason'))) return NodeFilter.FILTER_REJECT; p = p.parentNode; }
       return NodeFilter.FILTER_ACCEPT;
     } });
     let n; while ((n = w.nextNode())) out.push(n);
@@ -43,21 +43,45 @@ const HL = (() => {
       target.parentNode.insertBefore(m, target); m.appendChild(target);
     }
   }
-  /** re-apply all highlights for a unit block body */
+  // Map normalized text back to DOM text offsets; old backups normalized whitespace.
+  function normalizedMap(text) {
+    let normalized = '', indices = [], ends = [];
+    const parts = text.matchAll(/\s+|\S/g);
+    for (const m of parts) {
+      const isSpace = /^\s+$/.test(m[0]);
+      if (isSpace && !normalized) continue;
+      normalized += isSpace ? ' ' : m[0]; indices.push(m.index); ends.push(m.index + m[0].length);
+    }
+    if (normalized.endsWith(' ')) { normalized = normalized.slice(0, -1); indices.pop(); ends.pop(); }
+    return { text: normalized, indices, ends };
+  }
+  function resolveAnchor(text, h) {
+    const needle = String(h.txt || '').replace(/\s+/g, ' ').trim();
+    if (!needle) return null; // Unverifiable old offsets must never mark unrelated text.
+    const current = text.slice(h.s, h.e).replace(/\s+/g, ' ').trim();
+    if (Number.isInteger(h.s) && Number.isInteger(h.e) && h.s >= 0 && h.e <= text.length && h.e > h.s && current === needle) return { s: h.s, e: h.e };
+    const norm = normalizedMap(text), at = norm.text.indexOf(needle);
+    if (at < 0 || norm.text.indexOf(needle, at + 1) >= 0) return null;
+    // Very old records kept only 120 characters: re-anchor only the verified text.
+    return { s: norm.indices[at], e: norm.ends[at + needle.length - 1] };
+  }
+  /** Re-apply only verified highlights. Saved records remain byte-for-byte untouched. */
   function apply(body, ukey, ci) {
     const list = (S.hl[ukey] || []).filter(h => h.b === ci).sort((x, y) => x.s - y.s);
-    list.forEach(h => applyOne(body, h.s, h.e, h.c));
+    const text = plain(body); let skipped = 0;
+    list.forEach(h => { const range = resolveAnchor(text, h); if (range) applyOne(body, range.s, range.e, h.c); else skipped++; });
+    return { applied: list.length - skipped, skipped };
   }
-  function add(ukey, ci, s, e, c, txt) {
+  function add(ukey, ci, s, e, c, txt, bodyText) {
     S.hl[ukey] = S.hl[ukey] || [];
     // remove overlapping same-range pieces
-    S.hl[ukey] = S.hl[ukey].filter(h => !(h.b === ci && h.s < e && h.e > s));
-    S.hl[ukey].push({ b: ci, s, e, c, txt: txt.slice(0, 120), t: Date.now() });
+    S.hl[ukey] = S.hl[ukey].filter(h => { const r = bodyText == null ? h : resolveAnchor(bodyText, h); return !(h.b === ci && r && r.s < e && r.e > s); });
+    S.hl[ukey].push({ b: ci, s, e, c, txt, t: Date.now() });
     markDirty('hl/' + ukey);
   }
-  function removeRange(ukey, ci, s, e) {
+  function removeRange(ukey, ci, s, e, bodyText) {
     if (!S.hl[ukey]) return;
-    S.hl[ukey] = S.hl[ukey].filter(h => !(h.b === ci && h.s < e && h.e > s));
+    S.hl[ukey] = S.hl[ukey].filter(h => { const r = bodyText == null ? h : resolveAnchor(bodyText, h); return !(h.b === ci && r && r.s < e && r.e > s); });
     if (!S.hl[ukey].length) delete S.hl[ukey];
     markDirty('hl/' + ukey);
   }
@@ -77,7 +101,7 @@ const HL = (() => {
     const s = posOf(body, r.startContainer, r.startOffset), e = posOf(body, r.endContainer, r.endOffset);
     if (s == null || e == null || e <= s) { hide(); return; }
     const card = body.closest('.cblock');
-    curSel = { ukey: card.dataset.ukey, ci: +body.dataset.ci, s, e, body, txt: sel.toString().replace(/\s+/g, ' ').trim() };
+    curSel = { ukey: card.dataset.ukey, ci: +body.dataset.ci, s, e, body, txt: plain(body).slice(s, e) };
     const rect = r.getBoundingClientRect();
     const p = pop();
     p.innerHTML = Object.entries(COLORS).map(([k, v]) => '<button class="sw" data-c="' + k + '" style="background:' + v + '" aria-label="マーカー"></button>').join('') +
@@ -95,10 +119,10 @@ const HL = (() => {
     const b = e.target.closest('#hl-pop button'); if (!b || !curSel) return;
     e.preventDefault(); e.stopPropagation();
     const cs = curSel;
-    if (b.dataset.c) { add(cs.ukey, cs.ci, cs.s, cs.e, b.dataset.c, cs.txt); Learn.rerenderBlock(cs.ukey, cs.ci); toast('マーカーをつけました'); }
-    else if (b.dataset.a === 'del') { removeRange(cs.ukey, cs.ci, cs.s, cs.e); Learn.rerenderBlock(cs.ukey, cs.ci); }
+    if (b.dataset.c) { add(cs.ukey, cs.ci, cs.s, cs.e, b.dataset.c, cs.txt, plain(cs.body)); Learn.rerenderBlock(cs.ukey, cs.ci); toast('マーカーをつけました'); }
+    else if (b.dataset.a === 'del') { removeRange(cs.ukey, cs.ci, cs.s, cs.e, plain(cs.body)); Learn.rerenderBlock(cs.ukey, cs.ci); }
     else if (b.dataset.a === 'note') { Notes.create({ ukey: cs.ukey, ci: cs.ci, quote: cs.txt }); }
     window.getSelection().removeAllRanges(); hide();
   });
-  return { apply, add, removeRange, plain, hide, COLORS };
+  return { apply, add, removeRange, plain, hide, COLORS, resolveAnchor };
 })();

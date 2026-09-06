@@ -5,7 +5,7 @@ usage: python3 build/export_app.py
 """
 import os, re, json, sys, html as _html
 sys.path.insert(0, os.path.dirname(__file__))
-from export_json import parse, ROOT, split_items
+from export_json import parse, ROOT, split_items, split_item_block, pair_items
 import editions as ED
 from mdconv import Converter
 from ruby_engine import RubyDict, RubyEngine, annotate_html
@@ -144,10 +144,57 @@ def kanji_answers(md):
     return out
 
 
+def mock_answer_key(sec, title):
+    """Only match a mock's answer inside its source file and M-code, never by number alone."""
+    unit = sec['path'][1] if len(sec['path']) > 1 else ''
+    code = re.match(r'^(M\d+)\s', unit)
+    number = re.match(r'^大問\s*(\d+)', title)
+    if not code or not number:
+        return None
+    return (sec['file'], code.group(1), int(number.group(1)))
+
+
+def linked_mock_questions(doc):
+    """Copy, rather than move, separated mock answers. Existing unit/block indices remain intact."""
+    answers = {}
+    for sec in doc['sections']:
+        for b in sec['blocks']:
+            if b['type'] == 'a':
+                k = mock_answer_key(sec, b['title'])
+                if k:
+                    answers.setdefault(k, []).append(b)
+    linked = {}
+    for sec in doc['sections']:
+        key = mock_answer_key(sec, sec['heading'])
+        candidates = answers.get(key, [])
+        if len(candidates) != 1:
+            continue
+        questions = [b for b in sec['blocks'] if b['type'] == 'q']
+        if len(questions) != 1:
+            continue
+        q, a = questions[0], candidates[0]
+        ex = {'type': 'exercise', 'title': q['title'], 'question_md': q['md'],
+              'answer_title': a['title'], 'answer_md': a['md']}
+        items = pair_items(q['md'], a['md'])
+        # Refuse item-wise grading if an answer number is missing or unmatched.
+        qi, ai = split_items(q['md']), split_items(a['md'])
+        if items and [i['no'] for i in qi] == [i['no'] for i in ai]:
+            ex['items'] = items
+            ex['context_md'] = split_item_block(q['md'])['context_md']
+        linked[id(q)] = ex
+    return linked
+
+
 def build_subject(subject, key, name, short, ed):
     cfg = json.load(open(ED.src_dir(ed, subject, 'config.json'), encoding='utf-8'))
     R = Renderer(subject, cfg, ed)
     doc = parse(subject, ed)
+    # The browser uses original unit positions for uncoded/repeated headings.
+    # Append added chapters so existing notes, highlights and ink retain their keys.
+    appended_files = {'44_visual_guide.md', '45_visual.md', '41_visual_guide.md',
+                      '42_visual_history.md', '43_visual_geo.md'}
+    doc['sections'].sort(key=lambda sec: os.path.basename(sec.get('file') or '') in appended_files)
+    linked = linked_mock_questions(doc)
     units = []
     chapter = None
     cur = None
@@ -182,9 +229,14 @@ def build_subject(subject, key, name, short, ed):
             target = cur
         if target is None:
             continue
-        for b in sec['blocks']:
+        for source_block in sec['blocks']:
+            b = linked.get(id(source_block), source_block)
             if b['type'] == 'exercise':
                 ex = {'t': 'ex', 'title': plain_title(b['title']), 'q': R.html(b['question_md']), 'atitle': plain_title(b.get('answer_title', '')), 'a': R.html(b['answer_md'])}
+                if sec['level'] == 3:
+                    ex['contextTitle'] = plain_title(sec['heading'])
+                if b.get('context_md'):
+                    ex['context'] = R.html(b['context_md'])
                 # special: kanji sets (two q parts: 読み / 書き, table based)
                 if subject == 'japanese' and b.get('question_parts') and any(p['title'].startswith(('読み', '書き')) for p in b['question_parts']):
                     ans = kanji_answers(b['answer_md'])
@@ -212,6 +264,18 @@ def build_subject(subject, key, name, short, ed):
                         blk['vocab'] = v
                 if blk['html'] or blk.get('vocab'):
                     target['content'].append(blk)
+    # Keep passage/data blocks in their original slots and attach them once to each
+    # card. Do not concatenate the whole c.q to split items: that repeats all questions.
+    for unit in units:
+        shared = []
+        for block in unit['content']:
+            if block['t'] == 'h3':
+                shared = []
+            elif block['t'] in ('passage', 'dialog', 'data'):
+                title = ('<div class="ex-title">' + _html.escape(block['title']) + '</div>') if block['title'] else ''
+                shared.append(title + block['html'])
+            elif block['t'] == 'ex' and shared:
+                block['externalContext'] = '\n'.join(shared)
     # drop empty units
     units = [u for u in units if u['content']]
     return {'id': subject, 'key': key, 'name': name, 'short': short, 'title': cfg.get('title', name), 'ruby': bool(cfg.get('ruby')), 'units': units}

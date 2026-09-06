@@ -7,6 +7,17 @@ EDITION, _args = ED.resolve(sys.argv[1:])
 _pd = ED.import_module(EDITION, 'plan_data')
 globals().update({k: v for k, v in vars(_pd).items() if not k.startswith('__')})
 
+# Earlier editions can retain their unit-based plan without overrides.
+if not hasattr(_pd, 'task_min'):
+    def task_min(day, subj, code):
+        return unit_min(subj, code)
+if not hasattr(_pd, 'task_title'):
+    def task_title(day, subj, code):
+        return unit_title(subj, code)
+if not hasattr(_pd, 'task_scope'):
+    def task_scope(day, subj, code):
+        return 'unit'
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 days = day_list()
 
@@ -24,8 +35,8 @@ def subject_plan_md(subj):
     lines.append('|:--:|:--|:--:|:--|--:|:--:|')
     for d in days:
         codes = d['tasks'][subj]
-        items = '／'.join('**%s** %s' % (c, unit_title(subj, c)) for c in codes)
-        m = sum(unit_min(subj, c) for c in codes)
+        items = '／'.join('**%s** %s' % (c, task_title(d['day'], subj, c)) for c in codes)
+        m = sum(task_min(d['day'], subj, c) for c in codes)
         kind = '休日' if d['is_h'] else '平日'
         if d['holiday']:
             kind = '祝日'
@@ -37,7 +48,7 @@ def master_md():
     out = []
     out.append('# 34日間の日別タスク表')
     out.append('')
-    out.append('各日の表の「番号」は、科目別教材（PDF）の中の番号です。終わったら「済」欄にチェックを入れましょう。時間は目安です。10分以上余ったら「直しノート」の見直しに使ってください。')
+    out.append('各日の「番号」は科目別教材の番号です。時間は当日の指定範囲の目安です。「必要知識10分」は該当箇所だけを確認する枠で、単元全体の学習完了を意味しません。理科・社会は解答を見ずに図資料を解き、直しと24時間以上あけた再テストを分けます。余った時間を無理に埋める必要はありません。')
     out.append('')
     week = 0
     for d in days:
@@ -46,10 +57,10 @@ def master_md():
             out.append('## 第%d週' % week)
             out.append('')
         budget = HOLIDAY_MIN if d['is_h'] else WEEKDAY_MIN
-        kind = '休日 8時間' if d['is_h'] else '平日 4時間'
+        kind = '休日（配分は下表）' if d['is_h'] else '平日（配分は下表）'
         if d['holiday']:
-            kind = '祝日（%s） 8時間' % d['holiday']
-        total = sum(sum(unit_min(s, c) for c in d['tasks'][s]) for s in SUBJ_ORDER)
+            kind = '祝日（%s）' % d['holiday']
+        total = sum(sum(task_min(d['day'], s, c) for c in d['tasks'][s]) for s in SUBJ_ORDER)
         out.append('<div class="dayhead">Day %d　%s　%s　<span class="gray">合計の目安 %d分</span></div>' % (d['day'], fmt_date(d), kind, total))
         out.append('')
         if d['day'] in DAY_NOTES:
@@ -59,8 +70,8 @@ def master_md():
         out.append('|:--|:--|--:|:--:|')
         for s in SUBJ_ORDER:
             codes = d['tasks'][s]
-            items = '<br>'.join('**%s** %s' % (c, unit_title(s, c)) for c in codes)
-            m = sum(unit_min(s, c) for c in codes)
+            items = '<br>'.join('**%s** %s' % (c, task_title(d['day'], s, c)) for c in codes)
+            m = sum(task_min(d['day'], s, c) for c in codes)
             out.append('| %s | %s | %d分 | ☐ |' % (SUBJ_NAME[s], items, m))
         out.append('')
     return '\n'.join(out)
@@ -108,7 +119,7 @@ def write_plan_json():
             data['units'][s].pop('K', None)
     for d in days:
         data['days'].append({'day': d['day'], 'date': str(d['date']), 'weekday': d['wd'], 'holiday': d['holiday'], 'is_holiday': d['is_h'],
-                             'note': DAY_NOTES.get(d['day']), 'tasks': {s: [{'code': c, 'title': unit_title(s, c), 'minutes': unit_min(s, c)} for c in d['tasks'][s]] for s in SUBJ_ORDER}})
+                             'note': DAY_NOTES.get(d['day']), 'tasks': {s: [{'code': c, 'title': task_title(d['day'], s, c), 'minutes': task_min(d['day'], s, c), 'scope': task_scope(d['day'], s, c)} for c in d['tasks'][s]] for s in SUBJ_ORDER}})
     json.dump(data, open(ED.data_dir(EDITION, 'plan.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 
 

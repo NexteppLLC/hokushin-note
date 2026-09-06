@@ -425,3 +425,35 @@ body.pen-on.finger .inkhost, body.finger .inkhost.always { touch-action: none; }
 .sched .task .open { min-height: 32px; padding: 2px 8px; font-size: 12px; }
 @media (max-width: 1000px) { .sd-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .sd-grid { grid-template-columns: 1fr; } }
+
+/* Append to app/app.css when integrating stage 1. SVG zoom interaction is separate. */
+.exercise-context { margin: 8px 0 16px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); overflow-x: auto; }
+.exercise-context > :last-child { margin-bottom: 0; }
+.fc-context:empty { display: none; }
+.fc-context .exercise-context { font-size: 16px; line-height: 1.8; }
+.exercise-context table { min-width: 380px; }
+.exercise-context .fig { min-width: 280px; }
+.exercise-context .fig svg { width: auto; max-width: 100%; }
+
+/* Append after existing app styles. */
+.study-toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; margin:10px 0; padding:12px; border:1px solid var(--line); border-radius:10px; }
+.study-toolbar p { flex-basis:100%; margin:0; }
+.study-toolbar select, .fc-prog select { max-width:100%; font-size:14px; }
+.study-summary { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:16px 0 8px; }
+.study-summary > div { display:flex; flex-direction:column; gap:6px; padding:16px; border:1px solid var(--line); border-radius:12px; background:var(--card); }
+.study-summary b { font-size:28px; }
+.study-summary small { color:var(--ink-3); }
+.study-legacy { color:#775319; background:#fff8e6; border-radius:6px; padding:4px 8px; }
+.study-record-note { margin:5px 12px; font-size:12px; color:var(--ink-3); }
+.study-reason { max-width:145px; font-size:12px; padding:4px; }
+.ictl { flex-wrap:wrap; row-gap:7px; }
+.fc .fc-ctl { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; align-items:center; }
+.fc .fc-card { cursor:default; }
+.fc-prog { flex-wrap:wrap; }
+.psb { flex-wrap:wrap; }
+.study-history > div, .study-due-row { display:flex; gap:10px; align-items:center; padding:9px 0; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+.study-history > div > span:last-child, .study-due-row > span:nth-child(2) { flex:1; }
+.study-time-recent { display:flex; gap:10px; flex-wrap:wrap; font-size:12px; margin:12px 0; }
+.shared-material { margin:0 14px; }
+.ink-preview { position:relative; min-height:160px; border:1px solid var(--line); margin:10px 0; background:white; pointer-events:none; }
+@media (max-width:620px) { .study-summary { grid-template-columns:1fr; } .study-summary > div { padding:12px; } .study-history > div > span:last-child { flex-basis:100%; } }

@@ -51,9 +51,10 @@ def read_source(subject, ed=None):
     return '\n'.join(parts)
 
 
-def split_items(md):
+def split_item_block(md):
     """Split a body like '1. foo　2. bar\n3. baz' or '(1) foo　(2) bar' into numbered items (best effort).
-    Tries progressively looser separators; accepts the first split whose numbers form a consecutive run."""
+    Keep the shared material before the first item separately. The separator order
+    is unchanged so existing item numbers and persistent progress keys stay stable."""
     patterns = [
         (r'(\d{1,2})\\?\.\s', lambda lab: int(lab)),                      # 1. / 1\. (escaped)
         (r'(問\s?\d{1,2}|\(\d{1,2}\)|（\d{1,2}）)(?=[　 （(]|$)', lambda lab: int(re.sub(r'\D', '', lab))),  # 問1 / (1) / （1）
@@ -61,17 +62,25 @@ def split_items(md):
     for pat, tonum in patterns:
         for sep in (r'^', r'(?:^|(?<=　))', r'(?:^|(?<=[　 ]))'):
             s = re.sub(sep + pat, lambda m: '\n@@%s@@ ' % m.group(1), md, flags=re.M)
-            items = []
+            items, prefix = [], []
             for chunk in s.split('\n'):
                 m = re.match(r'^@@(.+?)@@ (.*)$', chunk.strip())
                 if m:
                     items.append({'no': tonum(m.group(1)), 'label': m.group(1), 'text': m.group(2).strip()})
                 elif items and chunk.strip():
                     items[-1]['text'] += '\n' + chunk.strip()
+                elif not items:
+                    prefix.append(chunk)
             nos = [it['no'] for it in items]
             if len(items) >= 2 and nos == list(range(nos[0], nos[0] + len(nos))):
-                return items
+                return {'context_md': '\n'.join(prefix).strip(), 'items': items}
     return None
+
+
+def split_items(md):
+    """Backward-compatible item-only API; use split_item_block for question bodies."""
+    block = split_item_block(md)
+    return block['items'] if block else None
 
 
 def pair_items(q_md, a_md):
@@ -81,7 +90,7 @@ def pair_items(q_md, a_md):
     amap = {it['no']: it['text'] for it in ai}
     out = []
     for it in qi:
-        out.append({'no': it['no'], 'q': it['text'], 'a': amap.get(it['no'])})
+        out.append({'no': it['no'], 'label': it['label'], 'q': it['text'], 'a': amap.get(it['no'])})
     return out
 
 
@@ -180,6 +189,7 @@ def parse(subject, ed=None):
                         items = pair_items(qs[0]['md'], a['md'])
                         if items:
                             ex['items'] = items
+                            ex['context_md'] = split_item_block(qs[0]['md'])['context_md']
                     out.append(ex)
                     i = j + 1
                     continue
