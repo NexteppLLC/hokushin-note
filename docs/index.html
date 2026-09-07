@@ -12,6 +12,7 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <title>北辰10月 学習ノート</title>
+<meta name="hokushin-build" content="2026-09-07-317adf98037b">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&display=swap">
 <style>
 /* ===== tokens ===== */
@@ -671,30 +672,112 @@ function studyCard(it, sid) {
 const Store = (() => {
   let db = null, mode = 'idb', mem = {};
   function open() {
-    return new Promise((res) => {
+    return new Promise((res, rej) => {
+      let settled = false;
+      const fallback = () => { if (!settled) { settled = true; mode = 'ls'; res(); } };
       try {
         const req = indexedDB.open('hokushin-note', 1);
         req.onupgradeneeded = () => { req.result.createObjectStore('kv'); };
-        req.onsuccess = () => { db = req.result; res(); };
-        req.onerror = () => { mode = 'ls'; res(); };
-        req.onblocked = () => { mode = 'ls'; res(); };
-      } catch (e) { mode = 'ls'; res(); }
+        req.onsuccess = () => { if (settled) { req.result.close(); return; } settled = true; db = req.result; mode = 'idb'; res(); };
+        req.onerror = fallback;
+        // A blocked database may contain records. Do not silently open a different store.
+        req.onblocked = () => { if (!settled) { settled = true; rej(new Error('保存先を開けません。他の学習ノートを閉じてから再度開いてください。')); } };
+      } catch (e) { fallback(); }
     });
   }
-  function lsGet(k) { try { const v = localStorage.getItem('hn:' + k); return v == null ? undefined : JSON.parse(v); } catch (e) { return mem[k]; } }
-  function lsSet(k, v) { try { localStorage.setItem('hn:' + k, JSON.stringify(v)); } catch (e) { mode = 'mem'; mem[k] = v; } }
-  function lsDel(k) { try { localStorage.removeItem('hn:' + k); } catch (e) {} delete mem[k]; }
-  function lsKeys(prefix) { const out = []; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k.startsWith('hn:' + prefix)) out.push(k.slice(3)); } } catch (e) {} Object.keys(mem).forEach(k => { if (k.startsWith(prefix) && !out.includes(k)) out.push(k); }); return out; }
-  function tx(m) { return db.transaction('kv', m).objectStore('kv'); }
+  function memoryError() { return new Error('この端末に保存できません。閉じる前にバックアップを書き出してください。'); }
+  function lsGet(k) {
+    if (mode === 'mem') return mem[k];
+    const v = localStorage.getItem('hn:' + k);
+    return v == null ? undefined : JSON.parse(v);
+  }
+  function lsKeys(prefix) {
+    if (mode === 'mem') return Object.keys(mem).filter(k => k.startsWith(prefix));
+    const out = [];
+    for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith('hn:' + prefix)) out.push(k.slice(3)); }
+    return out;
+  }
+  function read(makeRequest) {
+    return new Promise((res, rej) => {
+      try {
+        const t = db.transaction('kv', 'readonly'), r = makeRequest(t.objectStore('kv'));
+        r.onsuccess = () => res(r.result);
+        r.onerror = () => rej(r.error || new Error('保存データを読み込めませんでした。'));
+        t.onabort = () => rej(t.error || new Error('保存データの読み込みが中断されました。'));
+      } catch (e) { rej(e); }
+    });
+  }
+  function write(enqueue) {
+    return new Promise((res, rej) => {
+      let t;
+      const fail = e => { try { if (t) t.abort(); } catch (_) {} rej(e); };
+      try {
+        t = db.transaction('kv', 'readwrite');
+        // Request success is provisional; a later request or quota check can abort.
+        t.oncomplete = () => res();
+        t.onerror = () => rej(t.error || new Error('保存できませんでした。'));
+        t.onabort = () => rej(t.error || new Error('保存が中断されました。'));
+        enqueue(t.objectStore('kv'), fail);
+      } catch (e) { fail(e); }
+    });
+  }
+  async function lsReplace(entries, preserveSafety) {
+    if (mode === 'mem') throw memoryError();
+    // localStorage has no transaction. Keep the old bytes for best-effort rollback.
+    const previous = new Map(lsKeys('').filter(k => !preserveSafety || !k.startsWith('safety/')).map(k => [k, localStorage.getItem('hn:' + k)]));
+    const next = entries.map(([k, v]) => [k, JSON.stringify(v)]);
+    try {
+      for (const k of previous.keys()) localStorage.removeItem('hn:' + k);
+      for (const [k, v] of next) localStorage.setItem('hn:' + k, v);
+    } catch (error) {
+      let rollbackFailed = false;
+      try {
+        for (const [k] of next) localStorage.removeItem('hn:' + k);
+        for (const [k, v] of previous) localStorage.setItem('hn:' + k, v);
+      } catch (_) { rollbackFailed = true; }
+      const failure = new Error(rollbackFailed ? '保存に失敗し、元のデータを完全には戻せませんでした。バックアップを保管してください。' : '保存に失敗したため、元のデータに戻しました。');
+      failure.cause = error; failure.rollbackFailed = rollbackFailed; throw failure;
+    }
+  }
   const api = {
     open,
     mode: () => mode,
-    get(k) { if (mode !== 'idb') return Promise.resolve(lsGet(k)); return new Promise((res) => { try { const r = tx('readonly').get(k); r.onsuccess = () => res(r.result); r.onerror = () => res(undefined); } catch (e) { res(lsGet(k)); } }); },
-    set(k, v) { if (mode !== 'idb') { lsSet(k, v); return Promise.resolve(); } return new Promise((res, rej) => { try { const r = tx('readwrite').put(v, k); r.onsuccess = () => res(); r.onerror = () => rej(r.error); } catch (e) { rej(e); } }); },
-    del(k) { if (mode !== 'idb') { lsDel(k); return Promise.resolve(); } return new Promise((res) => { try { const r = tx('readwrite').delete(k); r.onsuccess = () => res(); r.onerror = () => res(); } catch (e) { res(); } }); },
-    keys(prefix) { if (mode !== 'idb') return Promise.resolve(lsKeys(prefix)); return new Promise((res) => { try { const r = tx('readonly').getAllKeys(IDBKeyRange.bound(prefix, prefix + '￿')); r.onsuccess = () => res(r.result); r.onerror = () => res([]); } catch (e) { res([]); } }); },
+    async get(k) { return mode !== 'idb' ? lsGet(k) : read(s => s.get(k)); },
+    async set(k, v) {
+      if (mode === 'mem') { mem[k] = v; throw memoryError(); }
+      if (mode !== 'idb') { localStorage.setItem('hn:' + k, JSON.stringify(v)); return; }
+      return write(s => s.put(v, k));
+    },
+    async del(k) {
+      if (mode === 'mem') { delete mem[k]; throw memoryError(); }
+      if (mode !== 'idb') { localStorage.removeItem('hn:' + k); return; }
+      return write(s => s.delete(k));
+    },
+    async keys(prefix) { return mode !== 'idb' ? lsKeys(prefix) : read(s => s.getAllKeys(IDBKeyRange.bound(prefix, prefix + '￿'))); },
     async getAll(prefix) { const ks = await api.keys(prefix); const out = {}; for (const k of ks) out[k] = await api.get(k); return out; },
-    async clear() { if (mode !== 'idb') { lsKeys('').forEach(lsDel); mem = {}; return; } return new Promise((res) => { try { const r = tx('readwrite').clear(); r.onsuccess = () => res(); r.onerror = () => res(); } catch (e) { res(); } }); }
+    async clear() {
+      if (mode !== 'idb') return lsReplace([], false);
+      return write(s => s.clear());
+    },
+    async replaceAll(entries) {
+      const next = (Array.isArray(entries) ? entries : Object.entries(entries)).filter(([k]) => !k.startsWith('safety/'));
+      if (mode !== 'idb') return lsReplace(next, true);
+      return write((s, fail) => {
+        const r = s.getAllKeys();
+        r.onsuccess = () => {
+          try {
+            r.result.filter(k => !String(k).startsWith('safety/')).forEach(k => s.delete(k));
+            next.forEach(([k, v]) => s.put(v, k));
+          } catch (e) { fail(e); }
+        };
+      });
+    }
+  };
+  // Verify fallback availability before showing an editable empty state.
+  const openDatabase = api.open;
+  api.open = async () => {
+    await openDatabase();
+    if (mode === 'ls') { try { void localStorage.length; } catch (e) { mode = 'mem'; } }
   };
   return api;
 })();
@@ -710,28 +793,54 @@ const S = {
   nb: {},   // ukey -> {pages:[{strokes}]}
   loaded: false
 };
-const dirty = new Set(); let saveTimer = null;
-function markDirty(path) { dirty.add(path); setStatus('…'); clearTimeout(saveTimer); saveTimer = setTimeout(flush, 400); }
-async function flush() {
-  const paths = Array.from(dirty); dirty.clear();
-  for (const p of paths) {
-    const col = p.split('/')[0];
-    let v;
-    if (col === 'progress') v = S.progress[p.slice(9)];
-    else if (col === 'plan') v = S.plan;
-    else if (col === 'notes') v = S.notes;
-    else if (col === 'settings') v = S.settings;
-    else if (col === 'hl') v = S.hl[p.slice(3)];
-    else if (col === 'ink') v = S.ink[p.slice(4)];
-    else if (col === 'nb') v = S.nb[p.slice(3)];
-    try { if (v === undefined) await Store.del(p); else await Store.set(p, JSON.parse(JSON.stringify(v))); }
-    catch (e) { console.warn('save failed', p, e); setStatus('保存失敗'); toast('保存できませんでした（容量不足の可能性）'); return; }
-  }
-  setStatus('保存済み'); setTimeout(() => { if ($('#save-status').textContent === '保存済み') setStatus(''); }, 1500);
+const dirty = new Set(); let saveTimer = null, activeSave = null;
+function stateValue(path, state = S) {
+  const col = path.split('/')[0];
+  if (col === 'progress') return state.progress[path.slice(9)];
+  if (col === 'plan') return state.plan;
+  if (col === 'notes') return state.notes;
+  if (col === 'settings') return state.settings;
+  if (col === 'hl') return state.hl[path.slice(3)];
+  if (col === 'ink') return state.ink[path.slice(4)];
+  if (col === 'nb') return state.nb[path.slice(3)];
+}
+function stateEntries(state = S) {
+  const out = { 'plan/main': state.plan, 'notes/all': state.notes, 'settings/main': state.settings };
+  ['progress', 'hl', 'ink', 'nb'].forEach(col => Object.entries(state[col] || {}).forEach(([key, value]) => { out[col + '/' + key] = value; }));
+  return JSON.parse(JSON.stringify(out));
+}
+function backgroundFlush() { flush().catch(() => {}); }
+function markDirty(path) { dirty.add(path); setStatus('…'); clearTimeout(saveTimer); saveTimer = setTimeout(backgroundFlush, 400); }
+function flush() {
+  clearTimeout(saveTimer);
+  if (activeSave) return activeSave.then(() => dirty.size ? flush() : undefined);
+  if (!dirty.size) return Promise.resolve();
+  activeSave = (async () => {
+    // New edits remain dirty while earlier snapshots are being persisted.
+    while (dirty.size) {
+      const paths = Array.from(dirty); dirty.clear();
+      for (let i = 0; i < paths.length; i++) {
+        const p = paths[i];
+        try {
+          const value = stateValue(p);
+          if (value === undefined) await Store.del(p);
+          else await Store.set(p, JSON.parse(JSON.stringify(value)));
+        } catch (e) {
+          paths.slice(i).forEach(path => dirty.add(path));
+          console.warn('save failed', p, e);
+          setStatus('保存失敗'); toast('保存できませんでした。閉じる前にバックアップを書き出してください。');
+          throw e;
+        }
+      }
+    }
+    setStatus('保存済み');
+    setTimeout(() => { const status = $('#save-status'); if (status && status.textContent === '保存済み') setStatus(''); }, 1500);
+  })().finally(() => { activeSave = null; });
+  return activeSave;
 }
 function setStatus(t) { const e = $('#save-status'); if (e) e.textContent = t; }
-document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && dirty.size) { clearTimeout(saveTimer); flush(); } });
-window.addEventListener('pagehide', () => { if (dirty.size) { clearTimeout(saveTimer); flush(); } });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && (dirty.size || activeSave)) backgroundFlush(); });
+window.addEventListener('pagehide', () => { if (dirty.size || activeSave) backgroundFlush(); });
 
 /* v1 (single edition, no prefixes) -> v2 keys. Returns true when anything changed. */
 const V1_ED = 'h5';
@@ -772,9 +881,11 @@ async function loadState() {
     if (/^(progress|hl|ink|nb)\//.test(k) && !/^(progress|hl|ink|nb)\/[A-Za-z0-9_-]+:[a-z]+/.test(k)) oldKeys.push(k);
   }
   if (migrateV1(S)) {
-    for (const k of oldKeys) { try { await Store.del(k); } catch (e) {} }
     Object.keys(S.progress).forEach(k => markDirty('progress/' + k)); markDirty('plan/main'); markDirty('notes/all'); markDirty('settings/main');
     Object.keys(S.hl).forEach(k => markDirty('hl/' + k)); Object.keys(S.ink).forEach(k => markDirty('ink/' + k)); Object.keys(S.nb).forEach(k => markDirty('nb/' + k));
+    // Keep the old keys until every migrated document has actually committed.
+    await flush();
+    for (const k of oldKeys) await Store.del(k);
   }
   setEdition(S.settings.edition && EDITIONS_BY_ID[S.settings.edition] ? S.settings.edition : defaultEdition());
   EDITIONS.forEach(E => E.subjects.forEach(s => progOf(s)));
@@ -2898,13 +3009,13 @@ const Settings = (() => {
     const main = $('#main');
     const lb = S.settings.lastBackup ? new Date(S.settings.lastBackup) : null;
     const sw = (on) => '<button class="switch ' + (on ? 'on' : '') + '" role="switch" aria-checked="' + on + '"></button>';
-    main.innerHTML = '<h1 class="vh">設定</h1><div class="card">' +
+    main.innerHTML = '<h1 class="vh">設定</h1>' + Updates.html() + '<div class="card">' +
       '<div class="set-row"><div class="sl"><b>バックアップ</b><small>採点履歴・初見/後日再テスト・復習日・実際の学習時間・進捗・付箋・マーカー・手書きをまとめて1つのファイル（JSON）にします。ファイル保存ができない場合は自動で「コピー」に切りかわるので、メモアプリなどに貼り付けて保存してください。' + (lb ? '最終バックアップ：' + (lb.getMonth() + 1) + '/' + lb.getDate() + ' ' + pad2(lb.getHours()) + ':' + pad2(lb.getMinutes()) : 'まだバックアップしていません') + '</small></div><button class="primary" id="bk-save">書き出す</button><button id="bk-copy">コピー</button></div>' +
-      '<div class="set-row"><div class="sl"><b>復元</b><small>バックアップファイルを読み込んで、いまのデータと置きかえます（合体ではありません）。</small></div><label class="row" style="gap:6px"><input type="file" id="bk-file" accept=".json,application/json" hidden><button id="bk-load">ファイルを選ぶ</button></label><button id="bk-paste">貼り付けて復元</button></div>' +
+      '<div class="set-row"><div class="sl"><b>復元</b><small>バックアップ時点の履歴に置きかえます（合体ではありません）。教材やアプリの版は変わりません。</small></div><label class="row" style="gap:6px"><input type="file" id="bk-file" accept=".json,application/json" hidden><button id="bk-load">ファイルを選ぶ</button></label><button id="bk-paste">貼り付けて復元</button><button id="bk-before-restore">復元前の履歴を書き出す</button></div>' +
       '<div class="set-row"><div class="sl"><b>指でも書く</b><small>オンにすると、ペンモードや計算スペースで指でも線が引けます（スクロールは余白か2本指で）。</small></div>' + sw(S.settings.fingerDraw).replace('class="switch', 'id="sw-finger" class="switch') + '</div>' +
       '<div class="set-row"><div class="sl"><b>ふりがな（理科・社会）</b><small>漢字の上のふりがなを表示／非表示にします。</small></div>' + sw(S.settings.ruby).replace('class="switch', 'id="sw-ruby" class="switch') + '</div>' +
       '<div class="set-row"><div class="sl"><b>文字の大きさ</b></div><div class="seg" id="seg-fs">' + [['s', '小'], ['m', '標準'], ['l', '大'], ['xl', '特大']].map(([k, l]) => '<button data-fs="' + k + '" class="' + ((S.settings.fs || 'm') === k ? 'active' : '') + '">' + l + '</button>').join('') + '</div></div>' +
-      '<div class="set-row"><div class="sl"><b>データの保存先</b><small>この端末（' + (Store.mode() === 'idb' ? 'ブラウザの内部データベース' : (Store.mode() === 'ls' ? 'ブラウザの簡易ストレージ' : 'メモリのみ・閉じると消えます')) + '）に保存。ホーム画面に追加して使うと消えにくくなります。</small></div></div>' +
+      '<div class="set-row"><div class="sl"><b>データの保存先</b><small>この端末（' + (Store.mode() === 'idb' ? 'ブラウザの内部データベース' : (Store.mode() === 'ls' ? 'ブラウザの簡易ストレージ' : 'メモリのみ・閉じると消えます')) + '）に保存。Safariとホーム画面版は別の保存先です。更新は上の「更新を確認」から行います。アイコンやサイトデータを削除しないでください。</small></div></div>' +
       '<div class="set-row"><div class="sl"><b>すべてのデータを消す</b><small>進捗・付箋・書き込みを全部消して最初の状態に戻します。</small></div><button id="bk-reset" style="color:var(--ng)">初期化</button></div>' +
       '</div>' +
       '<h2 class="sh">使い方</h2><div class="card help">' +
@@ -2915,8 +3026,16 @@ const Settings = (() => {
       '<h3>直しリスト</h3><p>×や△をつけた問題は「進捗 → 直しリスト」に自動で集まります。<b>カードで解き直す</b> で一気に復習し、○に直せば直しリストから消えますが、後日再テストの対象は残ります。</p>' +
       '<h3>バックアップ</h3><p>週に1回くらい「書き出す」でファイルを保存しておくと安心です（iPadの「ファイル」やiCloud Driveに保存できます）。別の端末で見たいときは、そのファイルを「復元」で読み込みます。</p>' +
       '</div>';
+    Updates.attach();
     $('#bk-save').onclick = exportBackup;
-    $('#bk-copy').onclick = copyBackup;
+    $('#bk-before-restore').onclick = async () => {
+      try {
+        const saved = await Store.get('safety/pre-restore');
+        if (!saved?.backup) { toast('復元前の控えはまだありません'); return; }
+        await downloadBackup(saved.backup, 'hokushin_before_restore_' + saved.created.replace(/[:.]/g, '-') + '.json');
+      } catch (e) { toast('控えを読み込めませんでした'); }
+    };
+    $('#bk-copy').onclick = () => copyBackup();
     $('#bk-load').onclick = () => $('#bk-file').click();
     $('#bk-file').onchange = e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => importBackup(r.result); r.readAsText(f); };
     $('#bk-paste').onclick = () => { const body = el('<div><p class="sm muted">バックアップの文字（JSON）をここに貼り付けてください。</p><textarea rows="8" id="paste-area" placeholder="{ ... }"></textarea></div>'); const m = openModal('貼り付けて復元', body, { footer: '<button class="primary" data-ok>復元する</button>', sticky: true }); $('[data-ok]', m).onclick = () => { const t = $('#paste-area', body).value; m.close(); importBackup(t); }; };
@@ -2928,57 +3047,93 @@ const Settings = (() => {
   function backupJSON() {
     return JSON.stringify({ app: 'hokushin-note', v: 3, studyRevision: Study.REVISION, exported: new Date().toISOString(), progress: S.progress, plan: S.plan, notes: S.notes, settings: S.settings, hl: S.hl, ink: S.ink, nb: S.nb });
   }
-  function fname() { const d = new Date(); return 'hokushin_backup_' + d.getFullYear() + pad2(d.getMonth() + 1) + pad2(d.getDate()) + '.json'; }
-  async function exportBackup() {
-    const json = backupJSON();
+  function fname() { const d = new Date(); return 'hokushin_backup_' + d.getFullYear() + pad2(d.getMonth() + 1) + pad2(d.getDate()) + '_' + pad2(d.getHours()) + pad2(d.getMinutes()) + pad2(d.getSeconds()) + '.json'; }
+  async function exportBackup() { return downloadBackup(backupJSON(), fname(), true); }
+  async function downloadBackup(json, filename, record = false) {
     let ok = false;
     let framed = false; try { framed = window.top !== window.self; } catch (e) { framed = true; }
     try {
       if (window.claude && typeof window.claude.use === 'function') {
         const dl = await Promise.race([window.claude.use('downloads'), new Promise(r => setTimeout(() => r(null), 3000))]);
-        if (dl) { try { await dl.save({ filename: fname(), data: json }); ok = true; } catch (e) { if (e && e.code === 'declined') { toast('保存をキャンセルしました'); return; } } }
+        if (dl) { try { await dl.save({ filename, data: json }); ok = true; } catch (e) { if (e && e.code === 'declined') { toast('保存をキャンセルしました'); return; } } }
       }
     } catch (e) { /* fall through */ }
-    if (!ok && framed) { copyBackup(); return; }
+    if (!ok && framed) { copyBackup(json, record); return; }
     if (!ok) {
       try {
         const blob = new Blob([json], { type: 'application/json' });
-        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fname(); document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
         ok = true;
         toast('ダウンロードが始まらない場合は「コピー」を使ってください');
       } catch (e) { ok = false; }
     }
-    if (ok) { S.settings.lastBackup = Date.now(); markDirty('settings/main'); setTimeout(render, 600); }
-    else copyBackup();
+    if (ok && record) { S.settings.lastBackup = Date.now(); markDirty('settings/main'); setTimeout(render, 600); }
+    else if (!ok) copyBackup(json, record);
   }
-  async function copyBackup() {
-    const json = backupJSON();
-    try { await navigator.clipboard.writeText(json); toast('バックアップをコピーしました。メモ帳などに貼り付けて保存してください'); S.settings.lastBackup = Date.now(); markDirty('settings/main'); setTimeout(render, 600); return; } catch (e) {}
+  async function copyBackup(json = backupJSON(), record = true) {
+    try { await navigator.clipboard.writeText(json); toast('バックアップをコピーしました。メモ帳などに貼り付けて保存してください'); if (record) { S.settings.lastBackup = Date.now(); markDirty('settings/main'); setTimeout(render, 600); } return; } catch (e) {}
     const body = el('<div><p class="sm muted">全部選んでコピーし、メモ帳などに貼り付けて保存してください（' + Math.round(json.length / 1024) + ' KB）。</p><textarea rows="10" readonly></textarea></div>');
     $('textarea', body).value = json;
     openModal('バックアップ（コピー用）', body);
     setTimeout(() => { const ta = $('textarea', body); ta.focus(); ta.select(); }, 100);
   }
-  async function importBackup(text) {
-    let obj;
-    try { obj = JSON.parse(text); } catch (e) { toast('読み込めませんでした（ファイルの形式が違います）'); return; }
-    if (!obj || obj.app !== 'hokushin-note' || !obj.progress || (obj.v && obj.v > 3)) { toast('このアプリのバックアップではないようです'); return; }
-    const when = obj.exported ? new Date(obj.exported) : null;
-    if (!(await confirmBox('バックアップ（' + (when ? (when.getMonth() + 1) + '/' + when.getDate() + ' ' + pad2(when.getHours()) + ':' + pad2(when.getMinutes()) : '日時不明') + '）で、いまのデータを置きかえます。よろしいですか？'))) return;
-    await Store.clear();
-    S.progress = obj.progress || {}; S.plan = Object.assign({ done: {}, log: {} }, obj.plan || {}); S.notes = Object.assign({ list: [] }, obj.notes || {}); S.settings = Object.assign(S.settings, obj.settings || {}); S.hl = obj.hl || {}; S.ink = obj.ink || {}; S.nb = obj.nb || {};
-    if (!obj.v || obj.v < 2) migrateV1(S);
-    Study.migrateAll(S);
-    PlanHistory.migrate(S);
-    EDITIONS.forEach(E => E.subjects.forEach(s => progOf(s)));
-    setEdition(S.settings.edition && EDITIONS_BY_ID[S.settings.edition] ? S.settings.edition : defaultEdition());
-    Object.keys(S.progress).forEach(k => markDirty('progress/' + k));
-    markDirty('plan/main'); markDirty('notes/all'); markDirty('settings/main');
-    Object.keys(S.hl).forEach(k => markDirty('hl/' + k)); Object.keys(S.ink).forEach(k => markDirty('ink/' + k)); Object.keys(S.nb).forEach(k => markDirty('nb/' + k));
-    await flush();
-    toast('復元しました'); App.applyFs(); App.show('today');
+  function prepareBackup(text) {
+    const obj = JSON.parse(text);
+    const map = v => v && typeof v === 'object' && !Array.isArray(v);
+    if (!map(obj) || obj.app !== 'hokushin-note' || !map(obj.progress) || (obj.v && ![1, 2, 3].includes(obj.v))) throw new Error('形式');
+    for (const key of ['plan', 'notes', 'settings', 'hl', 'ink', 'nb']) if (obj[key] !== undefined && !map(obj[key])) throw new Error('形式');
+    for (const doc of Object.values(obj.progress)) {
+      if (!map(doc) || (doc.items !== undefined && !map(doc.items)) || (doc.units !== undefined && !map(doc.units))) throw new Error('形式');
+      for (const records of [doc.items || {}, doc.units || {}]) if (!Object.values(records).every(map)) throw new Error('形式');
+    }
+    const draft = {
+      progress: obj.progress, plan: Object.assign({ done: {}, log: {} }, obj.plan || {}),
+      notes: Object.assign({ list: [] }, obj.notes || {}),
+      settings: Object.assign(JSON.parse(JSON.stringify(S.settings)), obj.settings || {}),
+      hl: obj.hl || {}, ink: obj.ink || {}, nb: obj.nb || {}
+    };
+    if (!map(draft.plan.done) || !map(draft.plan.log) || !Array.isArray(draft.notes.list)) throw new Error('形式');
+    if (!obj.v || obj.v < 2) migrateV1(draft);
+    Study.migrateAll(draft); PlanHistory.migrate(draft);
+    EDITIONS.forEach(E => E.subjects.forEach(s => {
+      const key = E.id + ':' + s.id;
+      draft.progress[key] = Object.assign({ items: {}, units: {} }, draft.progress[key] || {});
+    }));
+    return { draft, exported: obj.exported };
   }
-  return { render, exportBackup, importBackup, backupJSON };
+  let restoring = false;
+  async function importBackup(text) {
+    if (restoring) return false;
+    let prepared;
+    try { prepared = prepareBackup(text); }
+    catch (e) { toast('読み込めませんでした。学習ノートのバックアップファイルを選んでください。今の履歴は変更していません。'); return false; }
+    const when = prepared.exported ? new Date(prepared.exported) : null;
+    if (!(await confirmBox('バックアップ（' + (when && Number.isFinite(when.getTime()) ? (when.getMonth() + 1) + '/' + when.getDate() + ' ' + pad2(when.getHours()) + ':' + pad2(when.getMinutes()) : '日時不明') + '）で、いまの履歴を置きかえます。教材とアプリの版は変わりません。よろしいですか？'))) return false;
+    if (restoring) return false;
+    restoring = true;
+    const main = $('#main'), tabs = $('#tabs');
+    const previous = [main?.inert, tabs?.inert];
+    if (main) main.inert = true; if (tabs) tabs.inert = true;
+    try {
+      await flush();
+      const before = { created: new Date().toISOString(), backup: backupJSON() };
+      await Store.set('safety/pre-restore', before);
+      if (Store.mode() === 'mem' || (await Store.get('safety/pre-restore'))?.backup !== before.backup) throw new Error('控えの保存失敗');
+      // Commit the whole validated backup atomically before replacing live state.
+      await Store.replaceAll(stateEntries(prepared.draft));
+      Object.assign(S, prepared.draft);
+      setEdition(S.settings.edition && EDITIONS_BY_ID[S.settings.edition] ? S.settings.edition : defaultEdition());
+    } catch (e) {
+      toast('復元を完了できませんでした。今の画面の履歴を「書き出す」で保存してください。');
+      return false;
+    } finally {
+      restoring = false;
+      if (main) main.inert = previous[0]; if (tabs) tabs.inert = previous[1];
+    }
+    toast('履歴を復元しました。教材とアプリの版はそのままです。'); App.applyFs(); App.show('today');
+    return true;
+  }
+  return { render, exportBackup, downloadBackup, importBackup, backupJSON, prepareBackup };
 })();
 
 /* ===== study timer ===== */
@@ -3001,6 +3156,111 @@ const Timer = (() => {
   function beep() { try { const ac = new (window.AudioContext || window.webkitAudioContext)(); [0, 0.3, 0.6].forEach(t => { const o = ac.createOscillator(), g = ac.createGain(); o.connect(g); g.connect(ac.destination); o.frequency.value = 880; g.gain.setValueAtTime(0.25, ac.currentTime + t); g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + t + 0.25); o.start(ac.currentTime + t); o.stop(ac.currentTime + t + 0.26); }); } catch (e) {} }
   function toggle() { const b = box(); b.hidden = !b.hidden; if (!b.hidden) { if (!total && mode === 'down') { total = remain = 40 * 60; } render(); } }
   return { toggle };
+})();
+
+/* Update inside the same installed app. Never clear storage or open another app. */
+const Updates = (() => {
+  const VERSION = document.querySelector('meta[name="hokushin-build"]')?.content || '開発版';
+  const SNAPSHOT_KEY = 'safety/pre-update';
+  let busy = false;
+  function environment() {
+    return window.navigator.standalone || window.matchMedia?.('(display-mode: standalone)').matches ? 'ホーム画面版' : 'ブラウザ版';
+  }
+  function html() {
+    return '<div class="card"><h2 class="sh">アプリの更新</h2><p>表示中の版：<b>' + esc(VERSION) + '</b>（' + environment() + '）</p>' +
+      '<p class="sm">この画面の中で履歴を保存して更新します。ホーム画面のアイコンを削除する必要はありません。Safariとホーム画面版の履歴は自動で共有されません。</p>' +
+      '<div class="row"><button class="primary" id="app-update-check">更新を確認</button><button id="app-update-backup">更新前の履歴を書き出す</button></div>' +
+      '<p id="app-update-status" class="sm" role="status"></p><p class="sm muted">更新前の控えは、このアプリ内に1回分残します。アイコンやサイトデータの削除には備えられないため、「バックアップ → 書き出す」でもファイルを保存してください。</p></div>';
+  }
+  function status(message) { const node = $('#app-update-status'); if (node) node.textContent = message; }
+  function attach() {
+    $('#app-update-check').onclick = check;
+    $('#app-update-backup').onclick = async () => {
+      try {
+        const saved = await Store.get(SNAPSHOT_KEY);
+        if (!saved?.backup) { status('更新前の控えはまだありません。現在の履歴は「バックアップ → 書き出す」で保存できます。'); return; }
+        await Settings.downloadBackup(saved.backup, 'hokushin_before_update_' + saved.created.replace(/[:.]/g, '-') + '.json');
+      } catch (e) { status('控えを読み込めませんでした。現在の履歴を「バックアップ → 書き出す」で保存してください。'); }
+    };
+  }
+  function updateURL() {
+    const url = new URL(window.location.href);
+    if (!/^https?:$/.test(url.protocol)) throw new Error('公開サイトで更新を確認してください。');
+    url.searchParams.set('_hn_update', String(Date.now()));
+    return url;
+  }
+  async function fetchVersion(url) {
+    const abort = new AbortController();
+    const timeout = setTimeout(() => abort.abort(), 20000);
+    try {
+      const response = await fetch(url.href, { cache: 'no-store', signal: abort.signal, credentials: 'same-origin' });
+      if (!response.ok || (response.url && new URL(response.url).origin !== url.origin)) throw new Error('更新先を確認できませんでした。');
+      const doc = new DOMParser().parseFromString(await response.text(), 'text/html');
+      const version = doc.querySelector('meta[name="hokushin-build"]')?.content;
+      if (!version || !/^\d{4}-\d{2}-\d{2}-[a-f0-9]{12}$/.test(version) || !doc.getElementById('content-data')) throw new Error('更新先が学習ノートの最新版か確認できませんでした。');
+      return version;
+    } finally { clearTimeout(timeout); }
+  }
+  async function saveBeforeUpdate(version) {
+    await flush(); // includes earlier writes still in flight; rejects on any failed save
+    if (Store.mode() === 'mem') throw new Error('この画面では履歴を保存できません。先にバックアップを書き出してください。');
+    const backup = Settings.backupJSON();
+    const saved = { created: new Date().toISOString(), from: VERSION, target: version, backup };
+    await Store.set(SNAPSHOT_KEY, saved);
+    const verified = await Store.get(SNAPSHOT_KEY);
+    if (Store.mode() === 'mem' || verified?.backup !== backup || verified?.target !== version) throw new Error('更新前の履歴を保存できなかったため、更新を止めました。');
+    return saved;
+  }
+  async function apply(version) {
+    // Block changes while taking a consistent snapshot and completing navigation.
+    const main = $('#main'), tabs = $('#tabs');
+    const previous = [main?.inert, tabs?.inert];
+    if (main) main.inert = true; if (tabs) tabs.inert = true;
+    try {
+      await saveBeforeUpdate(version);
+      const url = updateURL();
+      url.searchParams.set('_hn_version', version);
+      status('履歴と更新前の控えを保存しました。新しい版を読み込んでいます…');
+      window.location.replace(url.href);
+      // Navigation is asynchronous. Keep edits blocked until the new document loads.
+    } catch (error) {
+      if (main) main.inert = previous[0]; if (tabs) tabs.inert = previous[1];
+      throw error;
+    }
+  }
+  async function check() {
+    if (busy) return;
+    busy = true; const button = $('#app-update-check'); if (button) button.disabled = true;
+    status('公開されている版を確認しています…');
+    try {
+      const version = await fetchVersion(updateURL());
+      if (version === VERSION) { status('現在の版が最新版です。履歴はそのまま使えます。'); return; }
+      status('新しい版があります：' + version);
+      const modal = openModal('学習ノートを更新', '<p>新しい版：<b>' + esc(version) + '</b></p><p>学習履歴と更新前の控えを保存してから、この画面を読み込み直します。</p><p class="sm">保存に失敗した場合は更新を止めます。</p>', { footer: '<button class="primary" data-update-apply>履歴を保存して更新</button>' });
+      const applyButton = $('[data-update-apply]', modal);
+      applyButton.onclick = async () => {
+        if (busy) return;
+        busy = true; applyButton.disabled = true;
+        try { await apply(version); }
+        catch (e) { modal.close(); status('更新を中止しました。履歴は削除していません。通信・保存状態を確認し、「バックアップ → 書き出す」で現在の履歴を保存してください。'); }
+        finally { busy = false; applyButton.disabled = false; }
+      };
+    } catch (e) { status('更新を確認できませんでした。通信状態を確認してもう一度お試しください。履歴は削除していません。'); }
+    finally { busy = false; if (button) button.disabled = false; }
+  }
+  async function afterBoot() {
+    try {
+      const expected = new URL(window.location.href).searchParams.get('_hn_version');
+      if (!expected) return;
+      if (expected !== VERSION) { toast('新しい版を読み込めていません。「設定 → 更新を確認」を開いてください。'); return; }
+      if (S.settings.updateNotice === VERSION) return;
+      const saved = await Store.get(SNAPSHOT_KEY);
+      if (saved?.target !== VERSION) return;
+      S.settings.updateNotice = VERSION; markDirty('settings/main');
+      toast('新しい版を開きました。更新前の控えは「設定」に保存されています。');
+    } catch (e) { /* A status notice must not block learning. */ }
+  }
+  return { VERSION, html, attach, check, fetchVersion, saveBeforeUpdate, apply, afterBoot };
 })();
 
 /* ===== app shell: routing & boot ===== */
@@ -3040,6 +3300,7 @@ const App = (() => {
     $$('#tabs button').forEach(b => b.onclick = () => show(b.dataset.view));
     $('#btn-timer').onclick = () => Timer.toggle();
     show('today');
+    Updates.afterBoot();
     if (!S.settings.seenIntro) {
       S.settings.seenIntro = true; markDirty('settings/main');
       setTimeout(() => openModal('はじめに', '<div class="help">' +
@@ -3060,7 +3321,18 @@ const App = (() => {
   api.show = show; api.applyFs = applyFs; api.boot = boot;
   return api;
 })();
-(() => { let booted = false; const go = () => { if (booted) return; booted = true; App.boot(); }; if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go(); })();
+(() => {
+  let booted = false;
+  const go = () => {
+    if (booted) return; booted = true;
+    App.boot().catch(() => {
+      $('#main').innerHTML = '<div class="card"><h1>学習履歴を読み込めませんでした</h1><p>他に開いている学習ノートを閉じ、もう一度この画面を開いてください。アイコンやサイトデータは削除しないでください。</p><button id="retry-load">もう一度読み込む</button></div>';
+      $$('#tabs button').forEach(b => { b.disabled = true; });
+      $('#retry-load').onclick = () => window.location.reload();
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+})();
 
 </script>
 </body>
