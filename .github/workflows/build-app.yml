@@ -38,6 +38,7 @@ jobs:
       - name: Validate cloud sync JavaScript
         run: |
           node --check app/js/95_cloud.js
+          node --check app/js/96_cloud_tasks.js
           python - <<'PY'
           from pathlib import Path
           import re
