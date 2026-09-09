@@ -1,0 +1,38 @@
+name: Build published app
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'data/app/**'
+      - 'build/build_app.py'
+      - '.github/workflows/build-app.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build GitHub Pages app
+        run: python build/build_app.py
+      - name: Commit generated site when changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/index.html
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+          else
+            git commit -m "Build published app"
+            git push
+          fi
