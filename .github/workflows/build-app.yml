@@ -1,0 +1,63 @@
+name: Build published app
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'docs/parent.html'
+      - 'data/app/**'
+      - 'build/build_app.py'
+      - '.github/workflows/build-app.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'docs/parent.html'
+      - 'data/app/**'
+      - 'build/build_app.py'
+      - '.github/workflows/build-app.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate cloud sync JavaScript
+        run: |
+          node --check app/js/95_cloud.js
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path('docs/parent.html').read_text(encoding='utf-8')
+          scripts = re.findall(r'<script(?:\s[^>]*)?>([\s\S]*?)</script>', html, flags=re.I)
+          inline = '\n'.join(s for s in scripts if s.strip())
+          Path('/tmp/parent-inline.js').write_text(inline, encoding='utf-8')
+          PY
+          node --check /tmp/parent-inline.js
+      - name: Build GitHub Pages app
+        run: python build/build_app.py
+      - name: Commit generated site when changed
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/index.html
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+          else
+            git commit -m "Build published app"
+            git push
+          fi
