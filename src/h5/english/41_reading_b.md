@@ -26,6 +26,10 @@ Hana: No, I haven't. Are there festivals like this in your country?
 ア When is the festival held?　イ Why don't you go to the festival?　ウ How many posters do you need?　エ Who made the poster?
 :::
 
+:::a 解答・解説
+問1　ア（直後にハナが「8月に開かれる」と答えている）
+:::
+
 :::dialog
 **【2】**
 Mr. Davis: Yes. In my hometown in Australia, we have a big festival in January. It's summer there in January.
@@ -35,10 +39,16 @@ Hana: In Japan, many people wear *yukata* at summer festivals. Do people wear sp
 Mr. Davis: No, they don't. They wear T-shirts and shorts because it's very hot. ( ③ ) I think that's a nice difference.
 :::
 
-:::q 問2　下線部②の It が指すものを、本文中から英語3語で抜き出しなさい。【3点】
+:::q 問2・問3
+問2　下線部②の It が指すものを、本文中から英語3語で抜き出しなさい。【3点】
 
 問3　（③）に入る最も適切な文をア〜エから選びなさい。【3点】
 ア I have a yukata, too.　イ I didn't know that Japanese people wear yukata.　ウ Wearing yukata sounds beautiful.　エ It is cold in Australia in January.
+:::
+
+:::a 解答・解説
+問2　a big festival（【2】最初の Mr. Davis の発言。「1月の大きな祭り」が家族連れに人気）
+問3　ウ（ゆかたの話を受けて「すてきだね」→ 次の「いいちがいだと思う」につながる）
 :::
 
 :::dialog
@@ -50,9 +60,15 @@ Mr. Davis: Good. Also, write short sentences. People don't read long sentences o
 Hana: OK. I'll write about the date, the place, and the fireworks.
 :::
 
-:::q 問4　下線部④の日本語を、（　）内の語を並べかえて英語にしなさい。 I don't know ( to / which / use / pictures ).【4点】
+:::q 問4・問5
+問4　下線部④の日本語を、（　）内の語を並べかえて英語にしなさい。 I don't know ( to / which / use / pictures ).【4点】
 
 問5　Mr. Davis がポスターについてハナに助言したことを、日本語で2つ書きなさい。【各2点＝4点】
+:::
+
+:::a 解答・解説
+問4　I don't know which pictures to use.（疑問詞＋名詞＋to＋原形）
+問5　（例）花火の写真とゆかたを着た人々の写真をのせること。／短い文で書くこと。（「日付・場所・花火について書く」はハナ自身の案なので不可）
 :::
 
 :::dialog
@@ -64,7 +80,8 @@ Hana: I'll try. Thank you very much, Mr. Davis. ( ⑥ )
 Mr. Davis: Of course. Come and show it to me anytime.
 :::
 
-:::q 問6　下線部⑤を日本語にしなさい。【3点】
+:::q 問6〜問9
+問6　下線部⑤を日本語にしなさい。【3点】
 
 問7　（⑥）に入る最も適切な文をア〜エから選びなさい。【3点】
 ア Can I show you the poster when I finish it?　イ Did you go to the festival with me?　ウ Shall I make a poster for you?　エ May I go to Australia with you?
@@ -78,11 +95,6 @@ I want to introduce ( ) to people from other countries.
 :::
 
 :::a 解答・解説
-問1　ア（直後にハナが「8月に開かれる」と答えている）
-問2　a big festival（【2】最初の Mr. Davis の発言。「1月の大きな祭り」が家族連れに人気）
-問3　ウ（ゆかたの話を受けて「すてきだね」→ 次の「いいちがいだと思う」につながる）
-問4　I don't know which pictures to use.（疑問詞＋名詞＋to＋原形）
-問5　（例）花火の写真とゆかたを着た人々の写真をのせること。／短い文で書くこと。（「日付・場所・花火について書く」はハナ自身の案なので不可）
 問6　私は他の国の人々にそれ（この祭り）について知ってほしいです。
 問7　ア（Of course. Come and show it to me anytime. につながる）
 問8　ウ（【3】He takes a lot of pictures every year.）
@@ -105,6 +117,10 @@ Kota: Of course! Books in English will be very useful.
 ア How many books do you have?　イ When did the library start the project?　ウ Where is the library?　エ Why do you have a box?
 :::
 
+:::a 解答・解説
+問1　イ（直後に「約5年前」と時期を答えている）
+:::
+
 :::dialog
 **【2】**
 Lily: How do the books get to the children?
@@ -114,10 +130,16 @@ Kota: About two months. It's slow, but it's much cheaper than sending them by pl
 Lily: I see. I hope the children will enjoy reading my books.
 :::
 
-:::q 問2　下線部②の they が指すものを、本文中から英語6語で抜き出しなさい。【3点】
+:::q 問2・問3
+問2　下線部②の they が指すものを、本文中から英語6語で抜き出しなさい。【3点】
 
 問3　（③）に入る最も適切な文をア〜エから選びなさい。【3点】
 ア How much does it cost?　イ How long does it take?　ウ How far is it?　エ How old are the ships?
+:::
+
+:::a 解答・解説
+問2　A volunteer group in the city（直前の文の主語。「市のボランティア団体」が本を送る）
+問3　イ（直後に「約2か月」と期間を答えている）
 :::
 
 :::dialog
@@ -128,9 +150,15 @@ Lily: OK. I'll make a poster in English tonight.
 Kota: Then I'll make one in Japanese. We can put both posters on the wall.
 :::
 
-:::q 問4　下線部④の日本語を、（　）内の語を並べかえて英語にしなさい。 I think ( help / can / we / collect ) books, too.【4点】
+:::q 問4・問5
+問4　下線部④の日本語を、（　）内の語を並べかえて英語にしなさい。 I think ( help / can / we / collect ) books, too.【4点】
 
 問5　Lily と Kota はそれぞれどんなポスターを作ることにしましたか。日本語で書きなさい。【4点】
+:::
+
+:::a 解答・解説
+問4　I think we can help collect books, too.（help ＋動詞の原形）
+問5　Lily は英語のポスター、Kota は日本語のポスターを作る。
 :::
 
 :::dialog
@@ -143,7 +171,8 @@ Kota: I hope so. ( ⑥ )
 Lily: Yes. Reading is a bridge between people.
 :::
 
-:::q 問6　下線部⑤を日本語にしなさい。【3点】
+:::q 問6〜問9
+問6　下線部⑤を日本語にしなさい。【3点】
 
 問7　（⑥）に入る最も適切な文をア〜エから選びなさい。【3点】
 ア Books can connect people around the world.　イ I don't like reading books.　ウ The elephant was very big.　エ I will buy the book again tomorrow.
@@ -157,11 +186,6 @@ When I was a child, my favorite book was ( ).
 :::
 
 :::a 解答・解説
-問1　イ（直後に「約5年前」と時期を答えている）
-問2　A volunteer group in the city（直前の文の主語。「市のボランティア団体」が本を送る）
-問3　イ（直後に「約2か月」と期間を答えている）
-問4　I think we can help collect books, too.（help ＋動詞の原形）
-問5　Lily は英語のポスター、Kota は日本語のポスターを作る。
 問6　最初は（その本を）手放したくなかったが、今は別の子どもにそれを楽しんでほしい。
 問7　ア（Reading is a bridge between people. につながる）
 問8　ウ
@@ -183,6 +207,10 @@ Ben: That's interesting. So the students learn to work together.
 ア Who serves the food?　イ What time do you eat?　ウ Where do you buy it?　エ Which food do you like?
 :::
 
+:::a 解答・解説
+問1　ア（直後「The students do.」＝生徒が配膳する）
+:::
+
 :::dialog
 **【2】**
 Yui: Today's lunch is curry and rice, a salad, and milk. Do you like it?
@@ -192,10 +220,16 @@ Ben: Six hundred! ( ③ )
 Yui: I think so, too. Also, a nutritionist plans the menu. She thinks about our health, so the lunch has a lot of vegetables.
 :::
 
-:::q 問2　下線部②を日本語にしなさい。【3点】
+:::q 問2・問3
+問2　下線部②を日本語にしなさい。【3点】
 
 問3　（③）に入る最も適切な文をア〜エから選びなさい。【3点】
 ア I can't eat so much.　イ They must work very hard.　ウ The kitchen is very small.　エ I want to cook it tomorrow.
+:::
+
+:::a 解答・解説
+問2　それは学校で作られているのですか。
+問3　イ（600人分を朝早くから作る → 「とても大変にちがいない」→ I think so, too.）
 :::
 
 :::dialog
@@ -207,9 +241,15 @@ Yui: I'm glad you think so. Some students don't like vegetables, but our teacher
 Ben: One bite. That's a good way.
 :::
 
-:::q 問4　下線部④の日本語を、（　）内の語を並べかえて英語にしなさい。 I ( try / can / food / different ) every day.【4点】
+:::q 問4・問5
+問4　下線部④の日本語を、（　）内の語を並べかえて英語にしなさい。 I ( try / can / food / different ) every day.【4点】
 
 問5　Ben がカナダで食べていた昼食について、本文の内容に合うように日本語で書きなさい。【4点】
+:::
+
+:::a 解答・解説
+問4　I can try different food every day.
+問5　サンドイッチとリンゴのことが多く、ときどきカフェテリアでピザを買っていた（野菜はあまり食べなかった）。
 :::
 
 :::dialog
@@ -221,7 +261,8 @@ Ben: I agree. I'll try it today. ( ⑥ )
 Yui: Sure. First, let's move the desks to the back of the room.
 :::
 
-:::q 問6　下線部⑤を日本語にしなさい。【3点】
+:::q 問6〜問9
+問6　下線部⑤を日本語にしなさい。【3点】
 
 問7　（⑥）に入る最も適切な文をア〜エから選びなさい。【3点】
 ア Can you tell me what to do?　イ Do I have to buy a lunch?　ウ Why don't you go home?　エ Where is the cafeteria?
@@ -234,11 +275,6 @@ Yui: Sure. First, let's move the desks to the back of the room.
 :::
 
 :::a 解答・解説
-問1　ア（直後「The students do.」＝生徒が配膳する）
-問2　それは学校で作られているのですか。
-問3　イ（600人分を朝早くから作る → 「とても大変にちがいない」→ I think so, too.）
-問4　I can try different food every day.
-問5　サンドイッチとリンゴのことが多く、ときどきカフェテリアでピザを買っていた（野菜はあまり食べなかった）。
 問6　生徒はそうじをすべきではないと言う人もいるが、私はそうじは学校を大切にすることを教えてくれると思う。
 問7　ア（Sure. First, let's move the desks … と「やること」を教えている）
 問8　イ
@@ -260,6 +296,10 @@ Mia: In Australia, many stores stopped giving plastic bags, too. I think it's a 
 ア How much is the bag?　イ When did that start?　ウ Where did you buy the bag?　エ Why do you like plastic bags?
 :::
 
+:::a 解答・解説
+問1　イ（直後「It started in 2020.」）
+:::
+
 :::dialog
 **【2】**
 Sora: My science teacher told us that a lot of plastic goes into the sea every year. ②Some sea animals eat it and die.
@@ -268,10 +308,16 @@ Sora: ( ③ )
 Mia: Yes. And plastic doesn't disappear for hundreds of years. So we should use less plastic.
 :::
 
-:::q 問2　下線部②を日本語にしなさい。【3点】
+:::q 問2・問3
+問2　下線部②を日本語にしなさい。【3点】
 
 問3　（③）に入る最も適切な文をア〜エから選びなさい。【3点】
 ア I don't believe that.　イ Sea turtles like plastic bags.　ウ That's terrible.　エ Plastic is very useful.
+:::
+
+:::a 解答・解説
+問2　海の動物の中にはそれ（プラスチック）を食べて死んでしまうものもいます。
+問3　ウ（ウミガメの話を聞いて「ひどい」→ Yes. と続く）
 :::
 
 :::dialog
@@ -283,9 +329,15 @@ Sora: You can use it many times. My grandmother gave me hers. She has used it fo
 Mia: Thirty years! That's a great way to reduce waste.
 :::
 
-:::q 問4　下線部④の日本語を、（　）内の語を並べかえて英語にしなさい。 I ( have / buy / to / don't ) plastic bottles.【4点】
+:::q 問4・問5
+問4　下線部④の日本語を、（　）内の語を並べかえて英語にしなさい。 I ( have / buy / to / don't ) plastic bottles.【4点】
 
 問5　Sora がプラスチックを減らすためにしていることを、日本語で2つ書きなさい。【各2点＝4点】
+:::
+
+:::a 解答・解説
+問4　I don't have to buy plastic bottles.
+問5　自分の水筒を持ち歩く。／風呂敷を使って物を包む。（自分の袋を持って行く、も可）
 :::
 
 :::dialog
@@ -297,7 +349,8 @@ Sora: That's a good idea. Let's practice at my house this weekend.
 Mia: Thank you, Sora. I'm looking forward to it.
 :::
 
-:::q 問6　下線部⑤を日本語にしなさい。【3点】
+:::q 問6〜問9
+問6　下線部⑤を日本語にしなさい。【3点】
 
 問7　（⑥）に入る最も適切な文をア〜エから選びなさい。【3点】
 ア They will be surprised to see it.　イ They don't want to see it.　ウ I have never used a bag.　エ My family lives in Japan.
@@ -310,11 +363,6 @@ Mia: Thank you, Sora. I'm looking forward to it.
 :::
 
 :::a 解答・解説
-問1　イ（直後「It started in 2020.」）
-問2　海の動物の中にはそれ（プラスチック）を食べて死んでしまうものもいます。
-問3　ウ（ウミガメの話を聞いて「ひどい」→ Yes. と続く）
-問4　I don't have to buy plastic bottles.
-問5　自分の水筒を持ち歩く。／風呂敷を使って物を包む。（自分の袋を持って行く、も可）
 問6　それは最初はむずかしいが、すぐに覚えられます。
 問7　ア（家族に見せる → 「見て驚くだろう」→ That's a good idea.）
 問8　ウ
