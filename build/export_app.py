@@ -278,6 +278,15 @@ def build_subject(subject, key, name, short, ed):
                 block['externalContext'] = '\n'.join(shared)
     # drop empty units
     units = [u for u in units if u['content']]
+    # Attach audio at unit level so existing question/note block indices stay stable.
+    # Rebuild this metadata from published assets on every export.
+    if subject == 'english':
+        for unit in units:
+            if not any(c['t'] == 'script' for c in unit['content']):
+                continue
+            audio = 'audio/%s/%s/%s.mp3' % (ed['id'], subject, unit['code'])
+            if os.path.isfile(os.path.join(ROOT, 'docs', audio)):
+                unit['audio'] = audio
     return {'id': subject, 'key': key, 'name': name, 'short': short, 'title': cfg.get('title', name), 'ruby': bool(cfg.get('ruby')), 'units': units}
 
 

@@ -21,6 +21,15 @@ const Learn = (() => {
     if (open) html += '</optgroup>';
     return html;
   }
+  function audioHTML(u) {
+    if (!u.audio) return '';
+    return '<section class="listening-audio" aria-label="リスニング音声">' +
+      '<h3>' + esc(u.code + '　練習用音声') + '</h3>' +
+      '<audio controls preload="metadata" src="' + esc(u.audio) + '" aria-label="' + esc(u.title + 'の音声') + '"></audio>' +
+      '<p class="sm muted">教材の英文原稿を読み上げた合成音声です（公式音声ではありません）。各問題を2回読み、解答時間をはさんで進みます。</p>' +
+      '<p class="sm" data-audio-error role="status" hidden>音声を読み込めませんでした。通信状態を確認して、下のリンクから再生してください。</p>' +
+      '<a class="sm" href="' + esc(u.audio) + '" target="_blank" rel="noopener">音声を別の画面で開く</a></section>';
+  }
   function render() {
     ensure();
     const s = SUBJ[st.sid], u = unitByKey(st.ukey);
@@ -57,12 +66,15 @@ const Learn = (() => {
       '</div>' +
       (stat.total ? '<div class="study-toolbar"><label>練習の種類 <select id="study-mode">' + Study.modeOptions(st.mode) + '</select></label><button class="small" id="study-restart">新しく解き始める</button><p class="sm muted">' + Study.help + '</p></div>' : '') +
       '<div id="unit-notes" class="notes-wrap"></div>' +
+      audioHTML(u) +
       '<div id="content"></div>' +
       '<div class="unit-nav">' +
         (u.idx > 0 ? '<button data-goto="' + esc(s.units[u.idx - 1].ukey) + '">‹ ' + esc(unitLabel(s.units[u.idx - 1])) + '</button>' : '<span></span>') +
         (u.idx < s.units.length - 1 ? '<button data-goto="' + esc(s.units[u.idx + 1].ukey) + '">' + esc(unitLabel(s.units[u.idx + 1])) + ' ›</button>' : '<span></span>') +
       '</div>';
     renderContent(u);
+    const audio = $('.listening-audio audio');
+    if (audio) audio.onerror = () => { $('[data-audio-error]').hidden = false; };
     refreshNotes();
     if (stat.total) {
       $('#study-mode').onchange = e => { st.mode = e.target.value; st.run = Study.session(st.mode, 'learn'); render(); };

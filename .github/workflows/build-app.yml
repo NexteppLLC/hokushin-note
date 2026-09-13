@@ -61,6 +61,9 @@ jobs:
           python build/export_json.py
           python build/export_app.py
           python build/build_app.py
+
+      - name: Check listening audio in rebuilt site
+        run: node tests/test_listening_audio.js
       - name: Commit generated site when changed
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
