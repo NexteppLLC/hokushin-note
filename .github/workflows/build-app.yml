@@ -9,7 +9,7 @@ on:
       - 'app/**'
       - 'docs/parent.html'
       - 'docs/audio/**'
-      - 'tests/test_listening_audio.js'
+      - 'tests/**'
       - 'data/app/**'
       - 'build/**'
       - 'requirements.txt'
@@ -22,7 +22,7 @@ on:
       - 'app/**'
       - 'docs/parent.html'
       - 'docs/audio/**'
-      - 'tests/test_listening_audio.js'
+      - 'tests/**'
       - 'data/app/**'
       - 'build/**'
       - 'requirements.txt'
@@ -68,6 +68,10 @@ jobs:
 
       - name: Check listening audio in rebuilt site
         run: node tests/test_listening_audio.js
+      - name: Check storage recovery and study records
+        run: |
+          node tests/test_storage.js
+          node tests/test_history.js
       - name: Commit generated site when changed
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |

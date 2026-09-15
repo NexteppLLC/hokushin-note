@@ -98,32 +98,68 @@ function studyCard(it, sid) {
 
 /* ---- storage (IndexedDB key-value, localStorage fallback, memory fallback) ---- */
 const Store = (() => {
-  let db = null, mode = 'idb', mem = {};
-  function open() {
-    return new Promise((res) => {
+  let db = null, mode = 'idb', mem = {}, opening = null;
+  function connect() {
+    if (db) return Promise.resolve();
+    if (opening) return opening;
+    opening = new Promise((res, rej) => {
+      let finished = false;
+      const finish = error => { if (finished) return; finished = true; clearTimeout(timer); error ? rej(error) : res(); };
+      const timer = setTimeout(() => finish(Object.assign(new Error('Database open timed out'), { name: 'TimeoutError' })), 5000);
       try {
         const req = indexedDB.open('hokushin-note', 1);
-        req.onupgradeneeded = () => { req.result.createObjectStore('kv'); };
-        req.onsuccess = () => { db = req.result; res(); };
-        req.onerror = () => { mode = 'ls'; res(); };
-        req.onblocked = () => { mode = 'ls'; res(); };
-      } catch (e) { mode = 'ls'; res(); }
+        req.onupgradeneeded = () => { if (!req.result.objectStoreNames.contains('kv')) req.result.createObjectStore('kv'); };
+        req.onsuccess = () => {
+          if (finished) { req.result.close(); return; }
+          const opened = req.result; db = opened;
+          opened.onclose = () => { if (db === opened) db = null; };
+          opened.onversionchange = () => { opened.close(); if (db === opened) db = null; };
+          finish();
+        };
+        req.onerror = () => finish(req.error);
+        req.onblocked = () => finish(Object.assign(new Error('Database is blocked'), { name: 'InvalidStateError' }));
+      } catch (e) { finish(e); }
+    }).finally(() => { opening = null; });
+    return opening;
+  }
+  async function open() { try { await connect(); } catch (e) { mode = 'ls'; } }
+  function writeOnce(action) {
+    return new Promise((res, rej) => {
+      let transaction;
+      try {
+        transaction = db.transaction('kv', 'readwrite');
+        // A request can succeed and the enclosing transaction still abort (e.g. quota).
+        transaction.oncomplete = () => res();
+        transaction.onabort = () => rej(transaction.error || Object.assign(new Error('Write aborted'), { name: 'AbortError' }));
+        action(transaction.objectStore('kv'));
+      } catch (e) { if (transaction) { try { transaction.abort(); } catch (_) {} } rej(e); }
     });
   }
+  async function write(action) {
+    for (let attempt = 0; ; attempt++) {
+      try { await connect(); return await writeOnce(action); }
+      catch (e) {
+        if (attempt || !['InvalidStateError', 'UnknownError', 'AbortError'].includes(e.name)) throw e;
+        // iPad/Safari may close a connection while the app is in the background.
+        if (db) { db.close(); db = null; }
+      }
+    }
+  }
   function lsGet(k) { try { const v = localStorage.getItem('hn:' + k); return v == null ? undefined : JSON.parse(v); } catch (e) { return mem[k]; } }
-  function lsSet(k, v) { try { localStorage.setItem('hn:' + k, JSON.stringify(v)); } catch (e) { mode = 'mem'; mem[k] = v; } }
-  function lsDel(k) { try { localStorage.removeItem('hn:' + k); } catch (e) {} delete mem[k]; }
+  function lsSet(k, v) { localStorage.setItem('hn:' + k, JSON.stringify(v)); }
+  function lsDel(k) { localStorage.removeItem('hn:' + k); delete mem[k]; }
   function lsKeys(prefix) { const out = []; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k.startsWith('hn:' + prefix)) out.push(k.slice(3)); } } catch (e) {} Object.keys(mem).forEach(k => { if (k.startsWith(prefix) && !out.includes(k)) out.push(k); }); return out; }
   function tx(m) { return db.transaction('kv', m).objectStore('kv'); }
   const api = {
     open,
     mode: () => mode,
     get(k) { if (mode !== 'idb') return Promise.resolve(lsGet(k)); return new Promise((res) => { try { const r = tx('readonly').get(k); r.onsuccess = () => res(r.result); r.onerror = () => res(undefined); } catch (e) { res(lsGet(k)); } }); },
-    set(k, v) { if (mode !== 'idb') { lsSet(k, v); return Promise.resolve(); } return new Promise((res, rej) => { try { const r = tx('readwrite').put(v, k); r.onsuccess = () => res(); r.onerror = () => rej(r.error); } catch (e) { rej(e); } }); },
-    del(k) { if (mode !== 'idb') { lsDel(k); return Promise.resolve(); } return new Promise((res) => { try { const r = tx('readwrite').delete(k); r.onsuccess = () => res(); r.onerror = () => res(); } catch (e) { res(); } }); },
+    async set(k, v) { if (mode !== 'idb') { lsSet(k, v); return; } await write(store => store.put(v, k)); },
+    async del(k) { if (mode !== 'idb') { lsDel(k); return; } await write(store => store.delete(k)); },
     keys(prefix) { if (mode !== 'idb') return Promise.resolve(lsKeys(prefix)); return new Promise((res) => { try { const r = tx('readonly').getAllKeys(IDBKeyRange.bound(prefix, prefix + '￿')); r.onsuccess = () => res(r.result); r.onerror = () => res([]); } catch (e) { res([]); } }); },
     async getAll(prefix) { const ks = await api.keys(prefix); const out = {}; for (const k of ks) out[k] = await api.get(k); return out; },
-    async clear() { if (mode !== 'idb') { lsKeys('').forEach(lsDel); mem = {}; return; } return new Promise((res) => { try { const r = tx('readwrite').clear(); r.onsuccess = () => res(); r.onerror = () => res(); } catch (e) { res(); } }); }
+    async clear() { if (mode !== 'idb') { lsKeys('').forEach(lsDel); mem = {}; return; } await write(store => store.clear()); }
+
   };
   return api;
 })();
@@ -139,28 +175,66 @@ const S = {
   nb: {},   // ukey -> {pages:[{strokes}]}
   loaded: false
 };
-const dirty = new Set(); let saveTimer = null;
-function markDirty(path) { dirty.add(path); setStatus('…'); clearTimeout(saveTimer); saveTimer = setTimeout(flush, 400); }
-async function flush() {
-  const paths = Array.from(dirty); dirty.clear();
-  for (const p of paths) {
-    const col = p.split('/')[0];
-    let v;
-    if (col === 'progress') v = S.progress[p.slice(9)];
-    else if (col === 'plan') v = S.plan;
-    else if (col === 'notes') v = S.notes;
-    else if (col === 'settings') v = S.settings;
-    else if (col === 'hl') v = S.hl[p.slice(3)];
-    else if (col === 'ink') v = S.ink[p.slice(4)];
-    else if (col === 'nb') v = S.nb[p.slice(3)];
-    try { if (v === undefined) await Store.del(p); else await Store.set(p, JSON.parse(JSON.stringify(v))); }
-    catch (e) { console.warn('save failed', p, e); setStatus('保存失敗'); toast('保存できませんでした（容量不足の可能性）'); return; }
+const dirty = new Set(); let saveTimer = null, saving = null, saveError = null;
+function markDirty(path) { dirty.add(path); if (!saveError) setStatus('…'); clearTimeout(saveTimer); saveTimer = setTimeout(flush, 400); }
+function stateValue(p) {
+  const col = p.split('/')[0];
+  if (col === 'progress') return S.progress[p.slice(9)];
+  if (col === 'plan') return S.plan;
+  if (col === 'notes') return S.notes;
+  if (col === 'settings') return S.settings;
+  if (col === 'hl') return S.hl[p.slice(3)];
+  if (col === 'ink') return S.ink[p.slice(4)];
+  if (col === 'nb') return S.nb[p.slice(3)];
+}
+function showSaveError(error) {
+  const quota = error && error.name === 'QuotaExceededError';
+  setStatus(quota ? '容量不足・未保存' : '保存失敗・未保存');
+  let box = $('#save-warning');
+  if (!box) {
+    box = el('<aside id="save-warning" role="alert"><b>まだ保存できていない記録があります</b><p data-save-detail></p><p>画面を閉じる前にバックアップしてください。再読み込み・初期化・ブラウザーのデータ削除は、バックアップを確保するまで行わないでください。</p><button data-save-retry>保存を再試行</button> <button data-save-backup>バックアップを書き出す</button></aside>');
+    $('#main').before(box);
+    $('[data-save-retry]', box).onclick = () => flush();
+    $('[data-save-backup]', box).onclick = () => Settings.exportBackup();
   }
-  setStatus('保存済み'); setTimeout(() => { if ($('#save-status').textContent === '保存済み') setStatus(''); }, 1500);
+  $('[data-save-detail]', box).textContent = quota
+    ? '保存領域が不足しています。バックアップ後、端末の空き容量を確認してください。'
+    : '保存先への書き込みに失敗しました。「保存を再試行」を押してください。（' + (error && error.name || '不明なエラー') + '）';
+}
+function flush() {
+  if (saving) return saving;
+  clearTimeout(saveTimer);
+  saving = (async () => {
+    let failure = null;
+    for (const p of Array.from(dirty)) {
+      // Only remove a path as it starts writing; later edits can re-add it.
+      dirty.delete(p);
+      try {
+        const v = stateValue(p);
+        if (v === undefined) await Store.del(p); else await Store.set(p, JSON.parse(JSON.stringify(v)));
+      } catch (e) {
+        dirty.add(p); failure = failure || e;
+        console.warn('save failed', p, e);
+        // Still try the other records: one large drawing must not block grades.
+      }
+    }
+    if (failure) { saveError = failure; showSaveError(failure); return false; }
+    saveError = null;
+    if (dirty.size) { setStatus('保存中…'); return false; }
+    const warning = $('#save-warning'); if (warning) warning.remove();
+    setStatus('保存済み');
+    setTimeout(() => { const status = $('#save-status'); if (status && status.textContent === '保存済み') setStatus(''); }, 1500);
+    return true;
+  })().finally(() => {
+    saving = null;
+    if (dirty.size && !saveError) { clearTimeout(saveTimer); saveTimer = setTimeout(flush, 400); }
+  });
+  return saving;
 }
 function setStatus(t) { const e = $('#save-status'); if (e) e.textContent = t; }
-document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && dirty.size) { clearTimeout(saveTimer); flush(); } });
+document.addEventListener('visibilitychange', () => { if (dirty.size) { clearTimeout(saveTimer); flush(); } });
 window.addEventListener('pagehide', () => { if (dirty.size) { clearTimeout(saveTimer); flush(); } });
+window.addEventListener('beforeunload', e => { if (dirty.size || saving) { e.preventDefault(); e.returnValue = ''; } });
 
 /* v1 (single edition, no prefixes) -> v2 keys. Returns true when anything changed. */
 const V1_ED = 'h5';

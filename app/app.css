@@ -455,6 +455,9 @@ body.pen-on.finger .inkhost, body.finger .inkhost.always { touch-action: none; }
 .study-history > div > span:last-child, .study-due-row > span:nth-child(2) { flex:1; }
 .study-time-recent { display:flex; gap:10px; flex-wrap:wrap; font-size:12px; margin:12px 0; }
 .shared-material { margin:0 14px; }
+#save-warning { max-width:1120px; margin:12px auto; padding:16px; border:2px solid #b45309; border-radius:12px; background:#fff7ed; color:#7c2d12; }
+#save-warning p { margin:8px 0; }
+#save-warning button { margin:4px 0; }
 .listening-audio { margin:16px 0; padding:16px; border:1px solid var(--line); border-radius:12px; background:var(--card); }
 .listening-audio h3 { margin:0 0 12px; font-size:18px; }
 .listening-audio audio { display:block; width:100%; }

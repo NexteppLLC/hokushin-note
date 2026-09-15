@@ -80,8 +80,8 @@ const Settings = (() => {
     Object.keys(S.progress).forEach(k => markDirty('progress/' + k));
     markDirty('plan/main'); markDirty('notes/all'); markDirty('settings/main');
     Object.keys(S.hl).forEach(k => markDirty('hl/' + k)); Object.keys(S.ink).forEach(k => markDirty('ink/' + k)); Object.keys(S.nb).forEach(k => markDirty('nb/' + k));
-    await flush();
-    toast('復元しました'); App.applyFs(); App.show('today');
+    const saved = await flush();
+    toast(saved === false ? '記録を読み込みましたが未保存です。バックアップは保管し、保存を再試行してください。' : '復元しました'); App.applyFs(); App.show('today');
   }
   return { render, exportBackup, importBackup, backupJSON };
 })();
