@@ -9,6 +9,7 @@ const TaskProgressSync = (() => {
       return !!(c && c.apiKey && c.projectId);
     } catch (e) { return false; }
   }
+  function canWrite() { return typeof CloudSync !== 'undefined' && CloudSync.canWrite && CloudSync.canWrite(); }
   function stopTimer() { if (timer) clearInterval(timer); timer = null; }
   function buildSchedule() {
     const days = PLAN.days.map(d => {
@@ -40,22 +41,26 @@ const TaskProgressSync = (() => {
       };
     });
     return {
-      schemaVersion: 1,
+      schemaVersion: 2,
       app: 'hokushin-note',
       editionId: ED.id,
       editionName: ED.name,
       testDay: PLAN.test_day,
       clientUpdatedAt: Date.now(),
+      deviceId: (typeof CloudSync !== 'undefined' && CloudSync.deviceId) ? CloudSync.deviceId() : '',
+      writerRole: 'student-device',
       days,
       privacy: { scheduleItems: true, questions: false, answers: false, notes: false, handwriting: false }
     };
   }
   async function syncNow(quiet) {
-    if (!ready || !auth || !auth.currentUser || !db) return false;
+    if (!ready || !auth || !auth.currentUser || !db || !canWrite()) return false;
     try {
       const doc = buildSchedule();
-      doc.syncedAt = firebase.firestore.FieldValue.serverTimestamp();
-      await db.collection('users').doc(auth.currentUser.uid).collection('hokushin').doc('schedule').set(doc, { merge: false });
+      const root = db.collection('users').doc(auth.currentUser.uid);
+      await root.collection('hokushin').doc('schedule').set(Object.assign({}, doc, { syncedAt: firebase.firestore.FieldValue.serverTimestamp() }), { merge: false });
+      const dateKey = todayISO();
+      await root.collection('hokushinScheduleSnapshots').doc(dateKey).set(Object.assign({}, doc, { syncedAt: firebase.firestore.FieldValue.serverTimestamp() }), { merge: false });
       return true;
     } catch (e) {
       console.warn('TaskProgressSync failed', e);
@@ -64,9 +69,16 @@ const TaskProgressSync = (() => {
     }
   }
   function schedule() {
-    if (!ready || !auth || !auth.currentUser) return;
+    if (!ready || !auth || !auth.currentUser || !canWrite()) return;
     clearTimeout(debounce);
     debounce = setTimeout(() => syncNow(true), 8000);
+  }
+  function startForUser(u) {
+    stopTimer();
+    if (u && canWrite()) {
+      setTimeout(() => syncNow(true), 1200);
+      timer = setInterval(() => syncNow(true), 60000);
+    }
   }
   function init() {
     if (!configured() || !window.firebase || !firebase.apps || !firebase.apps.length) return;
@@ -74,13 +86,8 @@ const TaskProgressSync = (() => {
       auth = firebase.auth();
       db = firebase.firestore();
       ready = true;
-      auth.onAuthStateChanged(u => {
-        stopTimer();
-        if (u) {
-          setTimeout(() => syncNow(true), 1200);
-          timer = setInterval(() => syncNow(true), 60000);
-        }
-      });
+      auth.onAuthStateChanged(startForUser);
+      window.addEventListener('hn-writer-changed', () => startForUser(auth.currentUser));
     } catch (e) { console.warn('TaskProgressSync init failed', e); }
   }
   return { init, schedule, syncNow, buildSchedule };
