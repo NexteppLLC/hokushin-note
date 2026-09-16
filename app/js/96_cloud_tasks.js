@@ -9,7 +9,7 @@ const TaskProgressSync = (() => {
       return !!(c && c.apiKey && c.projectId);
     } catch (e) { return false; }
   }
-  function canWrite() { return !!(window.CloudSync && CloudSync.canWrite && CloudSync.canWrite()); }
+  function canWrite() { return typeof CloudSync !== 'undefined' && CloudSync.canWrite && CloudSync.canWrite(); }
   function stopTimer() { if (timer) clearInterval(timer); timer = null; }
   function buildSchedule() {
     const days = PLAN.days.map(d => {
@@ -47,7 +47,7 @@ const TaskProgressSync = (() => {
       editionName: ED.name,
       testDay: PLAN.test_day,
       clientUpdatedAt: Date.now(),
-      deviceId: CloudSync.deviceId ? CloudSync.deviceId() : '',
+      deviceId: (typeof CloudSync !== 'undefined' && CloudSync.deviceId) ? CloudSync.deviceId() : '',
       writerRole: 'student-device',
       days,
       privacy: { scheduleItems: true, questions: false, answers: false, notes: false, handwriting: false }
