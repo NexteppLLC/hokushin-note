@@ -4,7 +4,8 @@ const CloudSync = (() => {
   const WRITER_KEY = 'hn-cloud-writer-v1';
   const DEVICE_KEY = 'hn-cloud-device-id-v1';
   const SDK = '10.14.1';
-  let app = null, auth = null, db = null, ready = false, timer = null, debounce = null;
+  let app = null, auth = null, db = null, ready = false, timer = null, debounce = null, pending = null;
+  let syncState = '', syncMessage = '', lastSuccess = 0;
 
   function loadScript(src) {
     return new Promise((resolve, reject) => {
@@ -52,19 +53,22 @@ const CloudSync = (() => {
     if (!configured()) return '未設定';
     if (!ready) return '接続準備中';
     if (!user()) return 'ログイン待ち';
-    return canWrite() ? '同期ON' : '閲覧のみ';
+    return canWrite() ? (syncState || '同期待ち') : '送信OFF';
   }
   function refreshCard() {
     const e = $('#cloud-state'); if (!e) return;
     e.textContent = stateLabel();
-    e.className = 'pill ' + (user() && canWrite() ? 'ok' : 'mid');
+    e.className = 'pill ' + (user() && canWrite() && syncState === '同期成功' ? 'ok' : 'mid');
     const d = $('#cloud-detail');
     if (d) {
-      if (user() && canWrite()) d.textContent = 'この端末だけが親PCへ進捗を送信します：' + (user().email || user().uid);
-      else if (user()) d.textContent = 'ログイン済みですが、この端末は閲覧専用です。誤上書きはしません。';
+      if (user() && canWrite()) d.textContent = syncMessage || 'この端末から親PCへ進捗を送信します。';
+      else if (user()) d.textContent = 'この端末からは送信していません。息子さんの学習端末であれば「設定する」から送信を有効にしてください。親PCでは有効にしないでください。';
       else d.textContent = configured() ? 'Firebaseにログインしてください。' : 'Firebaseの設定がまだありません。';
     }
+    const counts = $('#cloud-local-counts');
+    if (counts) { const local = buildSummary(); counts.textContent = 'この端末の記録：採点済み ' + local.overall.graded + '問 ／ 予定完了 ' + local.plan.done + '項目' + (lastSuccess ? ' ／ 最終送信 ' + new Date(lastSuccess).toLocaleString('ja-JP') : ''); }
   }
+  function report(state, message) { syncState = state; syncMessage = message; refreshCard(); }
   async function init() {
     if (!configured()) { refreshCard(); return; }
     try {
@@ -134,28 +138,61 @@ const CloudSync = (() => {
     const newDone = Number(nextData.plan && nextData.plan.done) || 0;
     const oldGraded = Number(oldData.overall && oldData.overall.graded) || 0;
     const newGraded = Number(nextData.overall && nextData.overall.graded) || 0;
-    return oldDone > newDone + 10 || oldGraded > newGraded + 25;
+    const otherDevice = oldData.deviceId !== nextData.deviceId;
+    return oldDone > newDone + (otherDevice ? 0 : 10) || oldGraded > newGraded + (otherDevice ? 0 : 25);
+  }
+  function scheduleRegression(oldData, nextData) {
+    if (!oldData || oldData.editionId !== nextData.editionId) return false;
+    const count = doc => (doc.days || []).reduce((n, day) => n + (day.tasks || []).filter(t => t.done).length, 0);
+    return count(oldData) > count(nextData) + (oldData.deviceId !== nextData.deviceId ? 0 : 10);
   }
   async function syncNow(quiet) {
-    if (!ready || !user() || !db) { if (!quiet) toast('クラウド同期は未設定または未ログインです'); return false; }
-    if (!canWrite()) { if (!quiet) toast('この端末は閲覧専用です。子どもの学習端末だけ送信端末にしてください'); return false; }
-    try {
-      const summary = buildSummary();
-      const root = db.collection('users').doc(user().uid);
-      const currentRef = root.collection('hokushin').doc('current');
-      const oldSnap = await currentRef.get();
-      const oldData = oldSnap.exists ? oldSnap.data() : null;
-      if (suspiciousRegression(oldData, summary)) {
-        console.warn('CloudSync rejected suspicious regression', { oldData, summary });
-        if (!quiet) toast('進捗が大幅に減る同期を安全のため停止しました');
+    if (!ready || !user() || !db) { if (!quiet) toast('クラウド同期は未設定または未ログインです'); refreshCard(); return false; }
+    if (!canWrite()) { if (!quiet) toast('この端末は送信OFFです。息子さんの学習端末だけ送信端末にしてください'); refreshCard(); return false; }
+    if (pending) return pending;
+    clearTimeout(debounce);
+    pending = (async () => {
+      report('同期中', '集計と項目別の進捗を送信しています。');
+      try {
+        const summary = buildSummary(), schedule = TaskProgressSync.buildSchedule();
+        const syncId = uid(), account = user().uid;
+        Object.assign(summary, { schemaVersion: 3, syncId });
+        Object.assign(schedule, { schemaVersion: 3, syncId, clientUpdatedAt: summary.clientUpdatedAt });
+        const root = db.collection('users').doc(account);
+        const currentRef = root.collection('hokushin').doc('current');
+        const scheduleRef = root.collection('hokushin').doc('schedule');
+        // Read guards and all writes in one transaction: no partially updated dashboard,
+        // and concurrent senders cannot overwrite between the safety check and write.
+        await db.runTransaction(async transaction => {
+          const oldSummary = await transaction.get(currentRef);
+          const oldSchedule = await transaction.get(scheduleRef);
+          if (!user() || user().uid !== account || !canWrite()) throw new Error('送信設定が変わったため停止しました');
+          if (suspiciousRegression(oldSummary.exists ? oldSummary.data() : null, summary) ||
+              scheduleRegression(oldSchedule.exists ? oldSchedule.data() : null, schedule)) {
+            throw Object.assign(new Error('クラウドより少ない記録での上書きを停止しました。息子さんの学習端末の採点数と予定完了数を確認してください。初期化は不要です。'), { code: 'progress-regression' });
+          }
+          const syncedAt = firebase.firestore.FieldValue.serverTimestamp();
+          const summaryData = Object.assign({}, summary, { syncedAt });
+          const scheduleData = Object.assign({}, schedule, { syncedAt });
+          transaction.set(currentRef, summaryData);
+          transaction.set(scheduleRef, scheduleData);
+          transaction.set(root.collection('hokushinSnapshots').doc(summary.today), summaryData);
+          transaction.set(root.collection('hokushinScheduleSnapshots').doc(summary.today), scheduleData);
+        });
+        lastSuccess = Date.now();
+        try { localStorage.setItem('hn-cloud-last-sync', String(lastSuccess)); } catch (e) {}
+        report('同期成功', '集計と項目別の進捗を親PCへ送信しました。');
+        if (!quiet) toast('親PC用の進捗を同期しました');
+        return true;
+      } catch (e) {
+        const message = e.message || String(e);
+        console.warn('CloudSync sync failed', e);
+        report(e.code === 'progress-regression' ? '同期停止' : '同期失敗', message);
+        if (!quiet) toast('同期できませんでした：' + message);
         return false;
       }
-      await currentRef.set(Object.assign({}, summary, { syncedAt: firebase.firestore.FieldValue.serverTimestamp() }), { merge: false });
-      await root.collection('hokushinSnapshots').doc(summary.today).set(Object.assign({}, summary, { syncedAt: firebase.firestore.FieldValue.serverTimestamp() }), { merge: false });
-      try { localStorage.setItem('hn-cloud-last-sync', String(Date.now())); } catch (e) {}
-      if (!quiet) toast('親PC用の進捗を同期しました');
-      refreshCard(); return true;
-    } catch (e) { console.warn('CloudSync sync failed', e); if (!quiet) toast('同期できませんでした：' + e.message); return false; }
+    })().finally(() => { pending = null; });
+    return pending;
   }
   async function login(email, password) {
     if (!configured()) throw new Error('先にFirebase設定を保存してください');
@@ -202,7 +239,7 @@ const CloudSync = (() => {
   function injectSettings() {
     const main = $('#main'); if (!main || $('#cloud-sync-card')) return;
     const help = $$('.sh', main).find(x => x.textContent.indexOf('使い方') >= 0);
-    const wrap = el('<div><h2 class="sh">親PCとの同期</h2><div class="card" id="cloud-sync-card"><div class="set-row"><div class="sl"><b>クラウド同期 <span id="cloud-state" class="pill mid"></span></b><small id="cloud-detail"></small><small>送信端末に指定した子どもの端末だけが書き込みます。親PCは閲覧専用です。</small></div><button class="primary" id="cloud-setup-btn">設定する</button><button id="cloud-sync-btn">今すぐ同期</button></div></div></div>');
+    const wrap = el('<div><h2 class="sh">親PCとの同期</h2><div class="card" id="cloud-sync-card"><div class="set-row"><div class="sl"><b>クラウド同期 <span id="cloud-state" class="pill mid"></span></b><small id="cloud-detail"></small><small id="cloud-local-counts"></small><small>送信端末に指定した子どもの端末だけが書き込みます。親PCは閲覧専用です。</small></div><button class="primary" id="cloud-setup-btn">設定する</button><button id="cloud-sync-btn">今すぐ同期</button></div></div></div>');
     if (help) main.insertBefore(wrap, help); else main.appendChild(wrap);
     $('#cloud-setup-btn').onclick = openSetup; $('#cloud-sync-btn').onclick = () => syncNow(false); refreshCard();
   }
@@ -216,4 +253,5 @@ const _cloudSettingsRender = Settings.render;
 Settings.render = function () { _cloudSettingsRender(); CloudSync.injectSettings(); };
 const _cloudAppBoot = App.boot;
 App.boot = async function () { await _cloudAppBoot(); await CloudSync.init(); };
-document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') CloudSync.syncNow(true); });
+document.addEventListener('visibilitychange', () => CloudSync.syncNow(true));
+window.addEventListener('online', () => CloudSync.syncNow(true));

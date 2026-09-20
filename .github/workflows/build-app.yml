@@ -72,6 +72,7 @@ jobs:
         run: |
           node tests/test_storage.js
           node tests/test_history.js
+          node tests/test_cloud_sync.js
       - name: Commit generated site when changed
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |

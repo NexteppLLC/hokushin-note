@@ -1,16 +1,5 @@
 /* ===== Optional item-level schedule sync for parent dashboard ===== */
 const TaskProgressSync = (() => {
-  const CONFIG_KEY = 'hn-cloud-config-v1';
-  let auth = null, db = null, ready = false, timer = null, debounce = null;
-
-  function configured() {
-    try {
-      const c = JSON.parse(localStorage.getItem(CONFIG_KEY) || 'null');
-      return !!(c && c.apiKey && c.projectId);
-    } catch (e) { return false; }
-  }
-  function canWrite() { return typeof CloudSync !== 'undefined' && CloudSync.canWrite && CloudSync.canWrite(); }
-  function stopTimer() { if (timer) clearInterval(timer); timer = null; }
   function buildSchedule() {
     const days = PLAN.days.map(d => {
       const tasks = [];
@@ -53,51 +42,8 @@ const TaskProgressSync = (() => {
       privacy: { scheduleItems: true, questions: false, answers: false, notes: false, handwriting: false }
     };
   }
-  async function syncNow(quiet) {
-    if (!ready || !auth || !auth.currentUser || !db || !canWrite()) return false;
-    try {
-      const doc = buildSchedule();
-      const root = db.collection('users').doc(auth.currentUser.uid);
-      await root.collection('hokushin').doc('schedule').set(Object.assign({}, doc, { syncedAt: firebase.firestore.FieldValue.serverTimestamp() }), { merge: false });
-      const dateKey = todayISO();
-      await root.collection('hokushinScheduleSnapshots').doc(dateKey).set(Object.assign({}, doc, { syncedAt: firebase.firestore.FieldValue.serverTimestamp() }), { merge: false });
-      return true;
-    } catch (e) {
-      console.warn('TaskProgressSync failed', e);
-      if (!quiet && typeof toast === 'function') toast('項目別進捗の同期に失敗しました：' + e.message);
-      return false;
-    }
-  }
-  function schedule() {
-    if (!ready || !auth || !auth.currentUser || !canWrite()) return;
-    clearTimeout(debounce);
-    debounce = setTimeout(() => syncNow(true), 8000);
-  }
-  function startForUser(u) {
-    stopTimer();
-    if (u && canWrite()) {
-      setTimeout(() => syncNow(true), 1200);
-      timer = setInterval(() => syncNow(true), 60000);
-    }
-  }
-  function init() {
-    if (!configured() || !window.firebase || !firebase.apps || !firebase.apps.length) return;
-    try {
-      auth = firebase.auth();
-      db = firebase.firestore();
-      ready = true;
-      auth.onAuthStateChanged(startForUser);
-      window.addEventListener('hn-writer-changed', () => startForUser(auth.currentUser));
-    } catch (e) { console.warn('TaskProgressSync init failed', e); }
-  }
-  return { init, schedule, syncNow, buildSchedule };
+  // A single coordinator sends both documents, including manual sync, retries,
+  // foreground wake-up and the periodic timer. Never write schedule independently.
+  function syncNow(quiet) { return CloudSync.syncNow(quiet); }
+  return { buildSchedule, syncNow };
 })();
-
-// Add item-level sync without changing the existing local-save or summary-sync behavior.
-const _taskLocalFlush = flush;
-flush = async function () { const r = await _taskLocalFlush(); TaskProgressSync.schedule(); return r; };
-const _taskAppBoot = App.boot;
-App.boot = async function () { await _taskAppBoot(); TaskProgressSync.init(); };
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'hidden') TaskProgressSync.syncNow(true);
-});
