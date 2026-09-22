@@ -94,6 +94,43 @@ def pair_items(q_md, a_md):
     return out
 
 
+def pair_numbered_groups(blocks):
+    """Link 問N answers to their own question block before pairing subquestions.
+
+    Dialog/data blocks may separate the questions from the combined answer key.
+    Keep every question in its original slot so existing note/grade keys survive.
+    """
+    questions = [b for b in blocks if b['type'] == 'q']
+    answers = [b for b in blocks if b['type'] == 'a']
+    if len(questions) < 2 or len(answers) != 1:
+        return None
+    numbers = [re.match(r'^問\s*(\d+)(?=\s|の問い)', q['title']) for q in questions]
+    key = list(re.finditer(r'^問\s*(\d+)\s+', answers[0]['md'], re.M))
+    if not all(numbers) or len(key) < 2:
+        return None
+    qnos = [int(m.group(1)) for m in numbers]
+    anos = [int(m.group(1)) for m in key]
+    if len(set(qnos)) != len(qnos) or len(set(anos)) != len(anos) or set(qnos) != set(anos):
+        raise ValueError('Numbered question/answer groups do not match: %s / %s' % (qnos, anos))
+    amap = {int(m.group(1)): answers[0]['md'][m.end():key[i + 1].start() if i + 1 < len(key) else None].strip()
+            for i, m in enumerate(key)}
+    linked = {}
+    for q, no in zip(questions, qnos):
+        answer = amap[no]
+        ex = {'type': 'exercise', 'title': q['title'], 'question_md': q['md'],
+              'answer_title': '問%d 解答・解説' % no, 'answer_md': answer}
+        # The score sheet after the final answer is not part of the final item.
+        item_answer = re.split(r'^\*\*記録\*\*', answer, maxsplit=1, flags=re.M)[0].strip()
+        qi, ai = split_items(q['md']), split_items(item_answer)
+        if qi:
+            if not ai or [it['no'] for it in qi] != [it['no'] for it in ai]:
+                raise ValueError('Subquestion/answer numbers do not match in 問%d' % no)
+            ex['items'] = pair_items(q['md'], item_answer)
+            ex['context_md'] = split_item_block(q['md'])['context_md']
+        linked[id(q)] = ex
+    return [linked.get(id(b), b) for b in blocks if b is not answers[0]]
+
+
 def parse(subject, ed=None):
     ed = ed or ED.latest()
     cfg = json.load(open(ED.src_dir(ed, subject, 'config.json'), encoding='utf-8'))
@@ -170,6 +207,10 @@ def parse(subject, ed=None):
     for sec in sections:
         out = []
         blocks = sec['blocks']
+        grouped = pair_numbered_groups(blocks)
+        if grouped is not None:
+            sec['blocks'] = grouped
+            continue
         i = 0
         while i < len(blocks):
             b = blocks[i]

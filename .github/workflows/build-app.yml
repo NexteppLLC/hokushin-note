@@ -68,6 +68,8 @@ jobs:
 
       - name: Check listening audio in rebuilt site
         run: node tests/test_listening_audio.js
+      - name: Check question context and answer mapping
+        run: python -m unittest discover -s tests -p 'test_*.py'
       - name: Check storage recovery and study records
         run: |
           node tests/test_storage.js

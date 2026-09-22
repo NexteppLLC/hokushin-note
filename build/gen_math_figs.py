@@ -152,9 +152,13 @@ savep(figs, 'd2_6_dots', gap=20)
 # ---------- d2_8_angles ----------
 g1 = Fig(200, 160, -1, 9, -1, 7)
 g1.line((0, 5.5), (8, 5.5)); g1.line((0, 0.5), (8, 0.5)); g1.text((8.3, 5.5), 'ℓ', anchor='start'); g1.text((8.3, 0.5), 'm', anchor='start')
-P1, V, P2 = (1.5, 5.5), (4.5, 3), (7.5, 0.5)
+# Both endpoints lie to the left of the bend. Use the stated angles to
+# construct the rays; the previous three collinear points made x a straight angle.
+V = (6.5, 2.5)
+P1 = (V[0] - (5.5 - V[1]) / math.tan(math.radians(55)), 5.5)
+P2 = (V[0] - (V[1] - 0.5) / math.tan(math.radians(30)), 0.5)
 g1.line(P1, V); g1.line(V, P2)
-g1.angle_mark(P1, (8, 5.5), V, r=0.9, label='55°'); g1.angle_mark(P2, (0, 0.5), V, r=0.9, label='30°'); g1.angle_mark(V, P1, P2, r=0.7, label='x')
+g1.angle_mark(P1, (8, 5.5), V, r=0.9, label='55°'); g1.angle_mark(P2, (8, 0.5), V, r=0.9, label='30°'); g1.angle_mark(V, P1, P2, r=0.7, label='x')
 g1.text((4, 6.6), '①', size=12)
 g2 = Fig(200, 160, -1, 9, -1, 7)
 A, B, C = (2.5, 5.5), (0.5, 0.5), (7, 0.5)
